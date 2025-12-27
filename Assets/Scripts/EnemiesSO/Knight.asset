@@ -18,4 +18,4 @@ MonoBehaviour:
   _position: 0
   _damage: 2
   _health: 10
-  _block: 0
+  _block: 3

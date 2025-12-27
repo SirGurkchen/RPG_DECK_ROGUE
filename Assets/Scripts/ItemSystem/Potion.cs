@@ -7,9 +7,22 @@ public class Potion : ItemBase
     [SerializeField] private int _amount;
     [SerializeField] private PotionType _type;
 
-    public override void Use(PlayerStats player, EnemyBase target = null)
+    public override void Use(PlayerStats player, EnemyController target = null)
     {
-        Debug.Log("Cannot attack without target!");
+        if (player == null)
+        {
+            return;
+        }
+
+        switch (_type)
+        {
+            case PotionType.Health:
+                //heal
+                break;
+            case PotionType.Mana:
+                //add mana
+                break;
+        }
     }
 }
 

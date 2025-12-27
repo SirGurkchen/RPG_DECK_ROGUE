@@ -14,7 +14,7 @@ public abstract class ItemBase : ScriptableObject
     [SerializeField] private int _endurance;
 
 
-    public abstract void Use(PlayerStats player, EnemyBase target = null);
+    public abstract void Use(PlayerStats player, EnemyController target = null);
 
     public virtual string GetItemToString()
     {

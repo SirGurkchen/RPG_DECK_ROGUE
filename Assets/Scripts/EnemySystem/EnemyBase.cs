@@ -8,12 +8,15 @@ public abstract class EnemyBase : ScriptableObject
     [SerializeField] private string _description;
     [SerializeField] private EnemyType _type;
     [SerializeField] private FightPosition _position;
+    [SerializeField] private int _damage;
+    [SerializeField] private int _health;
 
-    public abstract void Attack(PlayerStats player);
-    public abstract void TakeDamage(int damage);
+    public int Damage => _damage;
+    public int Health => _health;
+
     public virtual string GetEnemyStats()
     {
-        return "Name: " + _enemy_name + " Type: " + _type.ToString() + " Position: " + _position.ToString();
+        return "Name: " + _enemy_name + " Type: " + _type.ToString() + " Position: " + _position.ToString() + " Damage: " + _damage;
     }
 }
 
