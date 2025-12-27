@@ -1,0 +1,57 @@
+using System;
+using UnityEngine;
+
+public class GameInput : MonoBehaviour
+{
+    public static GameInput Instance { get; private set; }
+
+    public event Action OnConfirmPress;
+
+    private InputActions _inputActions;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        _inputActions = new InputActions();
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start()
+    {
+        _inputActions.Player.Enable();
+        _inputActions.Player.Confirm.performed += Confirm_performed;
+    }
+
+    private void Confirm_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnConfirmPress?.Invoke();
+    }
+
+    private void OnDisable()
+    {
+        if (_inputActions != null)
+        {
+            _inputActions.Player.Disable();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_inputActions != null)
+        {
+            _inputActions.Player.Confirm.performed -= Confirm_performed;
+        }
+        OnConfirmPress = null;
+
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+}

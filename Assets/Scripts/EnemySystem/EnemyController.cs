@@ -40,7 +40,7 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        print("Enemy Died!");
+        Destroy(gameObject);
     }
 
     public string GetEnemyStats()

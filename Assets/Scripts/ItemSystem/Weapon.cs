@@ -29,5 +29,6 @@ public enum AttackType
 {
     Melee,
     Range,
-    Magic
+    Magic,
+    None
 }
