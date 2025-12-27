@@ -14,10 +14,16 @@ public abstract class ItemBase : ScriptableObject
     [SerializeField] private int _endurance;
 
 
-    public abstract void Use(PlayerStats player);
+    public abstract void Use(PlayerStats player, EnemyBase target = null);
+
     public virtual string GetItemToString()
     {
         return "Name: " + _item_name;
+    }
+    
+    public ItemType GetItemType()
+    {
+        return _itemType;
     }
 }
 
@@ -25,9 +31,7 @@ public enum ItemType
 {
     Weapon,
     Shield,
-    Wand,
-    Health,
-    Mana,
+    Potion,
     Misc
 }
 

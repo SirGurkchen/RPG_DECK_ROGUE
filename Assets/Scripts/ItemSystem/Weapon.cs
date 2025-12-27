@@ -7,9 +7,13 @@ public class Weapon : ItemBase
     [SerializeField] private int _damage;
     [SerializeField] private AttackType _attackType;
 
-    public override void Use(PlayerStats player)
+    public override void Use(PlayerStats player, EnemyBase target = null)
     {
-        Debug.Log("Item Used!");
+        if (target == null)
+        {
+            Debug.Log("Cannot attack without target!");
+        }
+        target.TakeDamage(_damage);
     }
 
     public override string GetItemToString()

@@ -344,6 +344,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   _playerManager: {fileID: 1027601532}
   _test_item: {fileID: 11400000, guid: 1690c61ab37973346b954adfbb0f64ed, type: 2}
+  _2test_item: {fileID: 11400000, guid: 973ed0dea3cc142438a43d8cacc382d4, type: 2}
+  _test_enemy: {fileID: 11400000, guid: c484878f61635474491fbad2fcb7d017, type: 2}
 --- !u!4 &521486492
 Transform:
   m_ObjectHideFlags: 0
