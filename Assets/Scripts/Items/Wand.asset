@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e47c7dde1fe9d1f4583666e9182a1132, type: 3}
-  m_Name: Sword
+  m_Name: Wand
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  _itemName: 
-  _description: This sword is a bit rusty and not sharp, but it still suffices as
-    a weapon able to kill.
-  _price: 5
+  _itemName: Wand
+  _description: 
+  _price: 15
   _itemType: 0
   _rarity: 0
-  _endurance: 3
-  _damage: 2
-  _attackType: 0
+  _endurance: 5
+  _damage: 5
+  _attackType: 2

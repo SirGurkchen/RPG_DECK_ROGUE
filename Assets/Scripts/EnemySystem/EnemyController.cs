@@ -16,13 +16,15 @@ public class EnemyController : MonoBehaviour
         _currentHealth = _enemyData.Health;
     }
 
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, AttackType attack)
     {
         int finalDamage = damage;
 
+        finalDamage *= GetWeakness(attack);
+
         if (_enemyData is IBlock blocker)
         {
-            finalDamage = damage - blocker.Block;
+            finalDamage -= blocker.Block;
         }
 
         if (finalDamage >= 0)
@@ -44,5 +46,17 @@ public class EnemyController : MonoBehaviour
     public string GetEnemyStats()
     {
         return _enemyData.GetEnemyStats() + " Health: " + _currentHealth;
+    }
+
+    private int GetWeakness(AttackType attack)
+    {
+        if (attack == _enemyData.Weakness)
+        {
+            return 2;
+        }
+        else
+        {
+            return 1;
+        }
     }
 }

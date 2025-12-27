@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class ItemBase : ScriptableObject
 {
     [Header("Basic Info")]
-    [SerializeField] private string _item_name;
+    [SerializeField] private string _itemName;
     [TextArea(3, 6)]
     [SerializeField] private string _description;
     [SerializeField] private int _price;
@@ -18,7 +18,7 @@ public abstract class ItemBase : ScriptableObject
 
     public virtual string GetItemToString()
     {
-        return "Name: " + _item_name;
+        return "Name: " + _itemName;
     }
     
     public ItemType GetItemType()

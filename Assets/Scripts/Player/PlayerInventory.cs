@@ -1,32 +1,43 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    private ItemBase _current_item;
+    private List<ItemBase> _inventory = new List<ItemBase>();
+    private ItemBase _equippedItem;
+
+    private const int MAX_INVENTORY_SIZE = 4;
     
-    public void SetCurrentItem(ItemBase item)
+    public void SetEquippedItem(ItemBase item)
     {
-        _current_item = item;
-        DebugWeaponGive();
+        _equippedItem = item;
     }
 
     public void UseCurrentItem(PlayerStats player)
     {
-        _current_item.Use(player);
+        _equippedItem.Use(player);
+    }
+
+    public void GiveItemToInventory(ItemBase item)
+    {
+        if (_inventory.Count < MAX_INVENTORY_SIZE)
+        {
+            _inventory.Add(item);
+        }
     }
 
     public ItemType GetCurrentItemType()
     {
-        return _current_item.GetItemType();
+        return _equippedItem.GetItemType();
     }
 
-    public ItemBase GetCurrentItem()
+    public ItemBase GetEquippedItem()
     {
-        return _current_item;
+        return _equippedItem;
     }
 
-    private void DebugWeaponGive()
+    public ItemBase GetItemAtInvetory(int index)
     {
-        print(_current_item.GetItemToString());
+        return _inventory[index];
     }
 }

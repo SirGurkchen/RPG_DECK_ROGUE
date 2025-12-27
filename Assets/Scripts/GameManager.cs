@@ -3,14 +3,19 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerManager _playerManager;
-    [SerializeField] private ItemBase _test_item;
-    [SerializeField] private EnemyController _test_enemy;
+    [SerializeField] private ItemBase _testItem;
+    [SerializeField] private EnemyController _testEnemy;
+    [SerializeField] private EnemyController _2testEnemy;
 
     void Start()
     {
-        _playerManager.GiveItemToPlayer(_test_item);
-        print(_test_enemy.GetEnemyStats());
-        _playerManager.UseCurrentlySelectedItem(_test_enemy);
-        print(_test_enemy.GetEnemyStats());
+        _playerManager.GiveItemToPlayer(_testItem);
+        _playerManager.EquipItem(0);
+        Debug.Log(_testEnemy.GetEnemyStats());
+        Debug.Log(_2testEnemy.GetEnemyStats());
+        _playerManager.UseCurrentlySelectedItem(_testEnemy);
+        _playerManager.UseCurrentlySelectedItem(_2testEnemy);
+        Debug.Log(_testEnemy.GetEnemyStats());
+        Debug.Log(_2testEnemy.GetEnemyStats());
     }
 }

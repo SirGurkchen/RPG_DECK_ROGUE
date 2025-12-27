@@ -9,7 +9,7 @@ public class PlayerManager : MonoBehaviour
     {
         if (_inventory != null)
         {
-            _inventory.GetCurrentItem()?.Use(_stats, target);
+            _inventory.GetEquippedItem()?.Use(_stats, target);
         }
     }
 
@@ -17,11 +17,19 @@ public class PlayerManager : MonoBehaviour
     {
         if (_inventory != null)
         {
-            _inventory.SetCurrentItem(new_item);
+            _inventory.GiveItemToInventory(new_item);
         }
         else
         {
-            print("Error!");
+            print("Item could not be added to the Inventory!");
+        }
+    }
+
+    public void EquipItem(int inventory_index)
+    {
+        if (_inventory.GetItemAtInvetory(inventory_index) != null)
+        {
+            _inventory.SetEquippedItem(_inventory.GetItemAtInvetory(inventory_index));
         }
     }
 }

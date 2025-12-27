@@ -15,7 +15,7 @@ public class Weapon : ItemBase
         }
         else
         {
-            target.TakeDamage(_damage);
+            target.TakeDamage(_damage, _attackType);
         }
     }
 
