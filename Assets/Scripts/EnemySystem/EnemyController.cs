@@ -4,6 +4,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyBase _enemyData;
+    [SerializeField] private GameObject _marker;
 
     private int _currentHealth;
 
@@ -61,6 +62,11 @@ public class EnemyController : MonoBehaviour
         {
             return 1;
         }
+    }
+
+    public void SetEnemeyMarker(bool isMarked)
+    {
+        _marker.SetActive(isMarked);
     }
 
     private void OnDestroy()

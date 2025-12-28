@@ -37,7 +37,7 @@ public class EnemyBoard : MonoBehaviour
         CheckBoardClear();
     }
 
-    public EnemyController GetMostRighternEnemy()
+    public EnemyController GetMostLefternEnemy()
     {
         if (_enemiesOnField.Count == 0)
         {
@@ -47,7 +47,7 @@ public class EnemyBoard : MonoBehaviour
         return _enemiesOnField[0];
     }
 
-    public EnemyController GetMostLefternEnemy()
+    public EnemyController GetMostRighternEnemy()
     {
         if (_enemiesOnField.Count == 0)
         {

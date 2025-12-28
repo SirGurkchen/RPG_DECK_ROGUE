@@ -3,89 +3,36 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [SerializeField] private PlayerCombat _combat;
+    [SerializeField] private PlayerTargeting _targeting;
     [SerializeField] private PlayerInventory _inventory;
-    [SerializeField] private PlayerStats _stats;
-    [SerializeField] private EnemyController _selectTarget;
-
-    public event Action OnEnemyLeftSelect;
-    public event Action OnEnemyRightSelect;
+    [SerializeField] private EnemyBoard _board;
 
     private void Start()
     {
-        GameInput.Instance.OnConfirmPress += Instance_OnConfirmPress;
-        GameInput.Instance.OnSelectLeftPress += Instance_OnSelectLeftPress;
-        GameInput.Instance.OnSelectRightPress += Instance_OnSelectRightPress;
-    }
+        var input = GetComponent<PlayerInput>();
 
-    private void Instance_OnSelectLeftPress()
-    {
-        OnEnemyLeftSelect?.Invoke();
-    }
-
-    private void Instance_OnSelectRightPress()
-    {
-        OnEnemyRightSelect?.Invoke();
-    }
-
-    private void Instance_OnConfirmPress()
-    {
-        if (_selectTarget != null)
+        if (input != null )
         {
-            UseCurrentlySelectedItem(_selectTarget);
-            Debug.Log(_selectTarget.GetEnemyStats());
-        }
-        else
-        {
-            UseCurrentlySelectedItem();
+            input.OnConfirm += HandleConfirm;
+            input.OnEnemyLeftSelect += Input_OnEnemyLeftSelect;
+            input.OnEnemyRightSelect += Input_OnEnemyRightSelect;
         }
     }
 
-    public void UseCurrentlySelectedItem(EnemyController target = null)
+    private void Input_OnEnemyRightSelect()
     {
-        if (_inventory != null)
-        {
-            _inventory.GetEquippedItem()?.Use(_stats, target);
-        }
+        _targeting.SetSelectTarget(_board.GetMostRighternEnemy());
     }
 
-    public void GiveItemToPlayer(ItemBase new_item)
+    private void Input_OnEnemyLeftSelect()
     {
-        if (_inventory != null)
-        {
-            _inventory.GiveItemToInventory(new_item);
-        }
-        else
-        {
-            print("Item could not be added to the Inventory!");
-        }
+        _targeting.SetSelectTarget(_board.GetMostLefternEnemy());
     }
 
-    public void EquipItem(int inventory_index)
+    private void HandleConfirm()
     {
-        if (_inventory.GetItemAtInvetory(inventory_index) != null)
-        {
-            _inventory.SetEquippedItem(_inventory.GetItemAtInvetory(inventory_index));
-        }
-    }
-
-    public void SetSelectTarget(EnemyController enemy)
-    {
-        _selectTarget = enemy;
-    }
-
-    private void OnDisable()
-    {
-        if (GameInput.Instance != null)
-        {
-            GameInput.Instance.OnConfirmPress -= Instance_OnConfirmPress;
-            GameInput.Instance.OnSelectRightPress -= Instance_OnSelectRightPress;
-            GameInput.Instance.OnSelectLeftPress -= Instance_OnSelectLeftPress;
-        }
-    }
-
-    private void OnDestroy()
-    {
-        OnEnemyLeftSelect = null;
-        OnEnemyRightSelect = null;
+        _combat.Use(_targeting.GetCurrentTarget());
+        _targeting.DeselectAll();
     }
 }
