@@ -16,14 +16,22 @@ public class GameManager : MonoBehaviour
         AddEnemy(_testEnemy);
         AddEnemy(_2testEnemy);
 
-        _playerManager.OnEnemySelect += HandleEnemyRightSelect;
+        _playerManager.OnEnemyLeftSelect += HandleEnemyLeftSelect;
+        _playerManager.OnEnemyRightSelect += HandleEnemyRightSelect;
+    }
+
+    private void HandleEnemyLeftSelect()
+    {
+        EnemyController selectEnemy = _enemyBoard.GetMostRighternEnemy();
+        _playerManager.SetSelectTarget(selectEnemy);
+        Debug.Log("Left Enemy selected!");
     }
 
     private void HandleEnemyRightSelect()
     {
-        EnemyController selectEnemy = _enemyBoard.GetMostRighternEnemy();
+        EnemyController selectEnemy = _enemyBoard.GetMostLefternEnemy();
         _playerManager.SetSelectTarget(selectEnemy);
-        Debug.Log("Enemy selected");
+        Debug.Log("Right Enemy Selected!");
     }
 
     private void AddEnemy(EnemyController enemy)
@@ -34,6 +42,6 @@ public class GameManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        _playerManager.OnEnemySelect -= HandleEnemyRightSelect;
+        _playerManager.OnEnemyLeftSelect -= HandleEnemyLeftSelect;
     }
 }

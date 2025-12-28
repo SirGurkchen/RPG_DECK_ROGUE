@@ -20,7 +20,7 @@ public class EnemyBoard : MonoBehaviour
         if (_enemiesOnField.Count < MAX_ENEMIES)
         {
             _enemiesOnField.Add(enemy);
-            SetUpEnemyVisual(enemy);
+            SetUpEnemyVisuals();
             enemy.OnEnemyDeath += HandleEnemyDeath;
         }
     }
@@ -30,6 +30,7 @@ public class EnemyBoard : MonoBehaviour
         _enemiesOnField.Remove(enemy);
         enemy.OnEnemyDeath -= HandleEnemyDeath;
         Destroy(enemy.gameObject);
+        SetUpEnemyVisuals();
     }
 
     public EnemyController GetMostRighternEnemy()
@@ -42,11 +43,23 @@ public class EnemyBoard : MonoBehaviour
         return _enemiesOnField[0];
     }
 
-    private void SetUpEnemyVisual(EnemyController newEnemy)
+    public EnemyController GetMostLefternEnemy()
     {
-        int index = _enemiesOnField.IndexOf(newEnemy);
-        Vector3 pos = _startPos + new Vector3(_horizontalSpacing * index, 0, 0);
-        newEnemy.transform.position = pos;
+        if (_enemiesOnField.Count == 0)
+        {
+            Debug.Log("No Enemies ON Field!");
+            return null;
+        }
+        return _enemiesOnField[_enemiesOnField.Count - 1];
+    }
+
+    private void SetUpEnemyVisuals()
+    {
+        for (int count = 0; count < _enemiesOnField.Count; count++)
+        {
+            Vector3 pos = _startPos + new Vector3(_horizontalSpacing * count, 0, 0);
+            _enemiesOnField[count].transform.position = pos;
+        }
     }
 
     private void OnDestroy()

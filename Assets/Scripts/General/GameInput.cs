@@ -7,6 +7,7 @@ public class GameInput : MonoBehaviour
 
     public event Action OnConfirmPress;
     public event Action OnSelectRightPress;
+    public event Action OnSelectLeftPress;
 
     private InputActions _inputActions;
 
@@ -28,6 +29,7 @@ public class GameInput : MonoBehaviour
         _inputActions.Player.Enable();
         _inputActions.Player.Confirm.performed += Confirm_performed;
         _inputActions.Player.SelectRight.performed += SelectRight_performed;
+        _inputActions.Player.SelectLeft.performed += SelectLeft_performed;
     }
 
     private void SelectRight_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -38,6 +40,11 @@ public class GameInput : MonoBehaviour
     private void Confirm_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnConfirmPress?.Invoke();
+    }
+
+    private void SelectLeft_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnSelectLeftPress?.Invoke();
     }
 
     private void OnDisable()
@@ -54,10 +61,12 @@ public class GameInput : MonoBehaviour
         {
             _inputActions.Player.Confirm.performed -= Confirm_performed;
             _inputActions.Player.SelectRight.performed -= SelectRight_performed;
+            _inputActions.Player.SelectLeft.performed -= SelectLeft_performed;
         }
 
         OnConfirmPress = null;
         OnSelectRightPress = null;
+        OnSelectLeftPress = null;
 
         if (Instance == this)
         {

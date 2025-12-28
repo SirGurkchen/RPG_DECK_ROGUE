@@ -16,9 +16,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SelectRight",
+                    "name": "SelectLeft",
                     "type": "Button",
                     "id": "54bedcd7-ce10-4a09-8dc9-93f50682007b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SelectRight",
+                    "type": "Button",
+                    "id": "70f54d87-3db4-4fb4-9700-f013c8afca6d",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -41,6 +50,17 @@
                     "name": "",
                     "id": "7fa4a8d5-9f72-4338-ab7f-b52abf0aca2e",
                     "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4ae50b2b-2e1c-4ba6-81b4-717e364bb59b",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

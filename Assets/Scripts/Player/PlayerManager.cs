@@ -7,17 +7,24 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private PlayerStats _stats;
     [SerializeField] private EnemyController _selectTarget;
 
-    public event Action OnEnemySelect;
+    public event Action OnEnemyLeftSelect;
+    public event Action OnEnemyRightSelect;
 
     private void Start()
     {
         GameInput.Instance.OnConfirmPress += Instance_OnConfirmPress;
+        GameInput.Instance.OnSelectLeftPress += Instance_OnSelectLeftPress;
         GameInput.Instance.OnSelectRightPress += Instance_OnSelectRightPress;
+    }
+
+    private void Instance_OnSelectLeftPress()
+    {
+        OnEnemyLeftSelect?.Invoke();
     }
 
     private void Instance_OnSelectRightPress()
     {
-        OnEnemySelect?.Invoke();
+        OnEnemyRightSelect?.Invoke();
     }
 
     private void Instance_OnConfirmPress()
@@ -72,11 +79,13 @@ public class PlayerManager : MonoBehaviour
         {
             GameInput.Instance.OnConfirmPress -= Instance_OnConfirmPress;
             GameInput.Instance.OnSelectRightPress -= Instance_OnSelectRightPress;
+            GameInput.Instance.OnSelectLeftPress -= Instance_OnSelectLeftPress;
         }
     }
 
     private void OnDestroy()
     {
-        OnEnemySelect = null;
+        OnEnemyLeftSelect = null;
+        OnEnemyRightSelect = null;
     }
 }
