@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
@@ -6,9 +7,17 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private PlayerStats _stats;
     [SerializeField] private EnemyController _selectTarget;
 
+    public event Action OnEnemySelect;
+
     private void Start()
     {
         GameInput.Instance.OnConfirmPress += Instance_OnConfirmPress;
+        GameInput.Instance.OnSelectRightPress += Instance_OnSelectRightPress;
+    }
+
+    private void Instance_OnSelectRightPress()
+    {
+        OnEnemySelect?.Invoke();
     }
 
     private void Instance_OnConfirmPress()
@@ -52,11 +61,22 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public void SetSelectTarget(EnemyController enemy)
+    {
+        _selectTarget = enemy;
+    }
+
     private void OnDisable()
     {
         if (GameInput.Instance != null)
         {
             GameInput.Instance.OnConfirmPress -= Instance_OnConfirmPress;
+            GameInput.Instance.OnSelectRightPress -= Instance_OnSelectRightPress;
         }
+    }
+
+    private void OnDestroy()
+    {
+        OnEnemySelect = null;
     }
 }

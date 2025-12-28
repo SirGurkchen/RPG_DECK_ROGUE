@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -5,6 +6,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyBase _enemyData;
 
     private int _currentHealth;
+
+    public event Action<EnemyController> OnEnemyDeath;
 
     private void Start()
     {
@@ -40,7 +43,7 @@ public class EnemyController : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);
+        OnEnemyDeath?.Invoke(this);
     }
 
     public string GetEnemyStats()
@@ -58,5 +61,10 @@ public class EnemyController : MonoBehaviour
         {
             return 1;
         }
+    }
+
+    private void OnDestroy()
+    {
+        OnEnemyDeath = null;
     }
 }
