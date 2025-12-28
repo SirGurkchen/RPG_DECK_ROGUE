@@ -1,3 +1,5 @@
+using DG.Tweening;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,6 +11,8 @@ public class EnemyBoard : MonoBehaviour
     [SerializeField] private Vector3 _startPos = Vector3.zero;
 
     private const int MAX_ENEMIES = 2;
+
+    public event Action OnBoardClear;
 
     private void Awake()
     {
@@ -30,7 +34,7 @@ public class EnemyBoard : MonoBehaviour
         _enemiesOnField.Remove(enemy);
         enemy.OnEnemyDeath -= HandleEnemyDeath;
         Destroy(enemy.gameObject);
-        SetUpEnemyVisuals();
+        CheckBoardClear();
     }
 
     public EnemyController GetMostRighternEnemy()
@@ -58,7 +62,19 @@ public class EnemyBoard : MonoBehaviour
         for (int count = 0; count < _enemiesOnField.Count; count++)
         {
             Vector3 pos = _startPos + new Vector3(_horizontalSpacing * count, 0, 0);
-            _enemiesOnField[count].transform.position = pos;
+            _enemiesOnField[count].transform.DOMove(pos, 0.3f);
+        }
+    }
+
+    private void CheckBoardClear()
+    {
+        if (_enemiesOnField.Count == 0)
+        {
+            OnBoardClear?.Invoke();
+        }
+        else
+        {
+            SetUpEnemyVisuals();
         }
     }
 
@@ -71,5 +87,7 @@ public class EnemyBoard : MonoBehaviour
                 enemy.OnEnemyDeath -= HandleEnemyDeath;
             }
         }
+
+        OnBoardClear = null;
     }
 }
