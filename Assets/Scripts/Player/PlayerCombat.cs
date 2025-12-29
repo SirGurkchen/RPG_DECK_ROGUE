@@ -3,10 +3,21 @@ using UnityEngine;
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private PlayerInventory _inventory;
-    [SerializeField] private PlayerStats _stats;
 
-    public void Use(EnemyController target = null)
+    public void Use(PlayerStats stats, EnemyController target = null)
     {
-        _inventory.GetEquippedItem()?.Use(_stats, target);
+        if (_inventory.GetEquippedItem() != null)
+        {
+            _inventory.GetEquippedItem().Use(stats, target);
+        }
+        else
+        {
+            Debug.Log("No Weapon Equipped!");
+        }
+    }
+
+    public void TakeDamage(PlayerStats stats, int damage)
+    {
+        stats.ReceiveDamage(damage);
     }
 }

@@ -6,7 +6,9 @@ public class HordeLogic : MonoBehaviour
     [SerializeField] private EnemyController[] _enemyPool;
     [SerializeField] private EnemyBoard _board;
 
-    private float _spawnTimer = 0.5f;
+    private const float SPAWN_TIMER = 0.5f;
+    private const int MIN_ENEMIES = 1;
+    private const int MAX_ENEMIES = 2;
 
     private void Start()
     {
@@ -21,9 +23,9 @@ public class HordeLogic : MonoBehaviour
 
     private IEnumerator SpawnEnemiesWithDelay()
     {
-        yield return new WaitForSeconds(_spawnTimer);
+        yield return new WaitForSeconds(SPAWN_TIMER);
 
-        int amount = Random.Range(1, 3);
+        int amount = Random.Range(MIN_ENEMIES, MAX_ENEMIES + 1);
 
         for (int i = 0; i < amount; i++)
         {
@@ -31,7 +33,7 @@ public class HordeLogic : MonoBehaviour
 
             if (i < amount - 1)
             {
-                yield return new WaitForSeconds(_spawnTimer);
+                yield return new WaitForSeconds(SPAWN_TIMER);
             }
         }
     }

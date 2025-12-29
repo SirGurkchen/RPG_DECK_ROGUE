@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    private List<ItemBase> _inventory = new List<ItemBase>();
-    [SerializeField] private ItemBase _equippedItem;
+    private List<ItemController> _inventory = new List<ItemController>();
+    [SerializeField] private ItemController _equippedItem;
 
     private const int MAX_INVENTORY_SIZE = 4;
     
-    public void SetEquippedItem(ItemBase item)
+    public void SetEquippedItem(ItemController item)
     {
         _equippedItem = item;
     }
 
-    public void GiveItemToInventory(ItemBase item)
+    public void GiveItemToInventory(ItemController item)
     {
         if (_inventory.Count < MAX_INVENTORY_SIZE)
         {
@@ -21,7 +21,7 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
-    public ItemBase GetEquippedItem()
+    public ItemController GetEquippedItem()
     {
         return _equippedItem;
     }

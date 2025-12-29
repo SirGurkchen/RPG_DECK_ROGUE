@@ -19,6 +19,8 @@ public class PlayerStats : MonoBehaviour
             _health -= finalDamage;
         }
 
+        Debug.Log("Health: " + _health);
+
         CheckDeath();
     }
 

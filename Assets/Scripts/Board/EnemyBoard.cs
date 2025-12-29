@@ -78,6 +78,11 @@ public class EnemyBoard : MonoBehaviour
         }
     }
 
+    public List<EnemyController> GetEnemies()
+    {
+        return _enemiesOnField;
+    }
+
     private void OnDestroy()
     {
         foreach (EnemyController enemy in _enemiesOnField)

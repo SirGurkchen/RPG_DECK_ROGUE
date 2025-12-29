@@ -69,6 +69,11 @@ public class EnemyController : MonoBehaviour
         _marker.SetActive(isMarked);
     }
 
+    public void Attack(PlayerManager player)
+    {
+        player.TakeDamage(_enemyData.Damage);
+    }
+
     private void OnDestroy()
     {
         OnEnemyDeath = null;

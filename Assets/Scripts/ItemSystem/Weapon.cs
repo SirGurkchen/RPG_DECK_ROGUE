@@ -1,11 +1,14 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Items/Weapon")]
-public class Weapon : ItemBase
+public class Weapon : ItemBase, IDurable
 {
     [Header("Weapon Stats")]
     [SerializeField] private int _damage;
     [SerializeField] private AttackType _attackType;
+    [SerializeField] private int _endurance;
+
+    public int MaxDurability => _endurance;
 
     public override void Use(PlayerStats player, EnemyController target = null)
     {

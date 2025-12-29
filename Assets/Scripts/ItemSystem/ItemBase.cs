@@ -11,7 +11,7 @@ public abstract class ItemBase : ScriptableObject
 
     [Header("Item Properties")]
     [SerializeField] private Rarity _rarity;
-    [SerializeField] private int _endurance;
+
 
 
     public abstract void Use(PlayerStats player, EnemyController target = null);
