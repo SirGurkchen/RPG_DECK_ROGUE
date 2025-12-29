@@ -16,16 +16,20 @@ public class ItemController : MonoBehaviour
         {
             _currentEndurance = item.MaxDurability;
         }
-
-        Debug.Log(_currentEndurance);
     }
 
-    public void Use(PlayerStats stats, EnemyController target = null)
+    public bool Use(PlayerStats stats, EnemyController target = null)
     {
-        _itemData.Use(stats, target);
-        _currentEndurance--;
-        Debug.Log(_currentEndurance);
-        CheckDestroy();
+        bool suc = _itemData.Use(stats, target);
+
+        if (suc)
+        {
+            _currentEndurance--;
+            Debug.Log(_currentEndurance);
+            CheckDestroy();
+        }
+
+        return suc;
     }
 
     private void CheckDestroy()

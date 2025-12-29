@@ -17,4 +17,9 @@ public class GameManager : MonoBehaviour
             enemy.Attack(_player);
         }
     }
+
+    private void OnDisable()
+    {
+        _player.OnPlayerTurnEnded -= PlayerTurnEnd;
+    }
 }

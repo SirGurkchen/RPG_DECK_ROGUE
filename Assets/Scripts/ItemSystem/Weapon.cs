@@ -10,15 +10,17 @@ public class Weapon : ItemBase, IDurable
 
     public int MaxDurability => _endurance;
 
-    public override void Use(PlayerStats player, EnemyController target = null)
+    public override bool Use(PlayerStats player, EnemyController target = null)
     {
         if (target == null)
         {
             Debug.Log("Cannot attack without target!");
+            return false;
         }
         else
         {
             target.TakeDamage(_damage, _attackType);
+            return true;
         }
     }
 

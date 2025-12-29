@@ -40,9 +40,14 @@ public class PlayerManager : MonoBehaviour
 
     private void HandleConfirm()
     {
-        _combat.Use(_stats, _targeting.GetCurrentTarget());
+        bool success = _combat.Use(_stats, _targeting.GetCurrentTarget());
         _targeting.DeselectAll();
-        OnPlayerTurnEnded?.Invoke();
+
+        if (success)
+        {
+            OnPlayerTurnEnded?.Invoke();
+            Debug.Log("Success!");
+        }
     }
 
     public void TakeDamage(int damage)

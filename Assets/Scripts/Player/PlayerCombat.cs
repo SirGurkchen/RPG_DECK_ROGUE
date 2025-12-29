@@ -4,15 +4,17 @@ public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private PlayerInventory _inventory;
 
-    public void Use(PlayerStats stats, EnemyController target = null)
+    public bool Use(PlayerStats stats, EnemyController target = null)
     {
         if (_inventory.GetEquippedItem() != null)
         {
-            _inventory.GetEquippedItem().Use(stats, target);
+            ItemController item = _inventory.GetEquippedItem();
+            return item.Use(stats, target);
         }
         else
         {
             Debug.Log("No Weapon Equipped!");
+            return false;
         }
     }
 

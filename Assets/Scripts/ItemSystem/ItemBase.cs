@@ -14,7 +14,7 @@ public abstract class ItemBase : ScriptableObject
 
 
 
-    public abstract void Use(PlayerStats player, EnemyController target = null);
+    public abstract bool Use(PlayerStats player, EnemyController target = null);
 
     public virtual string GetItemToString()
     {

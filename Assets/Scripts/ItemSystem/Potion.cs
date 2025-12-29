@@ -7,21 +7,25 @@ public class Potion : ItemBase
     [SerializeField] private int _amount;
     [SerializeField] private PotionType _type;
 
-    public override void Use(PlayerStats player, EnemyController target = null)
+    public override bool Use(PlayerStats player, EnemyController target = null)
     {
         if (player == null)
         {
-            return;
+            return false;
         }
-
-        switch (_type)
+        else
         {
-            case PotionType.Health:
-                //heal
-                break;
-            case PotionType.Mana:
-                //add mana
-                break;
+            switch (_type)
+            {
+                case PotionType.Health:
+                    //heal
+                    return true;
+                case PotionType.Mana:
+                    //add mana
+                    return true;
+                default:
+                    return false;
+            }
         }
     }
 }
