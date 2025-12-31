@@ -12,7 +12,7 @@ public abstract class ItemBase : ScriptableObject
     [Header("Item Properties")]
     [SerializeField] private Rarity _rarity;
 
-
+    public string ItemName => _itemName;
 
     public abstract bool Use(PlayerStats player, EnemyController target = null);
 

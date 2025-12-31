@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e47c7dde1fe9d1f4583666e9182a1132, type: 3}
   m_Name: RustySword
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  _itemName: 
+  _itemName: Rusty Sword
   _description: This sword is a bit rusty and not sharp, but it still suffices as
     a weapon able to kill.
   _price: 5

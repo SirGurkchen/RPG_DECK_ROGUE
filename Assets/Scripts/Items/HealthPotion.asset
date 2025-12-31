@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c26c6b02f9a8134280f31015268ef5e, type: 3}
   m_Name: HealthPotion
   m_EditorClassIdentifier: Assembly-CSharp::Potion
-  _item_name: Small Health
+  _itemName: Health Potion
   _description: 
   _price: 10
   _itemType: 2
   _rarity: 0
-  _endurance: 0
   _amount: 5
   _type: 1

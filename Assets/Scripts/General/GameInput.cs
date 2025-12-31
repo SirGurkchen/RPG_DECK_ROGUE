@@ -8,6 +8,7 @@ public class GameInput : MonoBehaviour
     public event Action OnConfirmPress;
     public event Action OnSelectRightPress;
     public event Action OnSelectLeftPress;
+    public event Action<int> OnItemSelect;
 
     private InputActions _inputActions;
 
@@ -30,6 +31,10 @@ public class GameInput : MonoBehaviour
         _inputActions.Player.Confirm.performed += Confirm_performed;
         _inputActions.Player.SelectRight.performed += SelectRight_performed;
         _inputActions.Player.SelectLeft.performed += SelectLeft_performed;
+        _inputActions.Player.SelectItemOne.performed += SelectItemOne_performed;
+        _inputActions.Player.SelectItemTwo.performed += SelectItemTwo_performed;
+        _inputActions.Player.SelectItemThree.performed += SelectItemThree_performed;
+        _inputActions.Player.SelectItemFour.performed += SelectItemFour_performed;
     }
 
     private void SelectRight_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -47,6 +52,26 @@ public class GameInput : MonoBehaviour
         OnSelectLeftPress?.Invoke();
     }
 
+    private void SelectItemOne_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnItemSelect?.Invoke(1);
+    }
+
+    private void SelectItemTwo_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnItemSelect?.Invoke(2);
+    }
+
+    private void SelectItemThree_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnItemSelect?.Invoke(3);
+    }
+
+    private void SelectItemFour_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnItemSelect?.Invoke(4);
+    }
+
     private void OnDisable()
     {
         if (_inputActions != null)
@@ -62,11 +87,16 @@ public class GameInput : MonoBehaviour
             _inputActions.Player.Confirm.performed -= Confirm_performed;
             _inputActions.Player.SelectRight.performed -= SelectRight_performed;
             _inputActions.Player.SelectLeft.performed -= SelectLeft_performed;
+            _inputActions.Player.SelectItemOne.performed -= SelectItemOne_performed;
+            _inputActions.Player.SelectItemTwo.performed -= SelectItemTwo_performed;
+            _inputActions.Player.SelectItemThree.performed -= SelectItemThree_performed;
+            _inputActions.Player.SelectItemFour.performed -= SelectItemFour_performed;
         }
 
         OnConfirmPress = null;
         OnSelectRightPress = null;
         OnSelectLeftPress = null;
+        OnItemSelect = null;
 
         if (Instance == this)
         {

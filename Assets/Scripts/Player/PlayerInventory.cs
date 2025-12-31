@@ -3,14 +3,14 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    private List<ItemController> _inventory = new List<ItemController>();
+    [SerializeField]private List<ItemController> _inventory = new List<ItemController>();
     [SerializeField] private ItemController _equippedItem;
 
     private const int MAX_INVENTORY_SIZE = 4;
     
-    public void SetEquippedItem(ItemController item)
+    public void SetEquippedItem(int item_index)
     {
-        _equippedItem = item;
+        _equippedItem = _inventory[item_index];
     }
 
     public void GiveItemToInventory(ItemController item)
@@ -19,6 +19,11 @@ public class PlayerInventory : MonoBehaviour
         {
             _inventory.Add(item);
         }
+    }
+
+    public void DeselectItem()
+    {
+        _equippedItem = null;
     }
 
     public ItemController GetEquippedItem()

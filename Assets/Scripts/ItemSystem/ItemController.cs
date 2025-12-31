@@ -32,6 +32,11 @@ public class ItemController : MonoBehaviour
         return suc;
     }
 
+    public string GetItemName()
+    {
+        return _itemData.ItemName;
+    }
+
     private void CheckDestroy()
     {
         if (_currentEndurance <= 0)
