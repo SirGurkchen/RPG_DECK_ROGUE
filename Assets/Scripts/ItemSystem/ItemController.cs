@@ -37,6 +37,11 @@ public class ItemController : MonoBehaviour
         return _itemData.ItemName;
     }
 
+    public ItemBase GetItemBase()
+    {
+        return _itemData;
+    }
+
     private void CheckDestroy()
     {
         if (_currentEndurance <= 0)

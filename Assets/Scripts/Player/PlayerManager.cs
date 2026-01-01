@@ -8,9 +8,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private EnemyBoard _board;
     [SerializeField] private PlayerStats _stats;
     [SerializeField] private PlayerInventory _inventory;
+    [SerializeField] private PlayerCardStash _cards;
 
     public event Action OnPlayerTurnEnded;
     public event Action<ItemController> OnItemSelected;
+    public event Action<CardController> OnCardUse;
 
     private void Start()
     {
@@ -68,6 +70,16 @@ public class PlayerManager : MonoBehaviour
         _combat.TakeDamage(_stats, damage);
     }
 
+    public EnemyController GetTargetedEnemy()
+    {
+        return _targeting.GetCurrentTarget();
+    }
+
+    public PlayerInventory GetPlayerInventory()
+    {
+        return _inventory;
+    }
+
     private void OnDisable()
     {
         var input = GetComponent<PlayerInput>();
@@ -83,5 +95,6 @@ public class PlayerManager : MonoBehaviour
     {
         OnPlayerTurnEnded = null;
         OnItemSelected = null;
+        OnCardUse = null;
     }
 }

@@ -17,6 +17,6 @@ MonoBehaviour:
   _price: 5
   _itemType: 0
   _rarity: 0
-  _endurance: 4
   _damage: 3
   _attackType: 1
+  _endurance: 4

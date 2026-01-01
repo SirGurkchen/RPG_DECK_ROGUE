@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d1a03d044988b4bab56318949b8988, type: 3}
+  m_Name: Clean Sweep
+  m_EditorClassIdentifier: Assembly-CSharp::CardBase
+  _cardName: Clean Sweep
+  _cardDescription: 'If you have the Rusty Sword equipped, deal 3 Damage to each
+    enemy on the board.
+
+    Else, if you have any Meele Weapon equipped, deal 5
+    damage to a selected enemy.'
+  _mainEffect:
+    requiredItem: {fileID: 11400000, guid: 1690c61ab37973346b954adfbb0f64ed, type: 2}
+    requiredAttackType: 3
+    effect: {fileID: 11400000, guid: f8f2786fc7e661f48b088cbca76b9203, type: 2}
+  _secondaryEffect:
+    requiredItem: {fileID: 0}
+    requiredAttackType: 0
+    effect: {fileID: 11400000, guid: 5845805d0eb681b46b41338cd8f126a6, type: 2}

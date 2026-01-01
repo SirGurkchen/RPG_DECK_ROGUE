@@ -9,6 +9,7 @@ public class Weapon : ItemBase, IDurable
     [SerializeField] private int _endurance;
 
     public int MaxDurability => _endurance;
+    public AttackType attackType => _attackType;
 
     public override bool Use(PlayerStats player, EnemyController target = null)
     {

@@ -9,14 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0311402c3ab54e45b8d884dac7933bc, type: 3}
-  m_Name: Knight
-  m_EditorClassIdentifier: Assembly-CSharp::Human
-  _enemyName: Knight
-  _description: 
-  _type: 0
-  _position: 0
-  _damage: 2
-  _health: 10
-  _weakness: 2
-  _block: 2
+  m_Script: {fileID: 11500000, guid: cac2d3e929d319d469acc645015491ad, type: 3}
+  m_Name: SlashEffect
+  m_EditorClassIdentifier: Assembly-CSharp::SlashEffect
+  damage: 6

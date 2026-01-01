@@ -9,4 +9,9 @@ public class UIManager : MonoBehaviour
     {
         _weaponUI.text = item.GetItemName();
     }
+
+    public void ClearWeaponUI()
+    {
+        _weaponUI.text = "";
+    }
 }
