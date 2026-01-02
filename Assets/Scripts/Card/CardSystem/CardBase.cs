@@ -22,6 +22,10 @@ public class CardBase : ScriptableObject
         {
             _secondaryEffect.effect.Execute(context);
         }
+        else
+        {
+            Debug.Log("Card Had No Effect!");
+        }
     }
 
     public string GetCardName()

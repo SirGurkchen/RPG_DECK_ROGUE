@@ -28,6 +28,12 @@ public class PlayerCardStash : MonoBehaviour
         }
     }
 
+    public void CardUsed()
+    {
+        Destroy(_selectedCard.gameObject);
+        _selectedCard = null;
+    }
+
     public CardController GetEquippedCard()
     {
         return _selectedCard;

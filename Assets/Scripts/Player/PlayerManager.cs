@@ -10,8 +10,11 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private PlayerInventory _inventory;
     [SerializeField] private PlayerCardStash _cards;
 
+    private bool _isChoosingCard = false;
+
     public event Action OnPlayerTurnEnded;
     public event Action<ItemController> OnItemSelected;
+    public event Action<CardBase> OnCardSelected;
     public event Action<CardController> OnCardUse;
 
     private void Start()
@@ -24,8 +27,15 @@ public class PlayerManager : MonoBehaviour
             input.OnEnemyLeftSelect += Input_OnEnemyLeftSelect;
             input.OnEnemyRightSelect += Input_OnEnemyRightSelect;
             input.OnItemSelect += Input_OnItemSelect;
+            input.OnCardSwitch += HandleCardSwitch;
             _stats.OnPlayerDeath += PlayerDead;
         }
+    }
+
+    private void HandleCardSwitch()
+    {
+        _isChoosingCard = !_isChoosingCard;
+        Debug.Log(_isChoosingCard);
     }
 
     private void PlayerDead()
@@ -45,8 +55,19 @@ public class PlayerManager : MonoBehaviour
 
     private void Input_OnItemSelect(int item_index)
     {
-        _inventory.SetEquippedItem(item_index);
-        OnItemSelected?.Invoke(_inventory.GetEquippedItem());
+        if (!_isChoosingCard)
+        {
+            _inventory.SetEquippedItem(item_index);
+            OnItemSelected?.Invoke(_inventory.GetEquippedItem());
+        }
+        else
+        {
+            _cards.SetSelectedCard(item_index);
+            if (_cards.GetEquippedCard() != null)
+            {
+                OnCardSelected?.Invoke(_cards.GetEquippedCard().GetCard());
+            }
+        }
     }
 
     public void DeselectAllItems()
@@ -56,7 +77,17 @@ public class PlayerManager : MonoBehaviour
 
     private void HandleConfirm()
     {
-        bool success = _combat.Use(_stats, _targeting.GetCurrentTarget());
+        bool success = false;
+
+        if (!_isChoosingCard)
+        {
+            success = _combat.Use(_stats, _targeting.GetCurrentTarget());
+        }
+        else
+        {
+            OnCardUse?.Invoke(_cards.GetEquippedCard());
+            _cards.CardUsed();
+        }
 
         if (success)
         {
@@ -80,6 +111,11 @@ public class PlayerManager : MonoBehaviour
         return _inventory;
     }
 
+    public PlayerStats GetPlayerStats()
+    {
+        return _stats;
+    }
+
     private void OnDisable()
     {
         var input = GetComponent<PlayerInput>();
@@ -88,6 +124,7 @@ public class PlayerManager : MonoBehaviour
         input.OnEnemyLeftSelect -= Input_OnEnemyLeftSelect;
         input.OnEnemyRightSelect -= Input_OnEnemyRightSelect;
         input.OnItemSelect -= Input_OnItemSelect;
+        input.OnCardSwitch -= HandleCardSwitch;
         _stats.OnPlayerDeath -= PlayerDead;
     }
 
@@ -96,5 +133,6 @@ public class PlayerManager : MonoBehaviour
         OnPlayerTurnEnded = null;
         OnItemSelected = null;
         OnCardUse = null;
+        OnCardSelected = null;
     }
 }

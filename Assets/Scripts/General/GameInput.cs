@@ -9,6 +9,7 @@ public class GameInput : MonoBehaviour
     public event Action OnSelectRightPress;
     public event Action OnSelectLeftPress;
     public event Action<int> OnItemSelect;
+    public event Action OnCardMenuSelect;
 
     private InputActions _inputActions;
 
@@ -35,6 +36,12 @@ public class GameInput : MonoBehaviour
         _inputActions.Player.SelectItemTwo.performed += SelectItemTwo_performed;
         _inputActions.Player.SelectItemThree.performed += SelectItemThree_performed;
         _inputActions.Player.SelectItemFour.performed += SelectItemFour_performed;
+        _inputActions.Player.SwitchToCard.performed += SwitchToCard_performed;
+    }
+
+    private void SwitchToCard_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnCardMenuSelect?.Invoke();
     }
 
     private void SelectRight_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -91,12 +98,14 @@ public class GameInput : MonoBehaviour
             _inputActions.Player.SelectItemTwo.performed -= SelectItemTwo_performed;
             _inputActions.Player.SelectItemThree.performed -= SelectItemThree_performed;
             _inputActions.Player.SelectItemFour.performed -= SelectItemFour_performed;
+            _inputActions.Player.SwitchToCard.performed -= SwitchToCard_performed;
         }
 
         OnConfirmPress = null;
         OnSelectRightPress = null;
         OnSelectLeftPress = null;
         OnItemSelect = null;
+        OnCardMenuSelect = null;
 
         if (Instance == this)
         {

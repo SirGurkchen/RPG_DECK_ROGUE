@@ -4,7 +4,11 @@ public class CardManager : MonoBehaviour
 {
     public void PlayCard(CardController card, PlayerManager player, PlayerInventory playerInventory, EnemyBoard board)
     {
-        ItemBase equippedItem = playerInventory.GetEquippedItem().GetItemBase();
+        ItemBase equippedItem = null;
+        if (playerInventory.GetEquippedItem() != null)
+        {
+            equippedItem = playerInventory.GetEquippedItem().GetItemBase();
+        }
         AttackType attackType = AttackType.None;
 
         if (equippedItem is Weapon weapon)

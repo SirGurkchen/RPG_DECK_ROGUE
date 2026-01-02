@@ -154,6 +154,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchToCard"",
+                    ""type"": ""Button"",
+                    ""id"": ""0a60cbef-3871-4983-83ea-e566085082f7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -233,6 +242,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""SelectItemFour"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a62d7aaf-5007-49fb-aadf-2cb03e95a8e6"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwitchToCard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -248,6 +268,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_SelectItemTwo = m_Player.FindAction("SelectItemTwo", throwIfNotFound: true);
         m_Player_SelectItemThree = m_Player.FindAction("SelectItemThree", throwIfNotFound: true);
         m_Player_SelectItemFour = m_Player.FindAction("SelectItemFour", throwIfNotFound: true);
+        m_Player_SwitchToCard = m_Player.FindAction("SwitchToCard", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -335,6 +356,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SelectItemTwo;
     private readonly InputAction m_Player_SelectItemThree;
     private readonly InputAction m_Player_SelectItemFour;
+    private readonly InputAction m_Player_SwitchToCard;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -374,6 +396,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/SelectItemFour".
         /// </summary>
         public InputAction @SelectItemFour => m_Wrapper.m_Player_SelectItemFour;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SwitchToCard".
+        /// </summary>
+        public InputAction @SwitchToCard => m_Wrapper.m_Player_SwitchToCard;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -421,6 +447,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @SelectItemFour.started += instance.OnSelectItemFour;
             @SelectItemFour.performed += instance.OnSelectItemFour;
             @SelectItemFour.canceled += instance.OnSelectItemFour;
+            @SwitchToCard.started += instance.OnSwitchToCard;
+            @SwitchToCard.performed += instance.OnSwitchToCard;
+            @SwitchToCard.canceled += instance.OnSwitchToCard;
         }
 
         /// <summary>
@@ -453,6 +482,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @SelectItemFour.started -= instance.OnSelectItemFour;
             @SelectItemFour.performed -= instance.OnSelectItemFour;
             @SelectItemFour.canceled -= instance.OnSelectItemFour;
+            @SwitchToCard.started -= instance.OnSwitchToCard;
+            @SwitchToCard.performed -= instance.OnSwitchToCard;
+            @SwitchToCard.canceled -= instance.OnSwitchToCard;
         }
 
         /// <summary>
@@ -542,5 +574,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSelectItemFour(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SwitchToCard" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSwitchToCard(InputAction.CallbackContext context);
     }
 }

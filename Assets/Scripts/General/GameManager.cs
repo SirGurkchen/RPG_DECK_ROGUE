@@ -12,11 +12,22 @@ public class GameManager : MonoBehaviour
         _player.OnPlayerTurnEnded += PlayerTurnEnd;
         _player.OnItemSelected += PlayerItemSelect;
         _player.OnCardUse += PlayerCardUse;
+        _player.OnCardSelected += PlayerCardSelection;
+
+        _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
+    }
+
+    private void PlayerCardSelection(CardBase card)
+    {
+        if (card == null) return;
+        _UIManager.UpdateCardUI(card);
     }
 
     private void PlayerCardUse(CardController card)
     {
+        if (card == null) return;
         _cardManager.PlayCard(card, _player, _player.GetPlayerInventory(), _enemyBoard);
+        _UIManager.ClearCardUI();
     }
 
     private void PlayerTurnEnd()
@@ -28,6 +39,7 @@ public class GameManager : MonoBehaviour
 
         _player.DeselectAllItems();
         _UIManager.ClearWeaponUI();
+        _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
     }
 
     private void PlayerItemSelect(ItemController item)

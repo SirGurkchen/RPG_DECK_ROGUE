@@ -10,6 +10,8 @@ public class HordeLogic : MonoBehaviour
     private const int MIN_ENEMIES = 1;
     private const int MAX_ENEMIES = 2;
 
+    public bool isSpawning {  get; private set; }
+
     private void Start()
     {
         _board.OnBoardClear += RefillBoard;
@@ -23,6 +25,8 @@ public class HordeLogic : MonoBehaviour
 
     private IEnumerator SpawnEnemiesWithDelay()
     {
+        isSpawning = true;
+
         yield return new WaitForSeconds(SPAWN_TIMER);
 
         int amount = Random.Range(MIN_ENEMIES, MAX_ENEMIES + 1);
@@ -30,12 +34,9 @@ public class HordeLogic : MonoBehaviour
         for (int i = 0; i < amount; i++)
         {
             AddEnemy();
-
-            if (i < amount - 1)
-            {
-                yield return new WaitForSeconds(SPAWN_TIMER);
-            }
+            yield return new WaitForSeconds(SPAWN_TIMER);
         }
+        isSpawning = false;
     }
 
     private void AddEnemy()

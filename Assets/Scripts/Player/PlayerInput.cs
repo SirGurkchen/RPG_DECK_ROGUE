@@ -3,10 +3,13 @@ using UnityEngine;
 
 public class PlayerInput : MonoBehaviour
 {
+    [SerializeField] private HordeLogic _horde;
+
     public event Action OnConfirm;
     public event Action OnEnemyLeftSelect;
     public event Action OnEnemyRightSelect;
     public event Action<int> OnItemSelect;
+    public event Action OnCardSwitch;
 
     private void Start()
     {
@@ -14,25 +17,51 @@ public class PlayerInput : MonoBehaviour
         GameInput.Instance.OnSelectLeftPress += Instance_OnSelectLeftPress;
         GameInput.Instance.OnSelectRightPress += Instance_OnSelectRightPress;
         GameInput.Instance.OnItemSelect += Instance_OnItemSelect;
+        GameInput.Instance.OnCardMenuSelect += Instance_OnCardMenuSelect;
+    }
+
+    private void Instance_OnCardMenuSelect()
+    {
+        OnCardSwitch?.Invoke();
     }
 
     private void Instance_OnSelectLeftPress()
     {
+        if (_horde.isSpawning)
+        {
+            return;
+        }
+
         OnEnemyLeftSelect?.Invoke();
     }
 
     private void Instance_OnSelectRightPress()
     {
+        if (_horde.isSpawning)
+        {
+            return;
+        }
+
         OnEnemyRightSelect?.Invoke();
     }
 
     private void Instance_OnConfirmPress()
     {
+        if (_horde.isSpawning)
+        {
+            return;
+        }
+
         OnConfirm?.Invoke();
     }
 
     private void Instance_OnItemSelect(int item_numb)
     {
+        if (_horde.isSpawning)
+        {
+            return;
+        }
+
         switch (item_numb)
         {
             case 1:
@@ -58,6 +87,7 @@ public class PlayerInput : MonoBehaviour
             GameInput.Instance.OnSelectRightPress -= Instance_OnSelectRightPress;
             GameInput.Instance.OnSelectLeftPress -= Instance_OnSelectLeftPress;
             GameInput.Instance.OnItemSelect -= Instance_OnItemSelect;
+            GameInput.Instance.OnCardMenuSelect -= Instance_OnCardMenuSelect;
         }
     }
 
@@ -67,5 +97,6 @@ public class PlayerInput : MonoBehaviour
         OnEnemyLeftSelect = null;
         OnEnemyRightSelect = null;
         OnItemSelect = null;
+        OnCardSwitch = null;
     }
 }
