@@ -11,8 +11,15 @@ public class PlayerTargeting : MonoBehaviour
             _currentTarget.SetEnemeyMarker(false);
         }
 
-        _currentTarget = enemy;
-        enemy.SetEnemeyMarker(true);
+        if (_currentTarget !=  enemy)
+        {
+            _currentTarget = enemy;
+            enemy.SetEnemeyMarker(true);
+        }
+        else
+        {
+            _currentTarget = null;
+        }
     }
 
     public void DeselectAll()

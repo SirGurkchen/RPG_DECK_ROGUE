@@ -4,7 +4,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyBase _enemyData;
-    [SerializeField] private GameObject _marker;
+    [SerializeField] private EnemyUI _myUI;
 
     private int _currentHealth;
 
@@ -13,6 +13,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         InitializeEnemy();
+        _myUI.InitHealthText(_currentHealth, _enemyData);
     }
 
     private void InitializeEnemy()
@@ -34,6 +35,7 @@ public class EnemyController : MonoBehaviour
         if (finalDamage >= 0)
         {
             _currentHealth -= finalDamage;
+            _myUI.UpdateHealthbar(_currentHealth, _enemyData);
         }
 
         if (_currentHealth <= 0)
@@ -66,7 +68,7 @@ public class EnemyController : MonoBehaviour
 
     public void SetEnemeyMarker(bool isMarked)
     {
-        _marker.SetActive(isMarked);
+        _myUI.SetEnemeyMarker(isMarked);
     }
 
     public void Attack(PlayerManager player)

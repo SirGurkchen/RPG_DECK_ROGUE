@@ -10,7 +10,10 @@ public class PlayerInventory : MonoBehaviour
     
     public void SetEquippedItem(int item_index)
     {
-        _equippedItem = _inventory[item_index];
+        if (_inventory[item_index] != null)
+        {
+            _equippedItem = _inventory[item_index];
+        }
     }
 
     public void GiveItemToInventory(ItemController item)
