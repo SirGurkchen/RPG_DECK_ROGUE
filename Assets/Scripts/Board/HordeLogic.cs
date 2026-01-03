@@ -14,11 +14,10 @@ public class HordeLogic : MonoBehaviour
 
     private void Start()
     {
-        _board.OnBoardClear += RefillBoard;
         RefillBoard();
     }
 
-    private void RefillBoard()
+    public void RefillBoard()
     {
         StartCoroutine(SpawnEnemiesWithDelay());
     }
@@ -43,13 +42,5 @@ public class HordeLogic : MonoBehaviour
     {
         EnemyController newEnemy = Instantiate(_enemyPool[Random.Range(0, _enemyPool.Length)]);
         _board.AddEnemyToField(newEnemy);
-    }
-
-    private void OnDestroy()
-    {
-        if (_board != null)
-        {
-            _board.OnBoardClear -= RefillBoard;
-        }
     }
 }

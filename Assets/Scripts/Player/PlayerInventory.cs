@@ -3,11 +3,20 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField]private List<ItemController> _inventory = new List<ItemController>();
+    [SerializeField] private List<ItemController> _inventory;
     [SerializeField] private ItemController _equippedItem;
 
     private const int MAX_INVENTORY_SIZE = 4;
-    
+
+    private void Awake()
+    {
+        _inventory = new List<ItemController>(MAX_INVENTORY_SIZE);
+        for (int i = 0; i < MAX_INVENTORY_SIZE; i++)
+        {
+            _inventory.Add(null);
+        }
+    }
+
     public void SetEquippedItem(int item_index)
     {
         if (_inventory[item_index] != null)
@@ -18,10 +27,28 @@ public class PlayerInventory : MonoBehaviour
 
     public void GiveItemToInventory(ItemController item)
     {
-        if (_inventory.Count < MAX_INVENTORY_SIZE)
+        foreach (ItemController ownedItem in _inventory)
         {
-            _inventory.Add(item);
+            if (ownedItem == null)
+            {
+                int itemIndex = _inventory.IndexOf(ownedItem);
+                _inventory[itemIndex] = item;
+                item.OnItemDestroy += ItemDetroyed;
+                break;
+            }
         }
+    }
+
+    public bool CanAddItem()
+    {
+        return _inventory.Count < MAX_INVENTORY_SIZE || _inventory.Contains(null);
+    }
+
+    private void ItemDetroyed(ItemController item)
+    {
+        int itemIndex = _inventory.IndexOf(item);
+
+        _inventory[itemIndex] = null;
     }
 
     public void DeselectItem()

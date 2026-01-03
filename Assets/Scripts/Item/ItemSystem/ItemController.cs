@@ -1,9 +1,13 @@
+using System;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class ItemController : MonoBehaviour
 {
     [SerializeField] private ItemBase _itemData;
     private int _currentEndurance = 1;
+
+    public event Action<ItemController> OnItemDestroy;
 
     private void Awake()
     {
@@ -47,7 +51,8 @@ public class ItemController : MonoBehaviour
         if (_currentEndurance <= 0)
         {
             Debug.Log("Destroy!");
-            Destroy(gameObject);
+            OnItemDestroy?.Invoke(this);
+            Destroy(this.gameObject);
         }
     }
 }

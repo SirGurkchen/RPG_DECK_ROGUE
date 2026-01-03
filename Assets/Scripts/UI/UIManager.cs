@@ -5,7 +5,6 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _weaponUI;
     [SerializeField] private TextMeshProUGUI _healthUI;
-    [SerializeField] private TextMeshProUGUI _selectCardUI;
     [SerializeField] private CardUIManager _cardUI;
 
     private string _defaultHealthText;
@@ -23,16 +22,6 @@ public class UIManager : MonoBehaviour
     public void ClearWeaponUI()
     {
         _weaponUI.text = "";
-    }
-
-    public void UpdateCardUI(CardBase card)
-    {
-        _selectCardUI.text = card.GetCardName();
-    }
-
-    public void ClearCardUI()
-    {
-        _selectCardUI.text = "";
     }
 
     public void UpdateHealthText(int health, int maxHealth)

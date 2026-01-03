@@ -16,7 +16,6 @@ public class PlayerCardStash : MonoBehaviour
     {
         if (_playerCards.Count < _maxStashSize)
         {
-            Debug.Log("Card Added!");
             _playerCards.Add(newCard);
         }
         else

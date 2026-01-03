@@ -66,7 +66,6 @@ public class PlayerManager : MonoBehaviour
 
             if (cardSelect)
             {
-                Debug.Log("Equipped Card!");
                 OnCardSelected?.Invoke(_cards.GetEquippedCard());
             }
             else if (_cards.GetEquippedCard() == null)
