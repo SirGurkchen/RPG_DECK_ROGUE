@@ -12,6 +12,9 @@ public class CardBase : ScriptableObject
     [SerializeField] private CardConditionalWrapper _mainEffect;
     [SerializeField] private CardConditionalWrapper _secondaryEffect;
 
+    public string Name => _cardName;
+    public string Description => _cardDescription;
+
     public void Play(CardContext context)
     {
         if (_mainEffect.ItemConditionMet(context))
