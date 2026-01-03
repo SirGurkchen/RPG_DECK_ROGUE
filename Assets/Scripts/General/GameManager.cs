@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EnemyBoard _enemyBoard;
     [SerializeField] private UIManager _UIManager;
     [SerializeField] private CardManager _cardManager;
+    [SerializeField] private CardController _testCard;
 
     private void Start()
     {
@@ -15,12 +16,24 @@ public class GameManager : MonoBehaviour
         _player.OnCardSelected += PlayerCardSelection;
 
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
+        AddCardToPlayer(_testCard);
+        AddCardToPlayer(_testCard);
+        AddCardToPlayer(_testCard);
+        AddCardToPlayer(_testCard);
     }
 
-    private void PlayerCardSelection(CardBase card)
+    private void PlayerCardSelection(CardController card)
     {
         if (card == null) return;
-        _UIManager.UpdateCardUI(card);
+        _UIManager.UpdateCardUI(card.GetCard());
+        card.SelectCard();
+    }
+
+    private void AddCardToPlayer(CardController card)
+    {
+        CardController newCard = Instantiate(card);
+        _player.GiveCard(newCard);
+        _UIManager.AddCardUI(newCard);
     }
 
     private void PlayerCardUse(CardController card)
@@ -28,6 +41,7 @@ public class GameManager : MonoBehaviour
         if (card == null) return;
         _cardManager.PlayCard(card, _player, _player.GetPlayerInventory(), _enemyBoard);
         _UIManager.ClearCardUI();
+        _UIManager.RemoveCardUI(card);
     }
 
     private void PlayerTurnEnd()

@@ -14,7 +14,7 @@ public class PlayerManager : MonoBehaviour
 
     public event Action OnPlayerTurnEnded;
     public event Action<ItemController> OnItemSelected;
-    public event Action<CardBase> OnCardSelected;
+    public event Action<CardController> OnCardSelected;
     public event Action<CardController> OnCardUse;
 
     private void Start()
@@ -62,10 +62,16 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
-            _cards.SetSelectedCard(item_index);
-            if (_cards.GetEquippedCard() != null)
+            bool cardSelect = _cards.SetSelectedCard(item_index);
+
+            if (cardSelect)
             {
-                OnCardSelected?.Invoke(_cards.GetEquippedCard().GetCard());
+                Debug.Log("Equipped Card!");
+                OnCardSelected?.Invoke(_cards.GetEquippedCard());
+            }
+            else if (_cards.GetEquippedCard() == null)
+            {
+                OnCardSelected?.Invoke(null);
             }
         }
     }
@@ -114,6 +120,11 @@ public class PlayerManager : MonoBehaviour
     public PlayerStats GetPlayerStats()
     {
         return _stats;
+    }
+
+    public void GiveCard(CardController newCard)
+    {
+        _cards.AddCardToStash(newCard);
     }
 
     private void OnDisable()

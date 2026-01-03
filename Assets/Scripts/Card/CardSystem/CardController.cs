@@ -14,4 +14,14 @@ public class CardController : MonoBehaviour
     {
         return _card;
     }
+
+    public void SelectCard()
+    {
+        _myUI.VisualizeCardSelect();
+    }
+
+    public void DeselectCard()
+    {
+        _myUI.VisualizeCardDeselect();
+    }
 }

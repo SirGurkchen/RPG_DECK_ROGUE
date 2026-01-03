@@ -51,7 +51,7 @@ public class EnemyBoard : MonoBehaviour
     {
         if (_enemiesOnField.Count == 0)
         {
-            Debug.Log("No Enemies ON Field!");
+            Debug.Log("No Enemies On Field!");
             return null;
         }
         return _enemiesOnField[_enemiesOnField.Count - 1];
