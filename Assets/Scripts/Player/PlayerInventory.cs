@@ -27,28 +27,43 @@ public class PlayerInventory : MonoBehaviour
 
     public void GiveItemToInventory(ItemController item)
     {
-        foreach (ItemController ownedItem in _inventory)
+        if (item == null)
         {
-            if (ownedItem == null)
+            return;
+        }
+
+        for (int i = 0; i < _inventory.Count; i++)
+        {
+            if (_inventory[i] == null)
             {
-                int itemIndex = _inventory.IndexOf(ownedItem);
-                _inventory[itemIndex] = item;
-                item.OnItemDestroy += ItemDetroyed;
-                break;
+                _inventory[i] = item;
+                item.OnItemDestroy += ItemDestroyed;
+                return;
             }
         }
     }
 
     public bool CanAddItem()
     {
-        return _inventory.Count < MAX_INVENTORY_SIZE || _inventory.Contains(null);
+        for (int i = 0; i < _inventory.Count; i++)
+        {
+            if ( _inventory[i] == null || _inventory[i].gameObject == null)
+            {
+                return true;
+            } 
+        }
+        return false;
     }
 
-    private void ItemDetroyed(ItemController item)
+    private void ItemDestroyed(ItemController item)
     {
         int itemIndex = _inventory.IndexOf(item);
 
-        _inventory[itemIndex] = null;
+        if (itemIndex >= 0)
+        {
+            item.OnItemDestroy -= ItemDestroyed;
+            _inventory[itemIndex] = null;
+        }
     }
 
     public void DeselectItem()
@@ -59,5 +74,10 @@ public class PlayerInventory : MonoBehaviour
     public ItemController GetEquippedItem()
     {
         return _equippedItem;
+    }
+
+    public List<ItemController> GetInventory()
+    {
+        return _inventory;
     }
 }

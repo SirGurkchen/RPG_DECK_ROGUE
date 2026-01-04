@@ -52,6 +52,7 @@ public class ItemController : MonoBehaviour
         {
             Debug.Log("Destroy!");
             OnItemDestroy?.Invoke(this);
+            gameObject.SetActive(false);
             Destroy(this.gameObject);
         }
     }

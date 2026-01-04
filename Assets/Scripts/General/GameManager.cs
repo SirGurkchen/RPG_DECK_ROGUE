@@ -32,8 +32,9 @@ public class GameManager : MonoBehaviour
     private void HandleRewardSelection(int rewardIndex)
     {
         ItemController reward = _rewardManager.GetRewardItem(rewardIndex);
-        GivePlayerItem(reward);
+        GivePlayerItem(Instantiate(reward));
         _rewardManager.ClearRewards();
+        _UIManager.ClearRewardUI();
         var input = _player.GetComponent<PlayerInput>();
         input.EnablePlayerControls();
         _hordeLogic.RefillBoard();
@@ -41,10 +42,17 @@ public class GameManager : MonoBehaviour
 
     private void BoardClear()
     {
-        List<ItemController> rewards = _rewardManager.GetRandomRewardItems(_itemDatabase);
-        Debug.Log(rewards);
-        var input = _player.GetComponent<PlayerInput>();
-        input.EnableRewardControls();
+        if (_player.GetPlayerInventory().CanAddItem())
+        {
+            List<ItemController> rewards = _rewardManager.GetRandomRewardItems(_itemDatabase);
+            _UIManager.FillRewardUI(rewards[0], rewards[1]);
+            var input = _player.GetComponent<PlayerInput>();
+            input.EnableRewardControls();
+        }
+        else
+        {
+            _hordeLogic.RefillBoard();
+        }
     }
 
     private void PlayerCardSelection(CardController card)
@@ -75,8 +83,8 @@ public class GameManager : MonoBehaviour
         }
 
         _player.DeselectAllItems();
-        _UIManager.ClearWeaponUI();
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
+        _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
     }
 
     private void PlayerItemSelect(ItemController item)
@@ -86,7 +94,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("No Item");
             return;
         }
-        _UIManager.UpdateWeaponUI(item);
+        else
+        {
+            _UIManager.MarkSelecteItem(_player.GetPlayerInventory().GetInventory().IndexOf(item));
+        }
     }
 
     private void GivePlayerItem(ItemController item)
@@ -94,6 +105,7 @@ public class GameManager : MonoBehaviour
         if (_player.GetPlayerInventory().CanAddItem())
         {
             _player.GetPlayerInventory().GiveItemToInventory(Instantiate(item));
+            _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
         }
     }
 
