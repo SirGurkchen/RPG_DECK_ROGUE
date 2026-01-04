@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _healthUI;
     [SerializeField] private CardUIManager _cardUI;
-    [SerializeField] private TextMeshProUGUI[] _rewardUI;
     [SerializeField] private ItemUI _itemUI;
+    [SerializeField] private RewardUI _rewardUI;
 
     private string _defaultHealthText;
 
@@ -32,14 +33,29 @@ public class UIManager : MonoBehaviour
         _itemUI.DemarkAll();
     }
 
-    public void ClearWeaponUI()
-    {
-        //_weaponUI.text = "";
-    }
-
     public void MarkSelecteItem(int index)
     {
         _itemUI.MarkItem(index);
+    }
+
+    public void ShowItemDescription(ItemController item)
+    {
+        _itemUI.ShowItemDescription(item);
+    }
+
+    public void ShowRewardItemDescription(ItemController item, int index)
+    {
+        _rewardUI.ShowRewardItemDescription(item, index, _itemUI);
+    }
+
+    public void DemarkAllRewards()
+    {
+        _rewardUI.DemarkAllRewards();
+    }
+
+    public void RemoveItemDescription()
+    {
+        _itemUI.RemoveDescriptionText();
     }
 
     public void UpdateHealthText(int health, int maxHealth)
@@ -59,13 +75,11 @@ public class UIManager : MonoBehaviour
 
     public void FillRewardUI(ItemController itemOne, ItemController itemTwo)
     {
-        _rewardUI[0].text = itemOne.GetItemName();
-        _rewardUI[1].text = itemTwo.GetItemName();
+        _rewardUI.FillRewardUI(itemOne, itemTwo);
     }
 
     public void ClearRewardUI()
     {
-        _rewardUI[0].text = "";
-        _rewardUI[1].text = "";
+        _rewardUI.ClearRewardUI();
     }
 }

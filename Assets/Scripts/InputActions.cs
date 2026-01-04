@@ -277,6 +277,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd514969-3823-4e1e-8e8a-7e544fc96af9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -301,6 +310,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ItemTwo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2eaab39f-72f3-4379-b2e6-c1c6928669c2"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -321,6 +341,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_ItemReward = asset.FindActionMap("ItemReward", throwIfNotFound: true);
         m_ItemReward_ItemOne = m_ItemReward.FindAction("ItemOne", throwIfNotFound: true);
         m_ItemReward_ItemTwo = m_ItemReward.FindAction("ItemTwo", throwIfNotFound: true);
+        m_ItemReward_Confirm = m_ItemReward.FindAction("Confirm", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -577,6 +598,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private List<IItemRewardActions> m_ItemRewardActionsCallbackInterfaces = new List<IItemRewardActions>();
     private readonly InputAction m_ItemReward_ItemOne;
     private readonly InputAction m_ItemReward_ItemTwo;
+    private readonly InputAction m_ItemReward_Confirm;
     /// <summary>
     /// Provides access to input actions defined in input action map "ItemReward".
     /// </summary>
@@ -596,6 +618,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "ItemReward/ItemTwo".
         /// </summary>
         public InputAction @ItemTwo => m_Wrapper.m_ItemReward_ItemTwo;
+        /// <summary>
+        /// Provides access to the underlying input action "ItemReward/Confirm".
+        /// </summary>
+        public InputAction @Confirm => m_Wrapper.m_ItemReward_Confirm;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -628,6 +654,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ItemTwo.started += instance.OnItemTwo;
             @ItemTwo.performed += instance.OnItemTwo;
             @ItemTwo.canceled += instance.OnItemTwo;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
         }
 
         /// <summary>
@@ -645,6 +674,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ItemTwo.started -= instance.OnItemTwo;
             @ItemTwo.performed -= instance.OnItemTwo;
             @ItemTwo.canceled -= instance.OnItemTwo;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
         }
 
         /// <summary>
@@ -763,5 +795,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnItemTwo(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Confirm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnConfirm(InputAction.CallbackContext context);
     }
 }

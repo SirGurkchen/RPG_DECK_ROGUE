@@ -9,7 +9,6 @@ public class ItemsDataBase : MonoBehaviour
     public ItemController GetRandomItem()
     {
         int rng = Random.Range(0, _itemDatabase.Count);
-        Debug.Log("Given Item: " + _itemDatabase[rng]);
         return _itemDatabase[rng];
     }
 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HealthPotion
   m_EditorClassIdentifier: Assembly-CSharp::Potion
   _itemName: Health Potion
-  _description: 
+  _description: A small health potion. Heals you for 5 health.
   _price: 10
   _itemType: 2
   _rarity: 0

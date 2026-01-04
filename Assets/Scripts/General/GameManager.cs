@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
         _player.OnItemSelected += PlayerItemSelect;
         _player.OnCardUse += PlayerCardUse;
         _player.OnCardSelected += PlayerCardSelection;
-        _player.OnRewardConfirm += HandleRewardSelection;
+        _player.OnRewardSelect += HandleRewardSelection;
+        _player.OnRewardConfirm += HandleRewardConfirm;
         _enemyBoard.OnBoardClear += BoardClear;
 
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
@@ -29,15 +30,21 @@ public class GameManager : MonoBehaviour
         GivePlayerItem(_itemDatabase.GetRandomItem());
     }
 
-    private void HandleRewardSelection(int rewardIndex)
+    private void HandleRewardConfirm()
     {
-        ItemController reward = _rewardManager.GetRewardItem(rewardIndex);
-        GivePlayerItem(Instantiate(reward));
+        GivePlayerItem(Instantiate(_rewardManager.GetSelectReward()));
         _rewardManager.ClearRewards();
         _UIManager.ClearRewardUI();
+        _UIManager.RemoveItemDescription();
         var input = _player.GetComponent<PlayerInput>();
         input.EnablePlayerControls();
         _hordeLogic.RefillBoard();
+    }
+
+    private void HandleRewardSelection(int rewardIndex)
+    {
+        _rewardManager.SetSelectReward(rewardIndex);
+        _UIManager.ShowRewardItemDescription(_rewardManager.GetSelectReward(), rewardIndex);
     }
 
     private void BoardClear()
@@ -85,6 +92,7 @@ public class GameManager : MonoBehaviour
         _player.DeselectAllItems();
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
         _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
+        _UIManager.RemoveItemDescription();
     }
 
     private void PlayerItemSelect(ItemController item)
@@ -97,6 +105,7 @@ public class GameManager : MonoBehaviour
         else
         {
             _UIManager.MarkSelecteItem(_player.GetPlayerInventory().GetInventory().IndexOf(item));
+            _UIManager.ShowItemDescription(item);
         }
     }
 

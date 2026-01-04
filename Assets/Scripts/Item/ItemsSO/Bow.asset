@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   _itemName: Bow
-  _description: 
+  _description: A standard wooden bow that deals ranged damage. Some enemies might
+    be immune to ranged attacks!
   _price: 5
   _itemType: 0
   _rarity: 0

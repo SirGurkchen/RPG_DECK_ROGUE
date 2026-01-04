@@ -13,8 +13,10 @@ MonoBehaviour:
   m_Name: RustySword
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   _itemName: Rusty Sword
-  _description: This sword is a bit rusty and not sharp, but it still suffices as
-    a weapon able to kill.
+  _description: 'A rusty sword that has seen better days. Does melee damage. Some
+    enemies might be immune to melee attacks!
+
+'
   _price: 5
   _itemType: 0
   _rarity: 0

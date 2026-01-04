@@ -11,6 +11,8 @@ public class PlayerInput : MonoBehaviour
     public event Action<int> OnItemSelect;
     public event Action OnCardSwitch;
     public event Action<int> OnRewardSelect;
+    public event Action OnRewardConfirm;
+
 
     private void Start()
     {
@@ -20,6 +22,12 @@ public class PlayerInput : MonoBehaviour
         GameInput.Instance.OnItemSelect += Instance_OnItemSelect;
         GameInput.Instance.OnCardMenuSelect += Instance_OnCardMenuSelect;
         GameInput.Instance.OnRewardSelect += RewardSelected;
+        GameInput.Instance.OnRewardConfirm += RewardConfirmed;
+    }
+
+    private void RewardConfirmed()
+    {
+        OnRewardConfirm?.Invoke();
     }
 
     private void RewardSelected(int rewardIndex)
@@ -108,6 +116,7 @@ public class PlayerInput : MonoBehaviour
             GameInput.Instance.OnItemSelect -= Instance_OnItemSelect;
             GameInput.Instance.OnCardMenuSelect -= Instance_OnCardMenuSelect;
             GameInput.Instance.OnRewardSelect -= RewardSelected;
+            GameInput.Instance.OnRewardConfirm -= RewardConfirmed;
         }
     }
 
@@ -119,5 +128,6 @@ public class PlayerInput : MonoBehaviour
         OnItemSelect = null;
         OnCardSwitch = null;
         OnRewardSelect = null;
+        OnRewardConfirm = null;
     }
 }

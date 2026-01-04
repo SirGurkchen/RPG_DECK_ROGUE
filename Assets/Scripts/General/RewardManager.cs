@@ -4,7 +4,9 @@ using UnityEngine;
 public class RewardManager : MonoBehaviour
 {
     private List<ItemController> _currentRewards = new List<ItemController>();
-    
+
+    private ItemController _selectReward;
+
     public List<ItemController> GetRandomRewardItems(ItemsDataBase database)
     {
         List<ItemController> rewardItems = new List<ItemController>();
@@ -27,8 +29,18 @@ public class RewardManager : MonoBehaviour
         return _currentRewards[index];
     }
 
+    public void SetSelectReward(int index)
+    {
+        _selectReward = _currentRewards[index];
+    }
+
     public void ClearRewards()
     {
         _currentRewards.Clear();
+    }
+
+    public ItemController GetSelectReward()
+    {
+        return _selectReward;
     }
 }

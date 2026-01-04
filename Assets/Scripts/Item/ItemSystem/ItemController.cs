@@ -5,7 +5,7 @@ using static UnityEditor.Progress;
 public class ItemController : MonoBehaviour
 {
     [SerializeField] private ItemBase _itemData;
-    private int _currentEndurance = 1;
+    private int _currentEndurance;
 
     public event Action<ItemController> OnItemDestroy;
 
@@ -44,6 +44,11 @@ public class ItemController : MonoBehaviour
     public ItemBase GetItemBase()
     {
         return _itemData;
+    }
+
+    public int GetCurrentEndurance()
+    {
+        return _currentEndurance;
     }
 
     private void CheckDestroy()

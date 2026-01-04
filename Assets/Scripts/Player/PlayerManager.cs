@@ -16,7 +16,8 @@ public class PlayerManager : MonoBehaviour
     public event Action<ItemController> OnItemSelected;
     public event Action<CardController> OnCardSelected;
     public event Action<CardController> OnCardUse;
-    public event Action<int> OnRewardConfirm;
+    public event Action<int> OnRewardSelect;
+    public event Action OnRewardConfirm;
 
     private void Start()
     {
@@ -30,13 +31,19 @@ public class PlayerManager : MonoBehaviour
             input.OnItemSelect += Input_OnItemSelect;
             input.OnCardSwitch += HandleCardSwitch;
             input.OnRewardSelect += RewardSelected;
+            input.OnRewardConfirm += RewardConfirmed;
             _stats.OnPlayerDeath += PlayerDead;
         }
     }
 
+    private void RewardConfirmed()
+    {
+        OnRewardConfirm?.Invoke();
+    }
+
     private void RewardSelected(int rewardIndex)
     {
-        OnRewardConfirm?.Invoke(rewardIndex);
+        OnRewardSelect?.Invoke(rewardIndex);
     }
 
     private void HandleCardSwitch()
@@ -152,6 +159,6 @@ public class PlayerManager : MonoBehaviour
         OnItemSelected = null;
         OnCardUse = null;
         OnCardSelected = null;
-        OnRewardConfirm = null;
+        OnRewardSelect = null;
     }
 }

@@ -11,6 +11,7 @@ public class GameInput : MonoBehaviour
     public event Action<int> OnItemSelect;
     public event Action OnCardMenuSelect;
     public event Action<int> OnRewardSelect;
+    public event Action OnRewardConfirm;
 
     private InputActions _inputActions;
 
@@ -40,6 +41,12 @@ public class GameInput : MonoBehaviour
         _inputActions.Player.SwitchToCard.performed += SwitchToCard_performed;
         _inputActions.ItemReward.ItemOne.performed += ItemOneReward;
         _inputActions.ItemReward.ItemTwo.performed += ItemTwoReward;
+        _inputActions.ItemReward.Confirm.performed += RewardConfirmed;
+    }
+
+    private void RewardConfirmed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnRewardConfirm?.Invoke();
     }
 
     private void ItemOneReward(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -138,6 +145,7 @@ public class GameInput : MonoBehaviour
             _inputActions.Player.SwitchToCard.performed -= SwitchToCard_performed;
             _inputActions.ItemReward.ItemOne.performed -= ItemOneReward;
             _inputActions.ItemReward.ItemTwo.performed -= ItemTwoReward;
+            _inputActions.ItemReward.Confirm.performed -= RewardConfirmed;
         }
 
         OnConfirmPress = null;
@@ -146,6 +154,7 @@ public class GameInput : MonoBehaviour
         OnItemSelect = null;
         OnCardMenuSelect = null;
         OnRewardSelect = null;
+        OnRewardConfirm = null;
 
         if (Instance == this)
         {

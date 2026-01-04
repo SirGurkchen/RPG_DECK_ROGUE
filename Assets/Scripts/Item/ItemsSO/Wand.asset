@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Wand
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   _itemName: Wand
-  _description: 
+  _description: A wand that only looks like a stick. Does magic damage. Some enemies
+    might be immune to magic attacks!
   _price: 15
   _itemType: 0
   _rarity: 0
