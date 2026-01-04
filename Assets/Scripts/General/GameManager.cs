@@ -1,4 +1,4 @@
-using UnityEditorInternal;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CardController _testCard;
     [SerializeField] private HordeLogic _hordeLogic;
     [SerializeField] private ItemsDataBase _itemDatabase;
+    [SerializeField] private RewardManager _rewardManager;
 
     private void Start()
     {
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
         _player.OnItemSelected += PlayerItemSelect;
         _player.OnCardUse += PlayerCardUse;
         _player.OnCardSelected += PlayerCardSelection;
+        _player.OnRewardConfirm += HandleRewardSelection;
         _enemyBoard.OnBoardClear += BoardClear;
 
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
@@ -27,10 +29,22 @@ public class GameManager : MonoBehaviour
         GivePlayerItem(_itemDatabase.GetRandomItem());
     }
 
+    private void HandleRewardSelection(int rewardIndex)
+    {
+        ItemController reward = _rewardManager.GetRewardItem(rewardIndex);
+        GivePlayerItem(reward);
+        _rewardManager.ClearRewards();
+        var input = _player.GetComponent<PlayerInput>();
+        input.EnablePlayerControls();
+        _hordeLogic.RefillBoard();
+    }
+
     private void BoardClear()
     {
-        GivePlayerItem(_itemDatabase.GetRandomItem());
-        _hordeLogic.RefillBoard();
+        List<ItemController> rewards = _rewardManager.GetRandomRewardItems(_itemDatabase);
+        Debug.Log(rewards);
+        var input = _player.GetComponent<PlayerInput>();
+        input.EnableRewardControls();
     }
 
     private void PlayerCardSelection(CardController card)

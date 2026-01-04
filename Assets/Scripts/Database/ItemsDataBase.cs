@@ -13,12 +13,8 @@ public class ItemsDataBase : MonoBehaviour
         return _itemDatabase[rng];
     }
 
-    public ItemController GetItem(ItemController newItem)
+    public ItemController GetItemByName(string itemName)
     {
-        foreach (ItemController item in _itemDatabase)
-        {
-            if (item == newItem) return item;
-        }
-        return null;
+        return _itemDatabase.Find(item => item.name == itemName);
     }
 }

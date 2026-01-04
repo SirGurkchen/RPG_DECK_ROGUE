@@ -169,6 +169,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "ItemReward",
+            "id": "fa37d3e1-04b2-4e3d-bd5b-00a62e105a90",
+            "actions": [
+                {
+                    "name": "ItemOne",
+                    "type": "Button",
+                    "id": "cfbd1be0-02c3-4c2d-bbf6-bc497cd42873",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ItemTwo",
+                    "type": "Button",
+                    "id": "cdc5ca74-cc3f-4b0e-bf30-81a0ae641987",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "edbf0f12-aaa7-4464-892d-52bdebf330dd",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ItemOne",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b7aac3da-34cd-4972-941e-570bad9ba6f5",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ItemTwo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

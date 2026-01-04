@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour
     public event Action OnEnemyRightSelect;
     public event Action<int> OnItemSelect;
     public event Action OnCardSwitch;
+    public event Action<int> OnRewardSelect;
 
     private void Start()
     {
@@ -18,6 +19,12 @@ public class PlayerInput : MonoBehaviour
         GameInput.Instance.OnSelectRightPress += Instance_OnSelectRightPress;
         GameInput.Instance.OnItemSelect += Instance_OnItemSelect;
         GameInput.Instance.OnCardMenuSelect += Instance_OnCardMenuSelect;
+        GameInput.Instance.OnRewardSelect += RewardSelected;
+    }
+
+    private void RewardSelected(int rewardIndex)
+    {
+        OnRewardSelect?.Invoke(rewardIndex);
     }
 
     private void Instance_OnCardMenuSelect()
@@ -79,6 +86,18 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
+    public void EnablePlayerControls()
+    {
+        GameInput.Instance.ChangeRewardActive(false);
+        GameInput.Instance.ChangePlayerActive(true);
+    }
+
+    public void EnableRewardControls()
+    {
+        GameInput.Instance.ChangePlayerActive(false);
+        GameInput.Instance.ChangeRewardActive(true);
+    }
+
     private void OnDisable()
     {
         if (GameInput.Instance != null)
@@ -88,6 +107,7 @@ public class PlayerInput : MonoBehaviour
             GameInput.Instance.OnSelectLeftPress -= Instance_OnSelectLeftPress;
             GameInput.Instance.OnItemSelect -= Instance_OnItemSelect;
             GameInput.Instance.OnCardMenuSelect -= Instance_OnCardMenuSelect;
+            GameInput.Instance.OnRewardSelect -= RewardSelected;
         }
     }
 
@@ -98,5 +118,6 @@ public class PlayerInput : MonoBehaviour
         OnEnemyRightSelect = null;
         OnItemSelect = null;
         OnCardSwitch = null;
+        OnRewardSelect = null;
     }
 }

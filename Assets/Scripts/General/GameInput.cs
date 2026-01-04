@@ -10,6 +10,7 @@ public class GameInput : MonoBehaviour
     public event Action OnSelectLeftPress;
     public event Action<int> OnItemSelect;
     public event Action OnCardMenuSelect;
+    public event Action<int> OnRewardSelect;
 
     private InputActions _inputActions;
 
@@ -37,6 +38,18 @@ public class GameInput : MonoBehaviour
         _inputActions.Player.SelectItemThree.performed += SelectItemThree_performed;
         _inputActions.Player.SelectItemFour.performed += SelectItemFour_performed;
         _inputActions.Player.SwitchToCard.performed += SwitchToCard_performed;
+        _inputActions.ItemReward.ItemOne.performed += ItemOneReward;
+        _inputActions.ItemReward.ItemTwo.performed += ItemTwoReward;
+    }
+
+    private void ItemOneReward(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnRewardSelect?.Invoke(0);
+    }
+
+    private void ItemTwoReward(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnRewardSelect?.Invoke(1);
     }
 
     private void SwitchToCard_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -79,6 +92,30 @@ public class GameInput : MonoBehaviour
         OnItemSelect?.Invoke(4);
     }
 
+    public void ChangePlayerActive(bool isActive)
+    {
+        if (isActive)
+        {
+            _inputActions.Player.Enable();
+        }
+        else
+        {
+            _inputActions.Player.Disable();
+        }
+    }
+
+    public void ChangeRewardActive(bool isActive)
+    {
+        if (isActive)
+        {
+            _inputActions.ItemReward.Enable();
+        }
+        else
+        {
+            _inputActions.ItemReward.Disable();
+        }
+    }
+
     private void OnDisable()
     {
         if (_inputActions != null)
@@ -99,6 +136,8 @@ public class GameInput : MonoBehaviour
             _inputActions.Player.SelectItemThree.performed -= SelectItemThree_performed;
             _inputActions.Player.SelectItemFour.performed -= SelectItemFour_performed;
             _inputActions.Player.SwitchToCard.performed -= SwitchToCard_performed;
+            _inputActions.ItemReward.ItemOne.performed -= ItemOneReward;
+            _inputActions.ItemReward.ItemTwo.performed -= ItemTwoReward;
         }
 
         OnConfirmPress = null;
@@ -106,6 +145,7 @@ public class GameInput : MonoBehaviour
         OnSelectLeftPress = null;
         OnItemSelect = null;
         OnCardMenuSelect = null;
+        OnRewardSelect = null;
 
         if (Instance == this)
         {

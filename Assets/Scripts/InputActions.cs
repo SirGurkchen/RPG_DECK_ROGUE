@@ -255,6 +255,54 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""ItemReward"",
+            ""id"": ""fa37d3e1-04b2-4e3d-bd5b-00a62e105a90"",
+            ""actions"": [
+                {
+                    ""name"": ""ItemOne"",
+                    ""type"": ""Button"",
+                    ""id"": ""cfbd1be0-02c3-4c2d-bbf6-bc497cd42873"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ItemTwo"",
+                    ""type"": ""Button"",
+                    ""id"": ""cdc5ca74-cc3f-4b0e-bf30-81a0ae641987"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""edbf0f12-aaa7-4464-892d-52bdebf330dd"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7aac3da-34cd-4972-941e-570bad9ba6f5"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemTwo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -269,11 +317,16 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_SelectItemThree = m_Player.FindAction("SelectItemThree", throwIfNotFound: true);
         m_Player_SelectItemFour = m_Player.FindAction("SelectItemFour", throwIfNotFound: true);
         m_Player_SwitchToCard = m_Player.FindAction("SwitchToCard", throwIfNotFound: true);
+        // ItemReward
+        m_ItemReward = asset.FindActionMap("ItemReward", throwIfNotFound: true);
+        m_ItemReward_ItemOne = m_ItemReward.FindAction("ItemOne", throwIfNotFound: true);
+        m_ItemReward_ItemTwo = m_ItemReward.FindAction("ItemTwo", throwIfNotFound: true);
     }
 
     ~@InputActions()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputActions.Player.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_ItemReward.enabled, "This will cause a leak and performance issues, InputActions.ItemReward.Disable() has not been called.");
     }
 
     /// <summary>
@@ -518,6 +571,113 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="PlayerActions" /> instance referencing this action map.
     /// </summary>
     public PlayerActions @Player => new PlayerActions(this);
+
+    // ItemReward
+    private readonly InputActionMap m_ItemReward;
+    private List<IItemRewardActions> m_ItemRewardActionsCallbackInterfaces = new List<IItemRewardActions>();
+    private readonly InputAction m_ItemReward_ItemOne;
+    private readonly InputAction m_ItemReward_ItemTwo;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "ItemReward".
+    /// </summary>
+    public struct ItemRewardActions
+    {
+        private @InputActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public ItemRewardActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "ItemReward/ItemOne".
+        /// </summary>
+        public InputAction @ItemOne => m_Wrapper.m_ItemReward_ItemOne;
+        /// <summary>
+        /// Provides access to the underlying input action "ItemReward/ItemTwo".
+        /// </summary>
+        public InputAction @ItemTwo => m_Wrapper.m_ItemReward_ItemTwo;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_ItemReward; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="ItemRewardActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(ItemRewardActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="ItemRewardActions" />
+        public void AddCallbacks(IItemRewardActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ItemRewardActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ItemRewardActionsCallbackInterfaces.Add(instance);
+            @ItemOne.started += instance.OnItemOne;
+            @ItemOne.performed += instance.OnItemOne;
+            @ItemOne.canceled += instance.OnItemOne;
+            @ItemTwo.started += instance.OnItemTwo;
+            @ItemTwo.performed += instance.OnItemTwo;
+            @ItemTwo.canceled += instance.OnItemTwo;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="ItemRewardActions" />
+        private void UnregisterCallbacks(IItemRewardActions instance)
+        {
+            @ItemOne.started -= instance.OnItemOne;
+            @ItemOne.performed -= instance.OnItemOne;
+            @ItemOne.canceled -= instance.OnItemOne;
+            @ItemTwo.started -= instance.OnItemTwo;
+            @ItemTwo.performed -= instance.OnItemTwo;
+            @ItemTwo.canceled -= instance.OnItemTwo;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="ItemRewardActions.UnregisterCallbacks(IItemRewardActions)" />.
+        /// </summary>
+        /// <seealso cref="ItemRewardActions.UnregisterCallbacks(IItemRewardActions)" />
+        public void RemoveCallbacks(IItemRewardActions instance)
+        {
+            if (m_Wrapper.m_ItemRewardActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="ItemRewardActions.AddCallbacks(IItemRewardActions)" />
+        /// <seealso cref="ItemRewardActions.RemoveCallbacks(IItemRewardActions)" />
+        /// <seealso cref="ItemRewardActions.UnregisterCallbacks(IItemRewardActions)" />
+        public void SetCallbacks(IItemRewardActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ItemRewardActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ItemRewardActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="ItemRewardActions" /> instance referencing this action map.
+    /// </summary>
+    public ItemRewardActions @ItemReward => new ItemRewardActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
     /// </summary>
@@ -581,5 +741,27 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwitchToCard(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "ItemReward" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="ItemRewardActions.AddCallbacks(IItemRewardActions)" />
+    /// <seealso cref="ItemRewardActions.RemoveCallbacks(IItemRewardActions)" />
+    public interface IItemRewardActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "ItemOne" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnItemOne(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ItemTwo" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnItemTwo(InputAction.CallbackContext context);
     }
 }
