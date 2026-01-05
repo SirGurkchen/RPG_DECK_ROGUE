@@ -37,5 +37,6 @@ public enum AttackType
     Melee,
     Range,
     Magic,
+    Blade,
     None
 }
