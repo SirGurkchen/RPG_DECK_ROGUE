@@ -18,5 +18,5 @@ MonoBehaviour:
   _position: 1
   _damage: 5
   _health: 4
-  _weakness: 1
+  _weakness: 4
   _block: 0

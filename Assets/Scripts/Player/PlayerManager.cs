@@ -106,6 +106,8 @@ public class PlayerManager : MonoBehaviour
         {
             OnCardUse?.Invoke(_cards.GetEquippedCard());
             _cards.CardUsed();
+            _isChoosingCard = false;
+            _targeting.DeselectAll();
         }
 
         if (success)

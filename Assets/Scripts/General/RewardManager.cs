@@ -20,15 +20,6 @@ public class RewardManager : MonoBehaviour
         return rewardItems;
     }
 
-    public ItemController GetRewardItem(int index)
-    {
-        if (index < 0 || index >= _currentRewards.Count)
-        {
-            return null;
-        }
-        return _currentRewards[index];
-    }
-
     public void SetSelectReward(int index)
     {
         _selectReward = _currentRewards[index];

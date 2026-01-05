@@ -39,9 +39,15 @@ public class GameInput : MonoBehaviour
         _inputActions.Player.SelectItemThree.performed += SelectItemThree_performed;
         _inputActions.Player.SelectItemFour.performed += SelectItemFour_performed;
         _inputActions.Player.SwitchToCard.performed += SwitchToCard_performed;
+        _inputActions.Player.SelectFists.performed += SelectFists_performed;
         _inputActions.ItemReward.ItemOne.performed += ItemOneReward;
         _inputActions.ItemReward.ItemTwo.performed += ItemTwoReward;
         _inputActions.ItemReward.Confirm.performed += RewardConfirmed;
+    }
+
+    private void SelectFists_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnItemSelect?.Invoke(5);
     }
 
     private void RewardConfirmed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -146,6 +152,7 @@ public class GameInput : MonoBehaviour
             _inputActions.ItemReward.ItemOne.performed -= ItemOneReward;
             _inputActions.ItemReward.ItemTwo.performed -= ItemTwoReward;
             _inputActions.ItemReward.Confirm.performed -= RewardConfirmed;
+            _inputActions.Player.SelectFists.performed -= SelectFists_performed;
         }
 
         OnConfirmPress = null;

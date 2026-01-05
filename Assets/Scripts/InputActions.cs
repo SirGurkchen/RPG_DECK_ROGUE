@@ -163,6 +163,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SelectFists"",
+                    ""type"": ""Button"",
+                    ""id"": ""6b741eed-7ef7-40e5-a0f8-809280081e29"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -253,6 +262,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchToCard"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""35725356-a172-425d-b887-6af0c38ccb15"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectFists"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -337,6 +357,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_SelectItemThree = m_Player.FindAction("SelectItemThree", throwIfNotFound: true);
         m_Player_SelectItemFour = m_Player.FindAction("SelectItemFour", throwIfNotFound: true);
         m_Player_SwitchToCard = m_Player.FindAction("SwitchToCard", throwIfNotFound: true);
+        m_Player_SelectFists = m_Player.FindAction("SelectFists", throwIfNotFound: true);
         // ItemReward
         m_ItemReward = asset.FindActionMap("ItemReward", throwIfNotFound: true);
         m_ItemReward_ItemOne = m_ItemReward.FindAction("ItemOne", throwIfNotFound: true);
@@ -431,6 +452,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SelectItemThree;
     private readonly InputAction m_Player_SelectItemFour;
     private readonly InputAction m_Player_SwitchToCard;
+    private readonly InputAction m_Player_SelectFists;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -474,6 +496,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/SwitchToCard".
         /// </summary>
         public InputAction @SwitchToCard => m_Wrapper.m_Player_SwitchToCard;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/SelectFists".
+        /// </summary>
+        public InputAction @SelectFists => m_Wrapper.m_Player_SelectFists;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -524,6 +550,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @SwitchToCard.started += instance.OnSwitchToCard;
             @SwitchToCard.performed += instance.OnSwitchToCard;
             @SwitchToCard.canceled += instance.OnSwitchToCard;
+            @SelectFists.started += instance.OnSelectFists;
+            @SelectFists.performed += instance.OnSelectFists;
+            @SelectFists.canceled += instance.OnSelectFists;
         }
 
         /// <summary>
@@ -559,6 +588,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @SwitchToCard.started -= instance.OnSwitchToCard;
             @SwitchToCard.performed -= instance.OnSwitchToCard;
             @SwitchToCard.canceled -= instance.OnSwitchToCard;
+            @SelectFists.started -= instance.OnSelectFists;
+            @SelectFists.performed -= instance.OnSelectFists;
+            @SelectFists.canceled -= instance.OnSelectFists;
         }
 
         /// <summary>
@@ -773,6 +805,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwitchToCard(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "SelectFists" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSelectFists(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "ItemReward" which allows adding and removing callbacks.

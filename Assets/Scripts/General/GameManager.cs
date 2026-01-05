@@ -80,6 +80,8 @@ public class GameManager : MonoBehaviour
         if (card == null) return;
         _cardManager.PlayCard(card, _player, _player.GetPlayerInventory(), _enemyBoard);
         _UIManager.RemoveCardUI(card);
+        _UIManager.DemarkItems();
+        _UIManager.RemoveItemDescription();
     }
 
     private void PlayerTurnEnd()
@@ -99,12 +101,13 @@ public class GameManager : MonoBehaviour
     {
         if (item == null)
         {
-            Debug.Log("No Item");
+            _UIManager.MarkSelectItem(4);
+            _UIManager.ShowFistDescription();
             return;
         }
         else
         {
-            _UIManager.MarkSelecteItem(_player.GetPlayerInventory().GetInventory().IndexOf(item));
+            _UIManager.MarkSelectItem(_player.GetPlayerInventory().GetInventory().IndexOf(item));
             _UIManager.ShowItemDescription(item);
         }
     }

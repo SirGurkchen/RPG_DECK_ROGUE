@@ -91,6 +91,9 @@ public class PlayerInput : MonoBehaviour
             case 4:
                 OnItemSelect?.Invoke(3);
                 break;
+            case 5:
+                OnItemSelect?.Invoke(4);
+                break;
         }
     }
 

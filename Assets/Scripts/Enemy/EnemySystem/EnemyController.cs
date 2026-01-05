@@ -14,6 +14,7 @@ public class EnemyController : MonoBehaviour
     {
         InitializeEnemy();
         _myUI.InitHealthText(_currentHealth, _enemyData);
+        _myUI.InitSpecialUI(_enemyData);
     }
 
     private void InitializeEnemy()
@@ -23,19 +24,27 @@ public class EnemyController : MonoBehaviour
 
     public virtual void TakeDamage(int damage, AttackType attack)
     {
-        int finalDamage = damage;
-
-        finalDamage *= GetWeakness(attack);
-
-        if (_enemyData is IBlock blocker)
+        if (attack == AttackType.None)
         {
-            finalDamage -= blocker.Block;
-        }
-
-        if (finalDamage >= 0)
-        {
-            _currentHealth -= finalDamage;
+            _currentHealth -= damage;
             _myUI.UpdateHealthbar(_currentHealth, _enemyData);
+        }
+        else
+        {
+            int finalDamage = damage;
+
+            finalDamage *= GetWeakness(attack);
+
+            if (_enemyData is IBlock blocker)
+            {
+                finalDamage -= blocker.Block;
+            }
+
+            if (finalDamage >= 0)
+            {
+                _currentHealth -= finalDamage;
+                _myUI.UpdateHealthbar(_currentHealth, _enemyData);
+            }
         }
 
         if (_currentHealth <= 0)

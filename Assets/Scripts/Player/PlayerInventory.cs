@@ -19,6 +19,12 @@ public class PlayerInventory : MonoBehaviour
 
     public void SetEquippedItem(int item_index)
     {
+        if (item_index >= _inventory.Count)
+        {
+            _equippedItem = null;
+            return;
+        }
+
         if (_inventory[item_index] != null)
         {
             _equippedItem = _inventory[item_index];

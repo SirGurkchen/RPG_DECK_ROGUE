@@ -7,8 +7,7 @@ public class EnemyUI : MonoBehaviour
     [SerializeField] private GameObject _marker;
     [SerializeField] private Image _healthbar;
     [SerializeField] private TextMeshProUGUI _enemyHealthUI;
-    [Tooltip("Leave empty if Enemy has no block")]
-    [SerializeField] private TextMeshProUGUI _enemyBlockUI;
+    [SerializeField] private EnemyStatusUI _enemyStatusUI;
 
     public void SetEnemeyMarker(bool isMarked)
     {
@@ -18,11 +17,6 @@ public class EnemyUI : MonoBehaviour
     public void InitHealthText(int currentHealth, EnemyBase enemyData)
     {
         _enemyHealthUI.text = currentHealth + " | " + enemyData.Health;
-
-        if (enemyData is IBlock block)
-        {
-            UpdateBlock(block.Block);
-        }
     }
 
     public void UpdateHealthbar(int currentHealth, EnemyBase enemyData)
@@ -33,11 +27,8 @@ public class EnemyUI : MonoBehaviour
         InitHealthText(currentHealth, enemyData);
     }
 
-    private void UpdateBlock(int block)
+    public void InitSpecialUI(EnemyBase enemy)
     {
-        if (_enemyBlockUI != null)
-        {
-            _enemyBlockUI.text = "" + block;
-        }
+        _enemyStatusUI.UpdateStatus(enemy);
     }
 }

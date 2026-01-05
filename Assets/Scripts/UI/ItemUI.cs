@@ -8,6 +8,8 @@ public class ItemUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _itemDamage;
     [SerializeField] private TextMeshProUGUI _itemEndurance;
 
+    private const string FIST_TEXT = "Your last resort. Does 2 Damage and ignores any blocking.";
+
     public void SetItemUI(string itemName, int index)
     {
         if (index >= 0 && index < _itemList.Length)
@@ -35,6 +37,12 @@ public class ItemUI : MonoBehaviour
 
     public void ShowItemDescription(ItemController item)
     {
+        if (item == null)
+        {
+            _description.text = FIST_TEXT;
+            return;
+        }
+
         _description.text = item.GetItemBase().Description;
         
         if (item.GetItemBase() is Weapon weapon)

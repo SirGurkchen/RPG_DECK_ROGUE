@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "New Base Enemy", menuName = "Enemy/Enemy")]
 public abstract class EnemyBase : ScriptableObject
 {
     [Header("Basic Info")]
@@ -27,7 +28,8 @@ public enum EnemyType
     Human,
     Ghost,
     Orc,
-    Beast
+    Beast,
+    Monster
 }
 
 public enum FightPosition

@@ -29,7 +29,6 @@ public class ItemController : MonoBehaviour
         if (suc)
         {
             _currentEndurance--;
-            Debug.Log(_currentEndurance);
             CheckDestroy();
         }
 

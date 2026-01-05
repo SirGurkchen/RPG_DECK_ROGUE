@@ -33,7 +33,7 @@ public class UIManager : MonoBehaviour
         _itemUI.DemarkAll();
     }
 
-    public void MarkSelecteItem(int index)
+    public void MarkSelectItem(int index)
     {
         _itemUI.MarkItem(index);
     }
@@ -81,5 +81,15 @@ public class UIManager : MonoBehaviour
     public void ClearRewardUI()
     {
         _rewardUI.ClearRewardUI();
+    }
+
+    public void ShowFistDescription()
+    {
+        _itemUI.ShowItemDescription(null);
+    }
+
+    public void DemarkItems()
+    {
+        _itemUI.DemarkAll();
     }
 }
