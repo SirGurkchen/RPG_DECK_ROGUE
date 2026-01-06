@@ -85,6 +85,11 @@ public class EnemyController : MonoBehaviour
         player.TakeDamage(_enemyData.Damage);
     }
 
+    public string GetEnemyName()
+    {
+        return _enemyData.Name;
+    }
+
     private void OnDestroy()
     {
         OnEnemyDeath = null;

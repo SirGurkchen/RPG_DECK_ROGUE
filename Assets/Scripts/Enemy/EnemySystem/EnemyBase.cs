@@ -15,6 +15,7 @@ public abstract class EnemyBase : ScriptableObject
 
     public int Damage => _damage;
     public int Health => _health;
+    public string Name => _enemyName;
     public AttackType Weakness => _weakness;
 
     public virtual string GetEnemyStats()

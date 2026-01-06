@@ -7,9 +7,9 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private List<ItemController> _inventory;
     [SerializeField] private ItemController _equippedItem;
 
-    private const int MAX_INVENTORY_SIZE = 4;
+    private const int MAX_INVENTORY_SIZE = 5;
 
-    public event Action<CardController> OnCardWasUnlocked;
+    public event Action<CardController, ItemController> OnCardWasUnlocked;
 
     private void Awake()
     {
@@ -56,7 +56,7 @@ public class PlayerInventory : MonoBehaviour
 
     private void FirstEquip(ItemController item)
     {
-        OnCardWasUnlocked?.Invoke(item.GetItemBase().UnlockCard);
+        OnCardWasUnlocked?.Invoke(item.GetItemBase().UnlockCard, item);
         item.OnItemFirstAddedToInventory -= FirstEquip;
     }
 

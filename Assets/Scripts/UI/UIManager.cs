@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private CardUIManager _cardUI;
     [SerializeField] private ItemUI _itemUI;
     [SerializeField] private RewardUI _rewardUI;
+    [SerializeField] private TextMeshProUGUI _enemyInfo;
 
     private string _defaultHealthText;
 
@@ -91,5 +92,17 @@ public class UIManager : MonoBehaviour
     public void DemarkItems()
     {
         _itemUI.DemarkAll();
+    }
+
+    public void ShowEnemyInfo(EnemyController enemy)
+    {
+        if (enemy != null)
+        {
+            _enemyInfo.text = enemy.GetEnemyName();
+        }
+        else
+        {
+            _enemyInfo.text = string.Empty;
+        }
     }
 }

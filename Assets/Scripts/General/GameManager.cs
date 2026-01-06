@@ -21,18 +21,39 @@ public class GameManager : MonoBehaviour
         _player.OnRewardSelect += HandleRewardSelection;
         _player.OnRewardConfirm += HandleRewardConfirm;
         _player.GetPlayerInventory().OnCardWasUnlocked += HandleCardUnlock;
+        _player.GetPlayerTargeting().OnEnemyTargeted += HandleEnemyTargeted;
+        _player.GetPlayerStats().OnPlayerHeal += HandlePlayerHeal;
         _enemyBoard.OnBoardClear += BoardClear;
 
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
         AddCardToPlayer(_testCard);
         AddCardToPlayer(_testCard);
         AddCardToPlayer(_testCard);
-        AddCardToPlayer(_testCard);
+        _player.GetPlayerInventory().GetInventory()[4] = _itemDatabase.GetItemByName("Fist");
+        _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
     }
 
-    private void HandleCardUnlock(CardController card)
+    private void HandlePlayerHeal()
     {
-        AddCardToPlayer(card);
+        _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
+    }
+
+    private void HandleEnemyTargeted(EnemyController enemy)
+    {
+        _UIManager.ShowEnemyInfo(enemy);
+    }
+
+    private void HandleCardUnlock(CardController card, ItemController item)
+    {
+        if (_player.CanAddCard())
+        {
+            AddCardToPlayer(card);
+            item.GetItemBase().SetUnlocked();
+        }
+        else
+        {
+            item.GetItemBase().ResetUnlock();
+        }
     }
 
     private void HandleRewardConfirm()
@@ -75,9 +96,12 @@ public class GameManager : MonoBehaviour
 
     private void AddCardToPlayer(CardController card)
     {
-        CardController newCard = Instantiate(card);
-        _player.GiveCard(newCard);
-        _UIManager.AddCardUI(newCard);
+        if (_player.CanAddCard())
+        {
+            CardController newCard = Instantiate(card);
+            _player.TryGiveCard(newCard);
+            _UIManager.AddCardUI(newCard);
+        }
     }
 
     private void PlayerCardUse(CardController card)
@@ -87,6 +111,7 @@ public class GameManager : MonoBehaviour
         _UIManager.RemoveCardUI(card);
         _UIManager.DemarkItems();
         _UIManager.RemoveItemDescription();
+        _UIManager.ShowEnemyInfo(null);
     }
 
     private void PlayerTurnEnd()
@@ -100,14 +125,13 @@ public class GameManager : MonoBehaviour
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
         _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
         _UIManager.RemoveItemDescription();
+        _UIManager.ShowEnemyInfo(null);
     }
 
     private void PlayerItemSelect(ItemController item)
     {
         if (item == null)
         {
-            _UIManager.MarkSelectItem(4);
-            _UIManager.ShowFistDescription();
             return;
         }
         else
@@ -132,7 +156,11 @@ public class GameManager : MonoBehaviour
         _player.OnItemSelected -= PlayerItemSelect;
         _player.OnCardUse -= PlayerCardUse;
         _player.OnCardSelected -= PlayerCardSelection;
-        _enemyBoard.OnBoardClear -= BoardClear;
+        _player.OnRewardSelect -= HandleRewardSelection;
+        _player.OnRewardConfirm -= HandleRewardConfirm;
         _player.GetPlayerInventory().OnCardWasUnlocked -= HandleCardUnlock;
+        _player.GetPlayerTargeting().OnEnemyTargeted -= HandleEnemyTargeted;
+        _player.GetPlayerStats().OnPlayerHeal -= HandlePlayerHeal;
+        _enemyBoard.OnBoardClear -= BoardClear;
     }
 }

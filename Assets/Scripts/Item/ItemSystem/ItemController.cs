@@ -29,7 +29,10 @@ public class ItemController : MonoBehaviour
 
         if (suc)
         {
-            _currentEndurance--;
+            if (_currentEndurance > 0)
+            {
+                _currentEndurance--;
+            }
             CheckDestroy();
         }
 
@@ -53,6 +56,8 @@ public class ItemController : MonoBehaviour
 
     private void CheckDestroy()
     {
+        if (_itemData.ItemName == "Fist") return;
+
         if (_currentEndurance <= 0)
         {
             OnItemDestroy?.Invoke(this);
@@ -65,7 +70,6 @@ public class ItemController : MonoBehaviour
         if (_itemData.UnlockedCard || _itemData.UnlockCard == null) return;
 
         OnItemFirstAddedToInventory?.Invoke(this);
-        _itemData.SetUnlocked();
     }
 
     private void OnDestroy()

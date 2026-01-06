@@ -18,10 +18,7 @@ public class Potion : ItemBase
             switch (_type)
             {
                 case PotionType.Health:
-                    //heal
-                    return true;
-                case PotionType.Mana:
-                    //add mana
+                    player.HealPlayer(_amount);
                     return true;
                 default:
                     return false;
@@ -32,6 +29,5 @@ public class Potion : ItemBase
 
 public enum PotionType
 {
-    Mana,
     Health
 }

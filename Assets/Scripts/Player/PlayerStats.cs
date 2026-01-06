@@ -10,6 +10,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int _armor;
 
     public event Action OnPlayerDeath;
+    public event Action OnPlayerHeal;
 
     public int MaxHealth => _maxHealth;
     public int Health => _health;
@@ -26,6 +27,12 @@ public class PlayerStats : MonoBehaviour
         CheckDeath();
     }
 
+    public void HealPlayer(int healAmount)
+    {
+        _health += healAmount;
+        OnPlayerHeal?.Invoke();
+    }
+
     private void CheckDeath()
     {
         if (_health <= 0)
@@ -37,5 +44,6 @@ public class PlayerStats : MonoBehaviour
     private void OnDestroy()
     {
         OnPlayerDeath = null;
+        OnPlayerHeal = null;
     }
 }

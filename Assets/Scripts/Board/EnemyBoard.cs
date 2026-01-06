@@ -7,8 +7,8 @@ using UnityEngine;
 public class EnemyBoard : MonoBehaviour
 {
     [SerializeField] private List<EnemyController> _enemiesOnField;
-    [SerializeField] private float _horizontalSpacing = 2f;
-    [SerializeField] private Vector3 _startPos = Vector3.zero;
+    [SerializeField] private Vector3 _startPos = new Vector3(0, 1.5f, 0);
+    [SerializeField] private Transform[] _enemyPositions;
 
     private const int MAX_ENEMIES = 2;
 
@@ -61,7 +61,7 @@ public class EnemyBoard : MonoBehaviour
     {
         for (int count = 0; count < _enemiesOnField.Count; count++)
         {
-            Vector3 pos = _startPos + new Vector3(_horizontalSpacing * count, 0, 0);
+            Vector3 pos = _startPos + _enemyPositions[count].position;
             _enemiesOnField[count].transform.DOMove(pos, 0.3f);
         }
     }

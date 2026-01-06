@@ -137,9 +137,19 @@ public class PlayerManager : MonoBehaviour
         return _stats;
     }
 
-    public void GiveCard(CardController newCard)
+    public PlayerTargeting GetPlayerTargeting()
+    {
+        return _targeting;
+    }
+
+    public void TryGiveCard(CardController newCard)
     {
         _cards.AddCardToStash(newCard);
+    }
+
+    public bool CanAddCard()
+    {
+        return _cards.CanAdd();
     }
 
     private void OnDisable()

@@ -7,7 +7,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _cardNameText;
     [SerializeField] private TextMeshProUGUI _cardDescText;
 
-    private const float SELECT_HEIGHT = 3f;
+    private const float SELECT_HEIGHT = 2.5f;
     private bool _selected = false;
     private Vector3 _originalPos;
 

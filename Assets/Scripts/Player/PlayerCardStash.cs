@@ -7,6 +7,8 @@ public class PlayerCardStash : MonoBehaviour
     [SerializeField] private CardController _selectedCard;
     [SerializeField] private int _maxStashSize = 4;
 
+    private const int MAX_CARDS = 4;
+
     private void Start()
     {
         _playerCards = new List<CardController>();
@@ -72,5 +74,10 @@ public class PlayerCardStash : MonoBehaviour
     public CardController GetCardAtStash(int index)
     {
         return _playerCards[index];
+    }
+
+    public bool CanAdd()
+    {
+        return _playerCards.Count < MAX_CARDS;
     }
 }
