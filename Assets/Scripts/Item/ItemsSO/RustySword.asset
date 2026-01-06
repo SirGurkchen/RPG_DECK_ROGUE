@@ -20,6 +20,8 @@ MonoBehaviour:
   _price: 5
   _itemType: 0
   _rarity: 0
+  _unlockableCard: {fileID: 7036658307534412435, guid: 14c1e02c3a5207d4aaf4f52b8b036cbd, type: 3}
+  _unlockedCard: 0
   _damage: 6
   _attackType: 3
   _endurance: 3

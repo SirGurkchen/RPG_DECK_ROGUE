@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private ItemController _equippedItem;
 
     private const int MAX_INVENTORY_SIZE = 4;
+
+    public event Action<CardController> OnCardWasUnlocked;
 
     private void Awake()
     {
@@ -44,9 +47,17 @@ public class PlayerInventory : MonoBehaviour
             {
                 _inventory[i] = item;
                 item.OnItemDestroy += ItemDestroyed;
+                item.OnItemFirstAddedToInventory += FirstEquip;
+                item.CheckCardUnlock();
                 return;
             }
         }
+    }
+
+    private void FirstEquip(ItemController item)
+    {
+        OnCardWasUnlocked?.Invoke(item.GetItemBase().UnlockCard);
+        item.OnItemFirstAddedToInventory -= FirstEquip;
     }
 
     public bool CanAddItem()

@@ -27,7 +27,7 @@ public class CardUI : MonoBehaviour
         if (!_selected)
         {
             transform.DOKill();
-            Vector3 selectPos = gameObject.transform.position + new Vector3(0, SELECT_HEIGHT, 0);
+            Vector3 selectPos = _originalPos + new Vector3(0, SELECT_HEIGHT, 0);
             gameObject.transform.DOMove(selectPos, 0.2f);
             _selected = true;
         }

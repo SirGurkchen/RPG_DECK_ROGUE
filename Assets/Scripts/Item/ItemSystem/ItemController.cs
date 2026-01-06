@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class ItemController : MonoBehaviour
 {
@@ -8,6 +7,8 @@ public class ItemController : MonoBehaviour
     private int _currentEndurance;
 
     public event Action<ItemController> OnItemDestroy;
+    public event Action<ItemController> OnItemFirstAddedToInventory;
+
 
     private void Awake()
     {
@@ -54,10 +55,22 @@ public class ItemController : MonoBehaviour
     {
         if (_currentEndurance <= 0)
         {
-            Debug.Log("Destroy!");
             OnItemDestroy?.Invoke(this);
-            gameObject.SetActive(false);
             Destroy(this.gameObject);
         }
+    }
+
+    public void CheckCardUnlock()
+    {
+        if (_itemData.UnlockedCard || _itemData.UnlockCard == null) return;
+
+        OnItemFirstAddedToInventory?.Invoke(this);
+        _itemData.SetUnlocked();
+    }
+
+    private void OnDestroy()
+    {
+        OnItemDestroy = null;
+        OnItemFirstAddedToInventory = null;
     }
 }

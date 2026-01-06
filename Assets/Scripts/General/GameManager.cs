@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
         _player.OnCardSelected += PlayerCardSelection;
         _player.OnRewardSelect += HandleRewardSelection;
         _player.OnRewardConfirm += HandleRewardConfirm;
+        _player.GetPlayerInventory().OnCardWasUnlocked += HandleCardUnlock;
         _enemyBoard.OnBoardClear += BoardClear;
 
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
@@ -27,7 +28,11 @@ public class GameManager : MonoBehaviour
         AddCardToPlayer(_testCard);
         AddCardToPlayer(_testCard);
         AddCardToPlayer(_testCard);
-        GivePlayerItem(_itemDatabase.GetRandomItem());
+    }
+
+    private void HandleCardUnlock(CardController card)
+    {
+        AddCardToPlayer(card);
     }
 
     private void HandleRewardConfirm()
@@ -128,5 +133,6 @@ public class GameManager : MonoBehaviour
         _player.OnCardUse -= PlayerCardUse;
         _player.OnCardSelected -= PlayerCardSelection;
         _enemyBoard.OnBoardClear -= BoardClear;
+        _player.GetPlayerInventory().OnCardWasUnlocked -= HandleCardUnlock;
     }
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
   _cardDescription: 'If you have the Rusty Sword equipped, deal 3 Damage to each
     enemy on the board.
 
-    Else, if you have any Meele Weapon equipped, deal 5
+    Else, if you have any Blade Weapon equipped, deal 5
     damage to a selected enemy.'
   _mainEffect:
     requiredItem: {fileID: 11400000, guid: 1690c61ab37973346b954adfbb0f64ed, type: 2}
