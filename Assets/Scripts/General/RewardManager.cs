@@ -4,20 +4,19 @@ using UnityEngine;
 public class RewardManager : MonoBehaviour
 {
     private List<ItemController> _currentRewards = new List<ItemController>();
-
+    private List<ItemController> _availableRewards = new List<ItemController>();
     private ItemController _selectReward;
 
     public List<ItemController> GetRandomRewardItems(ItemsDataBase database)
     {
-        List<ItemController> rewardItems = new List<ItemController>();
         ItemController itemOne = database.GetRandomItem();
-        rewardItems.Add(itemOne);
+        _availableRewards.Add(itemOne);
 
         ItemController itemTwo = database.GetRandomItem();
-        rewardItems.Add(itemTwo);
+        _availableRewards.Add(itemTwo);
 
-        _currentRewards = rewardItems;
-        return rewardItems;
+        _currentRewards = _availableRewards;
+        return _currentRewards;
     }
 
     public void SetSelectReward(int index)
@@ -28,6 +27,7 @@ public class RewardManager : MonoBehaviour
     public void ClearRewards()
     {
         _currentRewards.Clear();
+        _availableRewards.Clear();
     }
 
     public ItemController GetSelectReward()

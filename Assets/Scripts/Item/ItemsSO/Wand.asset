@@ -17,7 +17,11 @@ MonoBehaviour:
     might be immune to magic attacks!
   _price: 15
   _itemType: 0
+  _isUnrewardable: 0
   _rarity: 0
+  _unlockableCard: {fileID: 0}
+  _unlockedCard: 0
   _damage: 10
   _attackType: 2
   _endurance: 10
+  _manaCost: 2

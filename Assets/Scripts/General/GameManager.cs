@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private ItemsDataBase _itemDatabase;
     [SerializeField] private RewardManager _rewardManager;
 
+    private const float ROUND_BUFFER_TIMER = 0.75f;
+    private Coroutine _roundBufferRoutine;
+
     private void Start()
     {
         _player.OnPlayerTurnEnded += PlayerTurnEnd;
@@ -23,14 +27,18 @@ public class GameManager : MonoBehaviour
         _player.GetPlayerInventory().OnCardWasUnlocked += HandleCardUnlock;
         _player.GetPlayerTargeting().OnEnemyTargeted += HandleEnemyTargeted;
         _player.GetPlayerStats().OnPlayerHeal += HandlePlayerHeal;
+        _player.GetPlayerStats().OnManaChange += HandleManaChange;
         _enemyBoard.OnBoardClear += BoardClear;
 
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
-        AddCardToPlayer(_testCard);
-        AddCardToPlayer(_testCard);
-        AddCardToPlayer(_testCard);
+        _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
         _player.GetPlayerInventory().GetInventory()[4] = _itemDatabase.GetItemByName("Fist");
         _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
+    }
+
+    private void HandleManaChange()
+    {
+        _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
     }
 
     private void HandlePlayerHeal()
@@ -58,12 +66,12 @@ public class GameManager : MonoBehaviour
 
     private void HandleRewardConfirm()
     {
-        GivePlayerItem(Instantiate(_rewardManager.GetSelectReward()));
+        GivePlayerItem(_rewardManager.GetSelectReward());
         _rewardManager.ClearRewards();
         _UIManager.ClearRewardUI();
         _UIManager.RemoveItemDescription();
-        var input = _player.GetComponent<PlayerInput>();
-        input.EnablePlayerControls();
+        GameInput.Instance.ChangeRewardActive(false);
+        GameInput.Instance.ChangePlayerActive(true);
         _hordeLogic.RefillBoard();
     }
 
@@ -75,15 +83,23 @@ public class GameManager : MonoBehaviour
 
     private void BoardClear()
     {
+        if (_roundBufferRoutine != null)
+        {
+            StopCoroutine(_roundBufferRoutine);
+            _roundBufferRoutine = null;
+        }
+
+        GameInput.Instance.ChangePlayerActive(false);
+
         if (_player.GetPlayerInventory().CanAddItem())
         {
             List<ItemController> rewards = _rewardManager.GetRandomRewardItems(_itemDatabase);
             _UIManager.FillRewardUI(rewards[0], rewards[1]);
-            var input = _player.GetComponent<PlayerInput>();
-            input.EnableRewardControls();
+            GameInput.Instance.ChangeRewardActive(true);
         }
         else
         {
+            GameInput.Instance.ChangeRewardActive(true);
             _hordeLogic.RefillBoard();
         }
     }
@@ -116,16 +132,7 @@ public class GameManager : MonoBehaviour
 
     private void PlayerTurnEnd()
     {
-        foreach (EnemyController enemy in _enemyBoard.GetEnemies())
-        {
-            enemy.Attack(_player);
-        }
-
-        _player.DeselectAllItems();
-        _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
-        _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
-        _UIManager.RemoveItemDescription();
-        _UIManager.ShowEnemyInfo(null);
+        _roundBufferRoutine = StartCoroutine(StartBufferedRound());
     }
 
     private void PlayerItemSelect(ItemController item)
@@ -148,6 +155,32 @@ public class GameManager : MonoBehaviour
             _player.GetPlayerInventory().GiveItemToInventory(Instantiate(item));
             _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
         }
+    }
+
+    private IEnumerator StartBufferedRound()
+    {
+        GameInput.Instance.ChangePlayerActive(false);
+        _UIManager.RemoveItemDescription();
+        _UIManager.ShowEnemyInfo(null);
+        _player.DeselectAllItems();
+        _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
+
+        yield return new WaitForSeconds(ROUND_BUFFER_TIMER);
+
+        foreach (EnemyController enemy in _enemyBoard.GetEnemies())
+        {
+            enemy.Attack(_player);
+        }
+
+        _player.GetPlayerStats().AddMana(1);
+        _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
+        _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
+
+        if (_enemyBoard.GetEnemies().Count > 0)
+        {
+            GameInput.Instance.ChangePlayerActive(true);
+        }
+        _roundBufferRoutine = null;
     }
 
     private void OnDisable()

@@ -7,6 +7,8 @@ public class Weapon : ItemBase, IDurable
     [SerializeField] private int _damage;
     [SerializeField] private AttackType _attackType;
     [SerializeField] private int _endurance;
+    [Tooltip("Leave at 0 if weapon is not Magic")]
+    [SerializeField] private int _manaCost = 0;
 
     public int MaxDurability => _endurance;
     public int Damage => _damage;
@@ -21,6 +23,17 @@ public class Weapon : ItemBase, IDurable
         }
         else
         {
+            if (_attackType == AttackType.Magic)
+            {
+                if (player.Mana >= _manaCost)
+                {
+                    player.RemoveMana(_manaCost);
+                }
+                else
+                {
+                    return false;
+                }
+            }
             target.TakeDamage(_damage, _attackType);
             return true;
         }

@@ -16,6 +16,9 @@ MonoBehaviour:
   _description: A small health potion. Heals you for 5 health.
   _price: 10
   _itemType: 2
+  _isUnrewardable: 0
   _rarity: 0
-  _amount: 5
-  _type: 1
+  _unlockableCard: {fileID: 0}
+  _unlockedCard: 0
+  _amount: 15
+  _type: 0

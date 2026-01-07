@@ -97,12 +97,6 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    public void EnablePlayerControls()
-    {
-        GameInput.Instance.ChangeRewardActive(false);
-        GameInput.Instance.ChangePlayerActive(true);
-    }
-
     public void EnableRewardControls()
     {
         GameInput.Instance.ChangePlayerActive(false);
