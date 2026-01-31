@@ -27,11 +27,11 @@ public class UIManager : MonoBehaviour
         {
             if (inventory[i] != null && inventory[i].gameObject != null)
             {
-                _itemUI.SetItemUI(inventory[i].GetItemName(), i);
+                _itemUI.SetItemUI(inventory[i], i);
             }
             else
             {
-                _itemUI.SetItemUI("", i);
+                _itemUI.SetEmptyItem(i);
             }
         }
         _itemUI.DemarkAll();

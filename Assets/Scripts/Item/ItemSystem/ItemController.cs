@@ -1,18 +1,27 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemController : MonoBehaviour
 {
     [SerializeField] private ItemBase _itemData;
+    [SerializeField] private Image _itemImage;
     private int _currentEndurance;
 
     public event Action<ItemController> OnItemDestroy;
     public event Action<ItemController> OnItemFirstAddedToInventory;
 
-
     private void Awake()
     {
         InitializeItem();
+    }
+
+    private void Start()
+    {
+        if (_itemImage != null && _itemData.Icon != null)
+        {
+            _itemImage.sprite = _itemData.Icon;
+        }
     }
 
     private void InitializeItem()
@@ -56,7 +65,7 @@ public class ItemController : MonoBehaviour
 
     private void CheckDestroy()
     {
-        if (_itemData.ItemName == "Fist") return;
+        if (_itemData.ItemName == "Hammer") return;
 
         if (_currentEndurance <= 0)
         {
@@ -70,6 +79,11 @@ public class ItemController : MonoBehaviour
         if (_itemData.UnlockedCard || _itemData.UnlockCard == null) return;
 
         OnItemFirstAddedToInventory?.Invoke(this);
+    }
+
+    public Image GetItemIcon()
+    {
+        return _itemImage;
     }
 
     private void OnDestroy()

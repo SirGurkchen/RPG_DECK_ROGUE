@@ -17,7 +17,12 @@ MonoBehaviour:
     be immune to ranged attacks!
   _price: 5
   _itemType: 0
+  _isUnrewardable: 0
+  _itemIcon: {fileID: -6791923525815039421, guid: 1d3410e7dae598041a00a840f8c6217e, type: 3}
   _rarity: 0
+  _unlockableCard: {fileID: 0}
+  _unlockedCard: 0
   _damage: 3
   _attackType: 1
   _endurance: 5
+  _manaCost: 0

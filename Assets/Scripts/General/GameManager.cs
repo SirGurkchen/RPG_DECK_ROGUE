@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
         _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
-        _player.GetPlayerInventory().GetInventory()[4] = _itemDatabase.GetItemByName("Fist");
+        _player.GetPlayerInventory().GetInventory()[4] = Instantiate(_itemDatabase.GetItemByName("Hammer"));
         _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
     }
 

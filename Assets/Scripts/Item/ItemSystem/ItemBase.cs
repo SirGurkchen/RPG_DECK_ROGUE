@@ -9,6 +9,7 @@ public abstract class ItemBase : ScriptableObject
     [SerializeField] private int _price;
     [SerializeField] private ItemType _itemType;
     [SerializeField] private bool _isUnrewardable;
+    [SerializeField] private Sprite _itemIcon;
 
     [Header("Item Properties")]
     [SerializeField] private Rarity _rarity;
@@ -20,6 +21,7 @@ public abstract class ItemBase : ScriptableObject
     public CardController UnlockCard => _unlockableCard;
     public bool UnlockedCard => _unlockedCard;
     public bool IsNotReward => _isUnrewardable;
+    public Sprite Icon => _itemIcon;
 
     public abstract bool Use(PlayerStats player, EnemyController target = null);
 

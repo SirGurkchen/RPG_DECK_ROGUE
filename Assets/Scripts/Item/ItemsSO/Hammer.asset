@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e47c7dde1fe9d1f4583666e9182a1132, type: 3}
-  m_Name: Fist
+  m_Name: Hammer
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
-  _itemName: Fist
+  _itemName: Hammer
   _description: Your last resort. Ignores enemy Block
   _price: 0
   _itemType: 0
   _isUnrewardable: 1
+  _itemIcon: {fileID: 2283982069682808729, guid: a24c9c12e03e9fb4ba3aa93abd8c0b7f, type: 3}
   _rarity: 0
   _unlockableCard: {fileID: 0}
   _unlockedCard: 0
   _damage: 2
   _attackType: 4
   _endurance: 0
+  _manaCost: 0

@@ -18,6 +18,7 @@ MonoBehaviour:
   _price: 15
   _itemType: 0
   _isUnrewardable: 0
+  _itemIcon: {fileID: 7046277200083561285, guid: b710874ec66f35a408f4dab54d81c9e2, type: 3}
   _rarity: 0
   _unlockableCard: {fileID: 0}
   _unlockedCard: 0

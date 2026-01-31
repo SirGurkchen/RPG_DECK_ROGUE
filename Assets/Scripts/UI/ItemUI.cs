@@ -1,18 +1,32 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ItemUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI[] _itemList;
+    [SerializeField] private GameObject[] _itemPositions;
     [SerializeField] private TextMeshProUGUI _description;
     [SerializeField] private TextMeshProUGUI _itemDamage;
     [SerializeField] private TextMeshProUGUI _itemEndurance;
 
-    public void SetItemUI(string itemName, int index)
+    public void SetItemUI(ItemController item, int index)
+    {
+        if (index >= 0 && index < _itemPositions.Length)
+        {
+            if (item.GetItemIcon() != null)
+            {
+                item.GetItemIcon().transform.position = _itemPositions[index].transform.position;
+            }
+        }
+    }
+
+    public void SetEmptyItem(int index)
     {
         if (index >= 0 && index < _itemList.Length)
         {
-            _itemList[index].text = itemName;
+            _itemList[index].text = "";
         }
     }
 
