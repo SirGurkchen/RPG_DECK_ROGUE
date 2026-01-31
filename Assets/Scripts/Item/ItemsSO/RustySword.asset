@@ -26,3 +26,4 @@ MonoBehaviour:
   _damage: 6
   _attackType: 3
   _endurance: 3
+  _manaCost: 0

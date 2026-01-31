@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            GameInput.Instance.ChangeRewardActive(true);
+            GameInput.Instance.ChangeRewardActive(false);
             _hordeLogic.RefillBoard();
         }
     }
