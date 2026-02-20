@@ -20,9 +20,9 @@ MonoBehaviour:
     damage to a selected enemy.'
   _mainEffect:
     requiredItem: {fileID: 11400000, guid: 1690c61ab37973346b954adfbb0f64ed, type: 2}
-    requiredAttackType: 3
+    requiredAttackType: 4
     effect: {fileID: 11400000, guid: f8f2786fc7e661f48b088cbca76b9203, type: 2}
   _secondaryEffect:
     requiredItem: {fileID: 0}
-    requiredAttackType: 0
+    requiredAttackType: 3
     effect: {fileID: 11400000, guid: 5845805d0eb681b46b41338cd8f126a6, type: 2}

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the logic of the players card inventory.
+/// </summary>
 public class PlayerCardStash : MonoBehaviour
 {
     [SerializeField] private List<CardController> _playerCards;

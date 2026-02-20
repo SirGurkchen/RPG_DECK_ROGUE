@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Orchestrates the 'flow' of the game.
+/// Handles simultaneous UI, logic and Game Input changes.
+/// </summary>
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private PlayerManager _player;

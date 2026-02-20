@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+/// Contains data for items of the Weapon type.
+/// Extends ItemBase for necessary base data.
+/// Implements IDurable for item type purposes (Durabilty).
+/// </summary>
 [CreateAssetMenu(fileName = "New Weapon", menuName = "Items/Weapon")]
 public class Weapon : ItemBase, IDurable
 {

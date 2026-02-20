@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Contains a List of all obtainable items in the game.
+/// Used to get info for which item to create.
+/// </summary>
 public class ItemsDataBase : MonoBehaviour
 {
     [SerializeField] private List<ItemController> _itemDatabase;

@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Contains configuration data for cards.
+/// Used to create new Cards with different effects.
+/// </summary>
 [CreateAssetMenu(menuName = "Cards/New Card")]
 public class CardBase : ScriptableObject
 {
@@ -9,7 +13,9 @@ public class CardBase : ScriptableObject
     [SerializeField] private string _cardDescription;
 
     [Header("Conditional Effects")]
+    [Tooltip("Effect which triggers if main condition is met. Leave empty if no Main Effect.")]
     [SerializeField] private CardConditionalWrapper _mainEffect;
+    [Tooltip("Effect which triggers if main condition is NOT met, but this condition is met. Leave empty if no Secondary Effect")]
     [SerializeField] private CardConditionalWrapper _secondaryEffect;
 
     public string Name => _cardName;
@@ -29,15 +35,5 @@ public class CardBase : ScriptableObject
         {
             Debug.Log("Card Had No Effect!");
         }
-    }
-
-    public string GetCardName()
-    {
-        return _cardName;
-    }
-
-    public string GetCardDescription()
-    {
-        return _cardDescription;
     }
 }

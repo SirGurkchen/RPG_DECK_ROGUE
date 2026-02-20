@@ -1,6 +1,11 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Handles the player stats.
+/// Updates only the logical components.
+/// Checks for player death.
+/// </summary>
 public class PlayerStats : MonoBehaviour
 {
     [Header("Player Stats")]

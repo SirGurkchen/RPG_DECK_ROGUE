@@ -1,6 +1,9 @@
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Handles the visualization of the Reward system after every round.
+/// </summary>
 public class RewardUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI[] _rewardUI;

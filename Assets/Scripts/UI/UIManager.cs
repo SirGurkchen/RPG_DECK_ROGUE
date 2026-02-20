@@ -3,6 +3,10 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Orchestrates the overall UI of the game.
+/// Controls CardUI, enemy UIs, RewardUI, ItemUI and playey UI elements.
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _healthUI;

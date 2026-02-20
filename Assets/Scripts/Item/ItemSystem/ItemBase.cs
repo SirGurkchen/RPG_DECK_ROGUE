@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Contains base configuration data for new items.
+/// </summary>
 public abstract class ItemBase : ScriptableObject
 {
     [Header("Basic Info")]

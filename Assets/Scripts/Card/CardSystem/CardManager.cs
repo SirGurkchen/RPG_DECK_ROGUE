@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Manages the Usage of Cards.
+/// Each card has this script as part of its components.
+/// </summary>
 public class CardManager : MonoBehaviour
 {
     public void PlayCard(CardController card, PlayerManager player, PlayerInventory playerInventory, EnemyBoard board)

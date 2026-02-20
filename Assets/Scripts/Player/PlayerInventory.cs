@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the player item inventory.
+/// Also incorporates checking for first item equip.
+/// </summary>
 public class PlayerInventory : MonoBehaviour
 {
     [SerializeField] private List<ItemController> _inventory;

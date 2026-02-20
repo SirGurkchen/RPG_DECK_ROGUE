@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Manages the visual representation of the enemy wave.
+/// Visualization includes adding, removing and moving enemies on the field.
+/// The DOTween Library is used for achieving the visualization goals.
+/// </summary>
 public class EnemyBoard : MonoBehaviour
 {
     [SerializeField] private List<EnemyController> _enemiesOnField;

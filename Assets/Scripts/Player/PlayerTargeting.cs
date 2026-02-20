@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Handles the enemy targeting system as part of the combat.
+/// </summary>
 public class PlayerTargeting : MonoBehaviour
 {
     private EnemyController _currentTarget;

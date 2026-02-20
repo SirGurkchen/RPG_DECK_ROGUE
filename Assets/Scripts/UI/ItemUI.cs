@@ -1,8 +1,10 @@
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
+/// <summary>
+/// Handles the visualization of the Inventory.
+/// Shows item descriptions for selected items.
+/// </summary>
 public class ItemUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI[] _itemList;

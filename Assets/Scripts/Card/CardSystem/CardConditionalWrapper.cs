@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+/// Conditional Class for triggering Card Effects.
+/// Used for defining conditionals for card usage.
+/// Designers set needed Weapon or Attack Type for main or secondary Attack.
+/// </summary>
 [System.Serializable]
 public class CardConditionalWrapper
 {

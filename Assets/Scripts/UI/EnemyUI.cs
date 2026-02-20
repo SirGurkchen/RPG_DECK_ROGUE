@@ -2,6 +2,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handles the visualization of an enemy.
+/// Uses the EnemeStatusUI to dynamically show/hide potential enemy statuses.
+/// </summary>
 public class EnemyUI : MonoBehaviour
 {
     [SerializeField] private GameObject _marker;

@@ -1,6 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the Reward System which is triggered after every round.
+/// </summary>
 public class RewardManager : MonoBehaviour
 {
     private List<ItemController> _currentRewards = new List<ItemController>();

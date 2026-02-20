@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Handles the New Unity Input System.
+/// Inputs are handled as events.
+/// </summary>
 public class GameInput : MonoBehaviour
 {
     public static GameInput Instance { get; private set; }

@@ -1,6 +1,11 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Controls the in game instance of an enemy object.
+/// Each new enemy has this script as part of their components.
+/// Orchestrates its data and UI representation.
+/// </summary>
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyBase _enemyData;

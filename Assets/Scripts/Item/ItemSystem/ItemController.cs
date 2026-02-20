@@ -2,6 +2,10 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Orchestrates the logic and visuals of an item instance.
+/// Script is part of the components of every item.
+/// </summary>
 public class ItemController : MonoBehaviour
 {
     [SerializeField] private ItemBase _itemData;

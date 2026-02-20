@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Handles the logic of player combat, so Attacking and taking damage.
+/// </summary>
 public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private PlayerInventory _inventory;

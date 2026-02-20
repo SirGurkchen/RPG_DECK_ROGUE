@@ -2,6 +2,10 @@ using TMPro;
 using DG.Tweening;
 using UnityEngine;
 
+/// <summary>
+/// Visualizes an instance of a card as its placement and animation.
+/// Uses the DOTween Library to support up and down selection animations.
+/// </summary>
 public class CardUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _cardNameText;

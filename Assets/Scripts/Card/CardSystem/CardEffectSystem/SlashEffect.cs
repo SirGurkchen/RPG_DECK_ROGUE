@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Contains definition of a Slashing effect for cards to use.
+/// Extends CardEffect to ensure it can be used as an effect.
+/// </summary>
 [CreateAssetMenu(menuName = "Card Effects/Slash Effect")]
 public class SlashEffect : CardEffect
 {

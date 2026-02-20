@@ -1,6 +1,9 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Handles the Player Input received by the GameInput class.
+/// </summary>
 public class PlayerInput : MonoBehaviour
 {
     [SerializeField] private HordeLogic _horde;

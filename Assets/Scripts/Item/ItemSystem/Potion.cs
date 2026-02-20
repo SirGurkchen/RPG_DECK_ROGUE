@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Contains the data for items of the Potion type.
+/// Extends ItemBase for necessary base information.
+/// </summary>
 [CreateAssetMenu(fileName = "New Potion", menuName = "Items/Potion")]
 public class Potion : ItemBase
 {

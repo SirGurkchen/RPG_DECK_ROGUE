@@ -1,6 +1,10 @@
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Handles the logical side of spawning new enemies onto the board.
+/// Works with EnemyBoard to also simultaneously show visuals.
+/// </summary>
 public class HordeLogic : MonoBehaviour
 {
     [SerializeField] private EnemyController[] _enemyPool;

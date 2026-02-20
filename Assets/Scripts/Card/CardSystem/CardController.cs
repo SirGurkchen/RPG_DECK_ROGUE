@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Controls the In Game Card and its visualization.
+/// This is achieved by orchestration of CardBase Data and the CardUI class.
+/// </summary>
 public class CardController : MonoBehaviour
 {
     [SerializeField] private CardBase _card;

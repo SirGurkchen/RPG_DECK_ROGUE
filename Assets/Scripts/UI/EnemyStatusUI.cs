@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+/// <summary>
+/// Updates the visuals of status effects an enemy can have.
+/// </summary>
 public class EnemyStatusUI : MonoBehaviour
 {
     [System.Serializable]

@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Contains configuration data for enemies.
+/// New enemy types use this SO to have necessary base data.
+/// </summary>
 [CreateAssetMenu(fileName = "New Base Enemy", menuName = "Enemy/Enemy")]
 public abstract class EnemyBase : ScriptableObject
 {

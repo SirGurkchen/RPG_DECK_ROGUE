@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Visualizes a card object on the screen.
+/// Adds and removes cards from their assigned card slots.
+/// </summary>
 public class CardUIManager : MonoBehaviour
 {
     [SerializeField] private Transform[] _cardUIPositions;

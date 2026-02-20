@@ -1,6 +1,10 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Orchestrates the player and its classes.
+/// Most classes that interact with the player do so through this class.
+/// </summary>
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] private PlayerCombat _combat;
