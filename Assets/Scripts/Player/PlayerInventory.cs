@@ -52,7 +52,10 @@ public class PlayerInventory : MonoBehaviour
                 _inventory[i] = item;
                 item.OnItemDestroy += ItemDestroyed;
                 item.OnItemFirstAddedToInventory += FirstEquip;
-                item.CheckCardUnlock();
+                if (!item.CheckCardUnlock())
+                {
+                    item.OnItemFirstAddedToInventory -= FirstEquip;
+                }
                 return;
             }
         }

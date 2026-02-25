@@ -78,11 +78,19 @@ public class ItemController : MonoBehaviour
         }
     }
 
-    public void CheckCardUnlock()
+    public bool CheckCardUnlock()
     {
-        if (_itemData.UnlockedCard || _itemData.UnlockCard == null) return;
+        if (CardUnlockManager.Instance.IsCardUnlcoked(_itemData.ItemName)) // Card of Item is already unlocked
+        {
+            return false;
+        }
+        else if (_itemData.UnlockCard == null) // Item does not have any card to unlock
+        {
+            return false;
+        }
 
         OnItemFirstAddedToInventory?.Invoke(this);
+        return true;
     }
 
     public Image GetItemIcon()

@@ -56,15 +56,19 @@ public class GameManager : MonoBehaviour
     }
 
     private void HandleCardUnlock(CardController card, ItemController item)
-    {
-        if (_player.CanAddCard())
+    {        
+        if (!item.GetItemBase().IsNotReward && item.GetItemBase().UnlockCard != null)
         {
-            AddCardToPlayer(card);
-            item.GetItemBase().SetUnlocked();
+            Debug.Log("Unlocked Card!");
+            CardUnlockManager.Instance.SetCardUnlocked(item.GetItemBase());
+            if (_player.CanAddCard())
+            {
+                AddCardToPlayer(card);
+            }
         }
         else
         {
-            item.GetItemBase().ResetUnlock();
+            Debug.Log("No Card Unlocked!");
         }
     }
 

@@ -17,12 +17,10 @@ public abstract class ItemBase : ScriptableObject
     [Header("Item Properties")]
     [SerializeField] private Rarity _rarity;
     [SerializeField] CardController _unlockableCard;
-    [SerializeField] private bool _unlockedCard = false;
 
     public string ItemName => _itemName;
     public string Description => _description;
     public CardController UnlockCard => _unlockableCard;
-    public bool UnlockedCard => _unlockedCard;
     public bool IsNotReward => _isUnrewardable;
     public Sprite Icon => _itemIcon;
 
@@ -36,16 +34,6 @@ public abstract class ItemBase : ScriptableObject
     public ItemType GetItemType()
     {
         return _itemType;
-    }
-
-    public void SetUnlocked()
-    {
-        _unlockedCard = true;
-    }
-
-    public void ResetUnlock()
-    {
-        _unlockedCard = false;
     }
 }
 
