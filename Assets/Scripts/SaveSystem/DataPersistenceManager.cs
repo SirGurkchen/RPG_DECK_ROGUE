@@ -5,10 +5,14 @@ using System.Collections.Generic;
 
 public class DataPersistenceManager : MonoBehaviour
 {
+    [Header("File Storage Config")]
+    [SerializeField] private string _fileName;
+
     public static DataPersistenceManager Instance { get; private set; }
 
     private GameData _gameData;
     private List<IDataPersistence> _dataScripts;
+    private FileDataHandler _dataHandler;
 
     private void Awake()
     {
@@ -21,6 +25,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Start()
     {
+        this._dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName);
         this._dataScripts = FindAllDataPersistenceObjects();
         LoadGameData();
     }
@@ -37,9 +42,10 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void LoadGameData()
     {
+        this._gameData = _dataHandler.Load();
+
         if (this._gameData == null)
         {
-            Debug.Log("Starting New Game");
             StartNewGame();
         }
 
@@ -54,12 +60,19 @@ public class DataPersistenceManager : MonoBehaviour
         
     }
 
-    public void SaveNewCardUnlock(ItemBase itemCard)
+    public void SaveNewCardUnlock()
     {
         foreach (IDataPersistence data in _dataScripts)
         {
             data.SaveData(ref _gameData);
         }
+
+        foreach (ItemBase card in _gameData.unlockedCards)
+        {
+            Debug.Log("Cards Unlocked: " + card.UnlockCard.GetCard().Name);
+        }
+
+        _dataHandler.Save(_gameData);
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()

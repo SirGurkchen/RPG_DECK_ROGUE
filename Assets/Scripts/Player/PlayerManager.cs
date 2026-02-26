@@ -53,7 +53,6 @@ public class PlayerManager : MonoBehaviour
     private void HandleCardSwitch()
     {
         _isChoosingCard = !_isChoosingCard;
-        Debug.Log(_isChoosingCard);
     }
 
     private void PlayerDead()

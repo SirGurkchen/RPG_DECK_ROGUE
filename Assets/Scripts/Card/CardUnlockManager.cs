@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
     public static CardUnlockManager Instance { get; private set; }
 
     private List<ItemBase> _unlockedItemsCards;
+
+    public event Action<List<ItemBase>> OnLoadFinished;
 
     private void Awake()
     {
@@ -23,7 +26,7 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
             return;
         }
         _unlockedItemsCards.Add(unlockItem);
-        Debug.Log("Unlocked Card: " + unlockItem.UnlockCard.GetCard().Name);
+        DataPersistenceManager.Instance.SaveNewCardUnlock();
     }
 
     public bool IsCardUnlcoked(string itemName)
@@ -49,13 +52,19 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
         {
             foreach(ItemBase item in data.unlockedCards)
             {
-                Debug.Log(item.ItemName);
+                Debug.Log(item.UnlockCard.GetCard().Name);
             }
             _unlockedItemsCards = data.unlockedCards;
+            OnLoadFinished?.Invoke(_unlockedItemsCards);
         }
     }
     public void SaveData(ref GameData data)
     {
         data.unlockedCards = _unlockedItemsCards;
+    }
+
+    public List<ItemBase> GetUnlockedCards()
+    {
+        return _unlockedItemsCards;
     }
 }

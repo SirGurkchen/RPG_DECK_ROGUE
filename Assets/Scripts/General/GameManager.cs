@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         _player.GetPlayerStats().OnPlayerHeal += HandlePlayerHeal;
         _player.GetPlayerStats().OnManaChange += HandleManaChange;
         _enemyBoard.OnBoardClear += BoardClear;
+        CardUnlockManager.Instance.OnLoadFinished += GivePlayerUnlockedCards;
 
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
         _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
@@ -59,7 +60,6 @@ public class GameManager : MonoBehaviour
     {        
         if (!item.GetItemBase().IsNotReward && item.GetItemBase().UnlockCard != null)
         {
-            Debug.Log("Unlocked Card!");
             CardUnlockManager.Instance.SetCardUnlocked(item.GetItemBase());
             if (_player.CanAddCard())
             {
@@ -69,6 +69,14 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("No Card Unlocked!");
+        }
+    }
+
+    private void GivePlayerUnlockedCards(List<ItemBase> items)
+    {
+        foreach (ItemBase item in items)
+        {
+            AddCardToPlayer(item.UnlockCard);
         }
     }
 
@@ -147,6 +155,7 @@ public class GameManager : MonoBehaviour
     {
         if (item == null)
         {
+            _UIManager.RemoveItemDescription();
             return;
         }
         else
@@ -203,5 +212,6 @@ public class GameManager : MonoBehaviour
         _player.GetPlayerTargeting().OnEnemyTargeted -= HandleEnemyTargeted;
         _player.GetPlayerStats().OnPlayerHeal -= HandlePlayerHeal;
         _enemyBoard.OnBoardClear -= BoardClear;
+        CardUnlockManager.Instance.OnLoadFinished -= GivePlayerUnlockedCards;
     }
 }

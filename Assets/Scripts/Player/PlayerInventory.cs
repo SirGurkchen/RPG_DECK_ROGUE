@@ -28,13 +28,27 @@ public class PlayerInventory : MonoBehaviour
     {
         if (item_index >= _inventory.Count)
         {
+            _equippedItem.DemarkItem();
             _equippedItem = null;
             return;
         }
 
         if (_inventory[item_index] != null)
         {
+            if (_equippedItem == _inventory[item_index])
+            {
+                _equippedItem.DemarkItem();
+                _equippedItem = null;
+                return;
+            }
+            
+            if (_equippedItem != null)
+            {
+                _equippedItem.DemarkItem();
+            }
+
             _equippedItem = _inventory[item_index];
+            _equippedItem.MarkItem();
         }
     }
 
@@ -92,6 +106,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void DeselectItem()
     {
+        _equippedItem.DemarkItem();
         _equippedItem = null;
     }
 

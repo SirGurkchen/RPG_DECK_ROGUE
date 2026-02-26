@@ -3510,6 +3510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9f935a72e9fd1748aed0e706de8e2c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataPersistenceManager
+  _fileName: unlock.game
 --- !u!4 &1483922426
 Transform:
   m_ObjectHideFlags: 0
