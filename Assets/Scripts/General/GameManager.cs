@@ -13,12 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIManager _UIManager;
     [SerializeField] private CardManager _cardManager;
     [SerializeField] private CardController _testCard;
-    [SerializeField] private HordeLogic _hordeLogic;
-    [SerializeField] private ItemsDataBase _itemDatabase;
-    [SerializeField] private RewardManager _rewardManager;
-
-    private const float ROUND_BUFFER_TIMER = 0.75f;
-    private Coroutine _roundBufferRoutine;
+    [SerializeField] private RoundManager _roundManager;
 
     private void Start()
     {
@@ -33,11 +28,13 @@ public class GameManager : MonoBehaviour
         _player.GetPlayerStats().OnPlayerHeal += HandlePlayerHeal;
         _player.GetPlayerStats().OnManaChange += HandleManaChange;
         _enemyBoard.OnBoardClear += BoardClear;
+        _enemyBoard.OnEnemyKilled += HandleCoinsGain;
         CardUnlockManager.Instance.OnLoadFinished += GivePlayerUnlockedCards;
 
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
         _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
-        _player.GetPlayerInventory().GetInventory()[4] = Instantiate(_itemDatabase.GetItemByName("Hammer"));
+        _UIManager.UpdateCoinsUI(_player.GetPlayerStats().Coins);
+        _roundManager.GiveFirstRoundItem(_player);
         _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
     }
 
@@ -49,6 +46,12 @@ public class GameManager : MonoBehaviour
     private void HandlePlayerHeal()
     {
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
+    }
+
+    private void HandleCoinsGain(int coins)
+    {
+        _player.GetPlayerStats().AddCoins(coins);
+        _UIManager.UpdateCoinsUI(_player.GetPlayerStats().Coins);
     }
 
     private void HandleEnemyTargeted(EnemyController enemy)
@@ -82,42 +85,17 @@ public class GameManager : MonoBehaviour
 
     private void HandleRewardConfirm()
     {
-        GivePlayerItem(_rewardManager.GetSelectReward());
-        _rewardManager.ClearRewards();
-        _UIManager.ClearRewardUI();
-        _UIManager.RemoveItemDescription();
-        GameInput.Instance.ChangeRewardActive(false);
-        GameInput.Instance.ChangePlayerActive(true);
-        _hordeLogic.RefillBoard();
+        _roundManager.HandleRewardConfirm(_player, _UIManager);
     }
 
     private void HandleRewardSelection(int rewardIndex)
     {
-        _rewardManager.SetSelectReward(rewardIndex);
-        _UIManager.ShowRewardItemDescription(_rewardManager.GetSelectReward(), rewardIndex);
+        _roundManager.HandleRewardSelection(rewardIndex, _UIManager);
     }
 
     private void BoardClear()
     {
-        if (_roundBufferRoutine != null)
-        {
-            StopCoroutine(_roundBufferRoutine);
-            _roundBufferRoutine = null;
-        }
-
-        GameInput.Instance.ChangePlayerActive(false);
-
-        if (_player.GetPlayerInventory().CanAddItem())
-        {
-            List<ItemController> rewards = _rewardManager.GetRandomRewardItems(_itemDatabase);
-            _UIManager.FillRewardUI(rewards[0], rewards[1]);
-            GameInput.Instance.ChangeRewardActive(true);
-        }
-        else
-        {
-            GameInput.Instance.ChangeRewardActive(false);
-            _hordeLogic.RefillBoard();
-        }
+        _roundManager.BoardClear(_player, _UIManager);
     }
 
     private void PlayerCardSelection(CardController card)
@@ -148,7 +126,7 @@ public class GameManager : MonoBehaviour
 
     private void PlayerTurnEnd()
     {
-        _roundBufferRoutine = StartCoroutine(StartBufferedRound());
+        _roundManager.StartBufferedRound(_UIManager, _player, _enemyBoard);
     }
 
     private void PlayerItemSelect(ItemController item)
@@ -174,32 +152,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator StartBufferedRound()
-    {
-        GameInput.Instance.ChangePlayerActive(false);
-        _UIManager.RemoveItemDescription();
-        _UIManager.ShowEnemyInfo(null);
-        _player.DeselectAllItems();
-        _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
-
-        yield return new WaitForSeconds(ROUND_BUFFER_TIMER);
-
-        foreach (EnemyController enemy in _enemyBoard.GetEnemies())
-        {
-            enemy.Attack(_player);
-        }
-
-        _player.GetPlayerStats().AddMana(1);
-        _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
-        _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
-
-        if (_enemyBoard.GetEnemies().Count > 0)
-        {
-            GameInput.Instance.ChangePlayerActive(true);
-        }
-        _roundBufferRoutine = null;
-    }
-
     private void OnDisable()
     {
         _player.OnPlayerTurnEnded -= PlayerTurnEnd;
@@ -212,6 +164,7 @@ public class GameManager : MonoBehaviour
         _player.GetPlayerTargeting().OnEnemyTargeted -= HandleEnemyTargeted;
         _player.GetPlayerStats().OnPlayerHeal -= HandlePlayerHeal;
         _enemyBoard.OnBoardClear -= BoardClear;
+        _enemyBoard.OnEnemyKilled -= HandleCoinsGain;
         CardUnlockManager.Instance.OnLoadFinished -= GivePlayerUnlockedCards;
     }
 }

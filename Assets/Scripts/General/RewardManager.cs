@@ -37,4 +37,13 @@ public class RewardManager : MonoBehaviour
     {
         return _selectReward;
     }
+
+    public void GivePlayerRewardItem(ItemController item, PlayerManager player, UIManager UI)
+    {
+        if (player.GetPlayerInventory().CanAddItem())
+        {
+            player.GetPlayerInventory().GiveItemToInventory(Instantiate(item));
+            UI.UpdateWeaponUI(player.GetPlayerInventory().GetInventory());
+        }
+    }
 }

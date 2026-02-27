@@ -16,11 +16,13 @@ public abstract class EnemyBase : ScriptableObject
     [SerializeField] private int _damage;
     [SerializeField] private int _health;
     [SerializeField] private AttackType _weakness;
+    [SerializeField] private int _coins;
 
     public int Damage => _damage;
     public int Health => _health;
     public string Name => _enemyName;
     public AttackType Weakness => _weakness;
+    public int Coins => _coins;
 
     public virtual string GetEnemyStats()
     {

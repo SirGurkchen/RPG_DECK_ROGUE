@@ -15,14 +15,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private RewardUI _rewardUI;
     [SerializeField] private TextMeshProUGUI _enemyInfo;
     [SerializeField] private TextMeshProUGUI _manaUI;
+    [SerializeField] private TextMeshProUGUI _coinsUI;
 
     private string _defaultHealthText;
     private string _defaultManaText;
+    private string _defaultCoinsText;
 
     private void Start()
     {
         _defaultHealthText = _healthUI.text;
         _defaultManaText = _manaUI.text;
+        _defaultCoinsText = _coinsUI.text;
+
     }
 
     public void UpdateWeaponUI(List<ItemController> inventory)
@@ -116,5 +120,10 @@ public class UIManager : MonoBehaviour
     public void UpdateManaUI(int mana, int maxMana)
     {
         _manaUI.text = _defaultManaText + mana + " | " + maxMana;
+    }
+
+    public void UpdateCoinsUI(int coins)
+    {
+        _coinsUI.text = _defaultCoinsText + coins;
     }
 }

@@ -12,8 +12,11 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyUI _myUI;
 
     private int _currentHealth;
+    private int _coinsReward;
 
     public event Action<EnemyController> OnEnemyDeath;
+
+    public int Coins => _coinsReward;
 
     private void Start()
     {
@@ -25,6 +28,7 @@ public class EnemyController : MonoBehaviour
     private void InitializeEnemy()
     {
         _currentHealth = _enemyData.Health;
+        _coinsReward = _enemyData.Coins;
     }
 
     public virtual void TakeDamage(int damage, AttackType attack)

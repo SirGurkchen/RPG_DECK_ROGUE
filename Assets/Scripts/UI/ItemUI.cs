@@ -73,6 +73,11 @@ public class ItemUI : MonoBehaviour
             _itemDamage.text = "Damage: " + weapon.Damage;
             _itemEndurance.text = "Endurance: " + weapon.MaxDurability;
         }
+        else
+        {
+            _itemDamage.text = string.Empty;
+            _itemEndurance.text = string.Empty;
+        }
     }
 
     public void RemoveDescriptionText()

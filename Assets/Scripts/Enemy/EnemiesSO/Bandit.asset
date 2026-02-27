@@ -19,4 +19,5 @@ MonoBehaviour:
   _damage: 1
   _health: 2
   _weakness: 1
+  _coins: 2
   _block: 1

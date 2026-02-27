@@ -18,6 +18,7 @@ public class EnemyBoard : MonoBehaviour
     private const int MAX_ENEMIES = 2;
 
     public event Action OnBoardClear;
+    public event Action<int> OnEnemyKilled;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class EnemyBoard : MonoBehaviour
 
     private void HandleEnemyDeath(EnemyController enemy)
     {
+        OnEnemyKilled?.Invoke(enemy.Coins);
         _enemiesOnField.Remove(enemy);
         enemy.OnEnemyDeath -= HandleEnemyDeath;
         Destroy(enemy.gameObject);

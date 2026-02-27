@@ -15,6 +15,7 @@ public class PlayerStats : MonoBehaviour
 
     private int _health;
     private int _mana;
+    private int _coins;
 
     public event Action OnPlayerDeath;
     public event Action OnPlayerHeal;
@@ -24,11 +25,13 @@ public class PlayerStats : MonoBehaviour
     public int Health => _health;
     public int MaxMana => _maxMana;
     public int Mana => _mana;
+    public int Coins => _coins;
 
     private void Start()
     {
         _health = _maxHealth;
         _mana = _maxMana;
+        _coins = 0;
     }
 
     public void ReceiveDamage(int damage)
@@ -81,6 +84,16 @@ public class PlayerStats : MonoBehaviour
                 _mana = _maxMana;
             }
         }
+    }
+
+    public void AddCoins(int amount)
+    {
+        _coins += amount;
+    }
+
+    public void RemoveCoins(int amount)
+    {
+        _coins -= amount; 
     }
 
     private void OnDestroy()
