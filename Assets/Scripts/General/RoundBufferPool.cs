@@ -44,7 +44,7 @@ public class RoundBufferPool : MonoBehaviour
             _chosenTimes = 0;
         }
 
-            _previousChosen = chosen;
+        _previousChosen = chosen;
         return chosen;
     }
 

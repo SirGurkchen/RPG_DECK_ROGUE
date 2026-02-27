@@ -5,6 +5,7 @@ using UnityEngine;
 public class RoundManager : MonoBehaviour
 {
     [SerializeField] private RewardManager _rewardManager;
+    [SerializeField] private ShopManager _shopManager;
     [SerializeField] private HordeLogic _hordeLogic;
 
     private Coroutine _roundBufferRoutine;
@@ -78,9 +79,10 @@ public class RoundManager : MonoBehaviour
 
     private void ShowShopScreen()
     {
-        Debug.Log("Shop Screen!");
+        _shopManager.FillShop();
         GameInput.Instance.ChangeRewardActive(false);
         _hordeLogic.RefillBoard();
+        _shopManager.EmptyShop();
     }
 
     public void HandleRewardConfirm(PlayerManager player, UIManager UI)
