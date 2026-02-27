@@ -1,29 +1,46 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Handles the visualization of the Reward system after every round.
 /// </summary>
 public class RewardUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI[] _rewardUI;
+    [SerializeField] private Image[] _rewardUI;
+
+    private void Start()
+    {
+        foreach (Image item in  _rewardUI)
+        {
+            item.gameObject.SetActive(false);
+        }
+    }
 
     public void ClearRewardUI()
     {
         DemarkAllRewards();
-        _rewardUI[0].text = "";
-        _rewardUI[1].text = "";
+        foreach (Image item in _rewardUI)
+        {
+            item.gameObject.SetActive(false);
+        }
+        _rewardUI[0].sprite = null;
+        _rewardUI[1].sprite = null;
     }
 
     public void FillRewardUI(ItemController itemOne, ItemController itemTwo)
     {
-        _rewardUI[0].text = itemOne.GetItemName();
-        _rewardUI[1].text = itemTwo.GetItemName();
+        _rewardUI[0].sprite = itemOne.GetItemBase().Icon;
+        _rewardUI[1].sprite = itemTwo.GetItemBase().Icon;
+        foreach (Image item in _rewardUI)
+        {
+            item.gameObject.SetActive(true);
+        }
     }
 
     public void DemarkAllRewards()
     {
-        foreach (TextMeshProUGUI item in _rewardUI)
+        foreach (Image item in _rewardUI)
         {
             item.color = Color.white;
         }

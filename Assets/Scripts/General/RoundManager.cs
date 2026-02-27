@@ -85,6 +85,11 @@ public class RoundManager : MonoBehaviour
 
     public void HandleRewardConfirm(PlayerManager player, UIManager UI)
     {
+        if (_rewardManager.GetSelectReward()  == null)
+        {
+            return;
+        }
+
         _rewardManager.GivePlayerRewardItem(_rewardManager.GetSelectReward(), player, UI);
         _rewardManager.ClearRewards();
         UI.ClearRewardUI();

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Club
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   _itemName: Club
-  _description: A wooden club that seems durable enough.. Does melee damage. Some
+  _description: A wooden club that seems durable enough. Does melee damage. Some
     enemies might be immune to melee attacks!
   _price: 10
   _itemType: 0
@@ -21,7 +21,6 @@ MonoBehaviour:
   _itemIcon: {fileID: 8748211661655536223, guid: 4ff8f2c1e3fca884fb729b8a61267195, type: 3}
   _rarity: 1
   _unlockableCard: {fileID: 0}
-  _unlockedCard: 0
   _damage: 4
   _attackType: 0
   _endurance: 6

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
   _itemName: Rusty Sword
   _description: 'A rusty sword that has seen better days. Does blade damage. Some
-    enemies might be immune to melee attacks!
+    enemies might be immune to blade attacks!
 
 '
   _price: 5
@@ -23,7 +23,6 @@ MonoBehaviour:
   _itemIcon: {fileID: 8962610242271416363, guid: d7fa739d0dacd6e42af81ed7086ac132, type: 3}
   _rarity: 0
   _unlockableCard: {fileID: 7036658307534412435, guid: 14c1e02c3a5207d4aaf4f52b8b036cbd, type: 3}
-  _unlockedCard: 0
   _damage: 6
   _attackType: 3
   _endurance: 3
