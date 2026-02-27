@@ -2361,6 +2361,7 @@ GameObject:
   - component: {fileID: 846743588}
   - component: {fileID: 846743587}
   - component: {fileID: 846743589}
+  - component: {fileID: 846743590}
   m_Layer: 0
   m_Name: RoundManager
   m_TagString: Untagged
@@ -2380,7 +2381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9b027f8177728a47bb4aa39616ddbbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoundManager
-  _itemDatabase: {fileID: 221469677}
   _rewardManager: {fileID: 846743589}
   _hordeLogic: {fileID: 496978643}
 --- !u!4 &846743588
@@ -2410,6 +2410,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b98ff21c6f315ad49ab1ccf6cb6364af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RewardManager
+--- !u!114 &846743590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846743586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f291944ad9bbe6942b334e835c6f1020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoundBufferPool
 --- !u!1 &848176372
 GameObject:
   m_ObjectHideFlags: 0

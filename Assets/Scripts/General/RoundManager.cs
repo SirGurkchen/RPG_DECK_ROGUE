@@ -1,21 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class RoundManager : MonoBehaviour
 {
-    [SerializeField] private ItemsDataBase _itemDatabase;
     [SerializeField] private RewardManager _rewardManager;
     [SerializeField] private HordeLogic _hordeLogic;
 
     private Coroutine _roundBufferRoutine;
     private const float ROUND_BUFFER_TIMER = 0.75f;
-
-    public void GiveFirstRoundItem(PlayerManager player)
-    {
-        player.GetPlayerInventory().GetInventory()[4] = Instantiate(_itemDatabase.GetItemByName("Hammer"));
-    }
 
     public void StartBufferedRound(UIManager UI, PlayerManager player, EnemyBoard board)
     {
@@ -55,12 +48,24 @@ public class RoundManager : MonoBehaviour
             StopCoroutine(_roundBufferRoutine);
             _roundBufferRoutine = null;
         }
-
         GameInput.Instance.ChangePlayerActive(false);
 
+        switch (RoundBufferPool.Instance.GetRandomRoundBuffer())
+        {
+            case RoundBufferPool.BufferType.Shop:
+                ShowShopScreen();
+                break;
+            case RoundBufferPool.BufferType.Reward:
+                ShowRewardScreen(player, UI);
+                break;
+        }
+    }
+
+    private void ShowRewardScreen(PlayerManager player, UIManager UI)
+    {
         if (player.GetPlayerInventory().CanAddItem())
         {
-            List<ItemController> rewards = _rewardManager.GetRandomRewardItems(_itemDatabase);
+            List<ItemController> rewards = _rewardManager.GetRandomRewardItems();
             UI.FillRewardUI(rewards[0], rewards[1]);
             GameInput.Instance.ChangeRewardActive(true);
         }
@@ -69,6 +74,13 @@ public class RoundManager : MonoBehaviour
             GameInput.Instance.ChangeRewardActive(false);
             _hordeLogic.RefillBoard();
         }
+    }
+
+    private void ShowShopScreen()
+    {
+        Debug.Log("Shop Screen!");
+        GameInput.Instance.ChangeRewardActive(false);
+        _hordeLogic.RefillBoard();
     }
 
     public void HandleRewardConfirm(PlayerManager player, UIManager UI)

@@ -19,6 +19,7 @@ public class DataPersistenceManager : MonoBehaviour
         if (Instance != null)
         {
             Debug.Log("There are multiple Data Persistence Managers!");
+            return;
         }
         Instance = this; 
     }

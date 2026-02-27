@@ -9,12 +9,16 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
     private List<ItemBase> _unlockedItemsCards;
 
     public event Action<List<ItemBase>> OnLoadFinished;
+    public event Action<List<ItemBase>> OnNewCardUnlock;
+
+    public List<ItemBase> UnlockedItemsCards => _unlockedItemsCards;
 
     private void Awake()
     {
         if (Instance != null)
         {
             Debug.Log("There are multiple Card Unlock Managers!");
+            return;
         }
         Instance = this; 
     }
@@ -27,6 +31,7 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
         }
         _unlockedItemsCards.Add(unlockItem);
         DataPersistenceManager.Instance.SaveNewCardUnlock();
+        OnNewCardUnlock?.Invoke(_unlockedItemsCards);
     }
 
     public bool IsCardUnlcoked(string itemName)
@@ -50,21 +55,13 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
     {
         if (data != null)
         {
-            foreach(ItemBase item in data.unlockedCards)
-            {
-                Debug.Log(item.UnlockCard.GetCard().Name);
-            }
             _unlockedItemsCards = data.unlockedCards;
             OnLoadFinished?.Invoke(_unlockedItemsCards);
         }
     }
+
     public void SaveData(ref GameData data)
     {
         data.unlockedCards = _unlockedItemsCards;
-    }
-
-    public List<ItemBase> GetUnlockedCards()
-    {
-        return _unlockedItemsCards;
     }
 }

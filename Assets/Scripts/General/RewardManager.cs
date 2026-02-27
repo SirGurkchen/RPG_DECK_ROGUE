@@ -10,12 +10,12 @@ public class RewardManager : MonoBehaviour
     private List<ItemController> _availableRewards = new List<ItemController>();
     private ItemController _selectReward;
 
-    public List<ItemController> GetRandomRewardItems(ItemsDataBase database)
+    public List<ItemController> GetRandomRewardItems()
     {
-        ItemController itemOne = database.GetRandomItem();
+        ItemController itemOne = ItemsDataBase.Instance.GetRandomItem();
         _availableRewards.Add(itemOne);
 
-        ItemController itemTwo = database.GetRandomItem();
+        ItemController itemTwo = ItemsDataBase.Instance.GetRandomItem();
         _availableRewards.Add(itemTwo);
 
         _currentRewards = _availableRewards;

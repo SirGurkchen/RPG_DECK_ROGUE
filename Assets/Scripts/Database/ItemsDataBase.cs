@@ -7,9 +7,21 @@ using UnityEngine;
 /// </summary>
 public class ItemsDataBase : MonoBehaviour
 {
+    public static ItemsDataBase Instance { get; private set; }
+
+
     [SerializeField] private List<ItemController> _itemDatabase;
     private List<ItemController> _validItems = new List<ItemController>();
 
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Debug.Log("There are multiple Item Databases!");
+            return;
+        }
+        Instance = this;
+    }
 
     public ItemController GetRandomItem()
     {
