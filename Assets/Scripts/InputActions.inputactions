@@ -257,6 +257,74 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "ShopInteract",
+            "id": "68d29083-5043-4650-a72b-fb94f5067b9a",
+            "actions": [
+                {
+                    "name": "ItemOne",
+                    "type": "Button",
+                    "id": "38ffd9fc-840f-4495-a4f1-71b5415e7783",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ItemTwo",
+                    "type": "Button",
+                    "id": "dc7ef56e-d95f-482f-a333-7bb2b2c09a83",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Confirm",
+                    "type": "Button",
+                    "id": "ccaa8fdc-21e8-4157-b89d-686e6f61380b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "50bc77e1-59bf-4312-b1bf-4365b67d8b9c",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ItemOne",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24ae717c-3ee9-4349-af20-3d3d770b64ab",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ItemTwo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7b7b0533-63bf-4d61-ab11-f30f1b8da227",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Confirm",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

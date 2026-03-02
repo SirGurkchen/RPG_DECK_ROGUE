@@ -15,6 +15,8 @@ public class PlayerInput : MonoBehaviour
     public event Action OnCardSwitch;
     public event Action<int> OnRewardSelect;
     public event Action OnRewardConfirm;
+    public event Action OnShopConfirmation;
+    public event Action<int> OnShopSelection;
 
 
     private void Start()
@@ -26,6 +28,18 @@ public class PlayerInput : MonoBehaviour
         GameInput.Instance.OnCardMenuSelect += Instance_OnCardMenuSelect;
         GameInput.Instance.OnRewardSelect += RewardSelected;
         GameInput.Instance.OnRewardConfirm += RewardConfirmed;
+        GameInput.Instance.OnShopItemSelect += ShopSelect;
+        GameInput.Instance.OnShopItemConfirm += ShopConfirm;
+    }
+
+    private void ShopConfirm()
+    {
+        OnShopConfirmation?.Invoke();
+    }
+
+    private void ShopSelect(int itemIndex)
+    {
+        OnShopSelection?.Invoke(itemIndex);
     }
 
     private void RewardConfirmed()
@@ -100,12 +114,6 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    public void EnableRewardControls()
-    {
-        GameInput.Instance.ChangePlayerActive(false);
-        GameInput.Instance.ChangeRewardActive(true);
-    }
-
     private void OnDisable()
     {
         if (GameInput.Instance != null)
@@ -117,6 +125,8 @@ public class PlayerInput : MonoBehaviour
             GameInput.Instance.OnCardMenuSelect -= Instance_OnCardMenuSelect;
             GameInput.Instance.OnRewardSelect -= RewardSelected;
             GameInput.Instance.OnRewardConfirm -= RewardConfirmed;
+            GameInput.Instance.OnShopItemConfirm -= ShopConfirm;
+            GameInput.Instance.OnShopItemSelect -= ShopSelect;
         }
     }
 
@@ -129,5 +139,7 @@ public class PlayerInput : MonoBehaviour
         OnCardSwitch = null;
         OnRewardSelect = null;
         OnRewardConfirm = null;
+        OnShopConfirmation = null;
+        OnShopSelection = null;
     }
 }

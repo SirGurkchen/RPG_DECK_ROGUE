@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CardManager _cardManager;
     [SerializeField] private CardController _testCard;
     [SerializeField] private RoundManager _roundManager;
+    [SerializeField] private ShopManager _shopManager;
 
     private void Start()
     {
@@ -27,9 +28,10 @@ public class GameManager : MonoBehaviour
         _player.GetPlayerTargeting().OnEnemyTargeted += HandleEnemyTargeted;
         _player.GetPlayerStats().OnPlayerHeal += HandlePlayerHeal;
         _player.GetPlayerStats().OnManaChange += HandleManaChange;
+        _player.OnShopConfirm += HandleShopConfirm;
+        _player.OnShopSelect += HandleShopSelect;
         _enemyBoard.OnBoardClear += BoardClear;
         _enemyBoard.OnEnemyKilled += HandleCoinsGain;
-        CardUnlockManager.Instance.OnLoadFinished += GivePlayerUnlockedCards;
 
         _player.GetPlayerInventory().GetInventory()[4] = Instantiate(ItemsDataBase.Instance.GetItemByName("Hammer"));
         _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
@@ -41,6 +43,16 @@ public class GameManager : MonoBehaviour
     private void HandleManaChange()
     {
         _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
+    }
+
+    private void HandleShopConfirm()
+    {
+        _roundManager.HandleShopConfirmation(_player, _UIManager);
+    }
+
+    private void HandleShopSelect(int index)
+    {
+        _roundManager.HandleShopSelect(index, _UIManager);
     }
 
     private void HandlePlayerHeal()
@@ -72,14 +84,6 @@ public class GameManager : MonoBehaviour
         else
         {
             Debug.Log("No Card Unlocked!");
-        }
-    }
-
-    private void GivePlayerUnlockedCards(List<ItemBase> items)
-    {
-        foreach (ItemBase item in items)
-        {
-            AddCardToPlayer(item.UnlockCard);
         }
     }
 
@@ -165,6 +169,7 @@ public class GameManager : MonoBehaviour
         _player.GetPlayerStats().OnPlayerHeal -= HandlePlayerHeal;
         _enemyBoard.OnBoardClear -= BoardClear;
         _enemyBoard.OnEnemyKilled -= HandleCoinsGain;
-        CardUnlockManager.Instance.OnLoadFinished -= GivePlayerUnlockedCards;
+        _player.OnShopConfirm -= HandleShopConfirm;
+        _player.OnShopSelect -= HandleShopSelect;
     }
 }

@@ -343,6 +343,74 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""ShopInteract"",
+            ""id"": ""68d29083-5043-4650-a72b-fb94f5067b9a"",
+            ""actions"": [
+                {
+                    ""name"": ""ItemOne"",
+                    ""type"": ""Button"",
+                    ""id"": ""38ffd9fc-840f-4495-a4f1-71b5415e7783"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ItemTwo"",
+                    ""type"": ""Button"",
+                    ""id"": ""dc7ef56e-d95f-482f-a333-7bb2b2c09a83"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""ccaa8fdc-21e8-4157-b89d-686e6f61380b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""50bc77e1-59bf-4312-b1bf-4365b67d8b9c"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24ae717c-3ee9-4349-af20-3d3d770b64ab"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemTwo"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b7b0533-63bf-4d61-ab11-f30f1b8da227"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -363,12 +431,18 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_ItemReward_ItemOne = m_ItemReward.FindAction("ItemOne", throwIfNotFound: true);
         m_ItemReward_ItemTwo = m_ItemReward.FindAction("ItemTwo", throwIfNotFound: true);
         m_ItemReward_Confirm = m_ItemReward.FindAction("Confirm", throwIfNotFound: true);
+        // ShopInteract
+        m_ShopInteract = asset.FindActionMap("ShopInteract", throwIfNotFound: true);
+        m_ShopInteract_ItemOne = m_ShopInteract.FindAction("ItemOne", throwIfNotFound: true);
+        m_ShopInteract_ItemTwo = m_ShopInteract.FindAction("ItemTwo", throwIfNotFound: true);
+        m_ShopInteract_Confirm = m_ShopInteract.FindAction("Confirm", throwIfNotFound: true);
     }
 
     ~@InputActions()
     {
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputActions.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_ItemReward.enabled, "This will cause a leak and performance issues, InputActions.ItemReward.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_ShopInteract.enabled, "This will cause a leak and performance issues, InputActions.ShopInteract.Disable() has not been called.");
     }
 
     /// <summary>
@@ -742,6 +816,124 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="ItemRewardActions" /> instance referencing this action map.
     /// </summary>
     public ItemRewardActions @ItemReward => new ItemRewardActions(this);
+
+    // ShopInteract
+    private readonly InputActionMap m_ShopInteract;
+    private List<IShopInteractActions> m_ShopInteractActionsCallbackInterfaces = new List<IShopInteractActions>();
+    private readonly InputAction m_ShopInteract_ItemOne;
+    private readonly InputAction m_ShopInteract_ItemTwo;
+    private readonly InputAction m_ShopInteract_Confirm;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "ShopInteract".
+    /// </summary>
+    public struct ShopInteractActions
+    {
+        private @InputActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public ShopInteractActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "ShopInteract/ItemOne".
+        /// </summary>
+        public InputAction @ItemOne => m_Wrapper.m_ShopInteract_ItemOne;
+        /// <summary>
+        /// Provides access to the underlying input action "ShopInteract/ItemTwo".
+        /// </summary>
+        public InputAction @ItemTwo => m_Wrapper.m_ShopInteract_ItemTwo;
+        /// <summary>
+        /// Provides access to the underlying input action "ShopInteract/Confirm".
+        /// </summary>
+        public InputAction @Confirm => m_Wrapper.m_ShopInteract_Confirm;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_ShopInteract; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="ShopInteractActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(ShopInteractActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="ShopInteractActions" />
+        public void AddCallbacks(IShopInteractActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ShopInteractActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ShopInteractActionsCallbackInterfaces.Add(instance);
+            @ItemOne.started += instance.OnItemOne;
+            @ItemOne.performed += instance.OnItemOne;
+            @ItemOne.canceled += instance.OnItemOne;
+            @ItemTwo.started += instance.OnItemTwo;
+            @ItemTwo.performed += instance.OnItemTwo;
+            @ItemTwo.canceled += instance.OnItemTwo;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="ShopInteractActions" />
+        private void UnregisterCallbacks(IShopInteractActions instance)
+        {
+            @ItemOne.started -= instance.OnItemOne;
+            @ItemOne.performed -= instance.OnItemOne;
+            @ItemOne.canceled -= instance.OnItemOne;
+            @ItemTwo.started -= instance.OnItemTwo;
+            @ItemTwo.performed -= instance.OnItemTwo;
+            @ItemTwo.canceled -= instance.OnItemTwo;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="ShopInteractActions.UnregisterCallbacks(IShopInteractActions)" />.
+        /// </summary>
+        /// <seealso cref="ShopInteractActions.UnregisterCallbacks(IShopInteractActions)" />
+        public void RemoveCallbacks(IShopInteractActions instance)
+        {
+            if (m_Wrapper.m_ShopInteractActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="ShopInteractActions.AddCallbacks(IShopInteractActions)" />
+        /// <seealso cref="ShopInteractActions.RemoveCallbacks(IShopInteractActions)" />
+        /// <seealso cref="ShopInteractActions.UnregisterCallbacks(IShopInteractActions)" />
+        public void SetCallbacks(IShopInteractActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ShopInteractActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ShopInteractActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="ShopInteractActions" /> instance referencing this action map.
+    /// </summary>
+    public ShopInteractActions @ShopInteract => new ShopInteractActions(this);
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.
     /// </summary>
@@ -819,6 +1011,35 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     /// <seealso cref="ItemRewardActions.AddCallbacks(IItemRewardActions)" />
     /// <seealso cref="ItemRewardActions.RemoveCallbacks(IItemRewardActions)" />
     public interface IItemRewardActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "ItemOne" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnItemOne(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "ItemTwo" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnItemTwo(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Confirm" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnConfirm(InputAction.CallbackContext context);
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "ShopInteract" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="ShopInteractActions.AddCallbacks(IShopInteractActions)" />
+    /// <seealso cref="ShopInteractActions.RemoveCallbacks(IShopInteractActions)" />
+    public interface IShopInteractActions
     {
         /// <summary>
         /// Method invoked when associated input action "ItemOne" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.

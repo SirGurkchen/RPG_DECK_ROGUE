@@ -16,6 +16,8 @@ public class GameInput : MonoBehaviour
     public event Action OnCardMenuSelect;
     public event Action<int> OnRewardSelect;
     public event Action OnRewardConfirm;
+    public event Action<int> OnShopItemSelect;
+    public event Action OnShopItemConfirm;
 
     private InputActions _inputActions;
 
@@ -47,6 +49,24 @@ public class GameInput : MonoBehaviour
         _inputActions.ItemReward.ItemOne.performed += ItemOneReward;
         _inputActions.ItemReward.ItemTwo.performed += ItemTwoReward;
         _inputActions.ItemReward.Confirm.performed += RewardConfirmed;
+        _inputActions.ShopInteract.ItemOne.performed += ShopOne_performed;
+        _inputActions.ShopInteract.ItemTwo.performed += ShopTwo_performed;
+        _inputActions.ShopInteract.Confirm.performed += ShopConfirm_performed;
+    }
+
+    private void ShopTwo_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnShopItemSelect?.Invoke(1);
+    }
+
+    private void ShopOne_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnShopItemSelect?.Invoke(0);
+    }
+
+    private void ShopConfirm_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnShopItemConfirm?.Invoke();
     }
 
     private void SelectFists_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -125,11 +145,25 @@ public class GameInput : MonoBehaviour
     {
         if (isActive)
         {
+            _inputActions.Player.Disable();
             _inputActions.ItemReward.Enable();
         }
         else
         {
             _inputActions.ItemReward.Disable();
+            _inputActions.Player.Enable();
+        }
+    }
+
+    public void ChangeShopActive(bool isActive)
+    {
+        if (isActive)
+        {
+            _inputActions.ShopInteract.Enable();
+        }
+        else
+        {
+            _inputActions.ShopInteract.Disable();
         }
     }
 
@@ -157,6 +191,9 @@ public class GameInput : MonoBehaviour
             _inputActions.ItemReward.ItemTwo.performed -= ItemTwoReward;
             _inputActions.ItemReward.Confirm.performed -= RewardConfirmed;
             _inputActions.Player.SelectFists.performed -= SelectFists_performed;
+            _inputActions.ShopInteract.ItemOne.performed -= ShopOne_performed;
+            _inputActions.ShopInteract.ItemTwo.performed -= ShopTwo_performed;
+            _inputActions.ShopInteract.Confirm.performed -= ShopConfirm_performed;
         }
 
         OnConfirmPress = null;
@@ -166,6 +203,8 @@ public class GameInput : MonoBehaviour
         OnCardMenuSelect = null;
         OnRewardSelect = null;
         OnRewardConfirm = null;
+        OnShopItemConfirm = null;
+        OnShopItemSelect = null;
 
         if (Instance == this)
         {

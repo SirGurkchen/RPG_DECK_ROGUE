@@ -1,6 +1,7 @@
 using TMPro;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Visualizes an instance of a card as its placement and animation.
@@ -10,6 +11,7 @@ public class CardUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _cardNameText;
     [SerializeField] private TextMeshProUGUI _cardDescText;
+    [SerializeField] private Image _cardMarker;
 
     private const float SELECT_HEIGHT = 2.5f;
     private bool _selected = false;
@@ -42,5 +44,17 @@ public class CardUI : MonoBehaviour
         transform.DOKill();
         gameObject.transform.DOMove(_originalPos, 0.2f);
         _selected = false;
+    }
+
+        public void ToggleMarkCard(bool isOn)
+    {
+        if (isOn)
+        {
+            _cardMarker.gameObject.SetActive(true);
+        }
+        else
+        {
+            _cardMarker.gameObject.SetActive(false);
+        }
     }
 }

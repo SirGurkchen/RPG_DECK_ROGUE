@@ -80,9 +80,20 @@ public class RoundManager : MonoBehaviour
     private void ShowShopScreen()
     {
         _shopManager.FillShop();
-        GameInput.Instance.ChangeRewardActive(false);
+        GameInput.Instance.ChangeShopActive(true);
+    }
+
+    public void HandleShopSelect(int index, UIManager UI)
+    {
+        _shopManager.HandleShopSelection(index, UI);
+    }
+
+    public void HandleShopConfirmation(PlayerManager player, UIManager UI)
+    {
+        _shopManager.HandleShopConfirm(player, UI);
+        GameInput.Instance.ChangeShopActive(false);
+        GameInput.Instance.ChangePlayerActive(true);
         _hordeLogic.RefillBoard();
-        _shopManager.EmptyShop();
     }
 
     public void HandleRewardConfirm(PlayerManager player, UIManager UI)

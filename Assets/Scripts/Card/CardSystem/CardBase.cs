@@ -11,6 +11,7 @@ public class CardBase : ScriptableObject
     [SerializeField] private string _cardName;
     [TextArea]
     [SerializeField] private string _cardDescription;
+    [SerializeField] private int _cardShopPrice;
 
     [Header("Conditional Effects")]
     [Tooltip("Effect which triggers if main condition is met. Leave empty if no Main Effect.")]
@@ -20,6 +21,7 @@ public class CardBase : ScriptableObject
 
     public string Name => _cardName;
     public string Description => _cardDescription;
+    public int ShopPrice => _cardShopPrice;
 
     public void Play(CardContext context)
     {

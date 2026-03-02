@@ -28,4 +28,9 @@ public class CardController : MonoBehaviour
     {
         _myUI.VisualizeCardDeselect();
     }
+
+    public void ToggleShopSelection(bool isOn)
+    {
+        _myUI.ToggleMarkCard(isOn);
+    }
 }
