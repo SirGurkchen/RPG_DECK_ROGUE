@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _enemyInfo;
     [SerializeField] private TextMeshProUGUI _manaUI;
     [SerializeField] private TextMeshProUGUI _coinsUI;
+    [SerializeField] private GameObject _selectionPrompts;
 
     private string _defaultHealthText;
     private string _defaultManaText;
@@ -26,7 +27,6 @@ public class UIManager : MonoBehaviour
         _defaultHealthText = _healthUI.text;
         _defaultManaText = _manaUI.text;
         _defaultCoinsText = _coinsUI.text;
-
     }
 
     public void UpdateWeaponUI(List<ItemController> inventory)
@@ -125,5 +125,10 @@ public class UIManager : MonoBehaviour
     public void UpdateCoinsUI(int coins)
     {
         _coinsUI.text = _defaultCoinsText + coins;
+    }
+
+    public void ToggleSelectionPrompts(bool isOn)
+    {
+        _selectionPrompts.gameObject.SetActive(isOn);
     }
 }

@@ -41,6 +41,10 @@ public class PlayerStats : MonoBehaviour
         if (finalDamage > 0)
         {
             _health -= finalDamage;
+            if (_health < 0)
+            {
+                _health = 0;
+            }
         }
 
         CheckDeath();

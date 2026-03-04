@@ -1,4 +1,5 @@
 using System.Collections;
+using NUnit.Framework;
 using UnityEngine;
 
 /// <summary>
@@ -7,7 +8,6 @@ using UnityEngine;
 /// </summary>
 public class HordeLogic : MonoBehaviour
 {
-    [SerializeField] private EnemyController[] _enemyPool;
     [SerializeField] private EnemyBoard _board;
 
     private const float SPAWN_TIMER = 0.5f;
@@ -16,17 +16,30 @@ public class HordeLogic : MonoBehaviour
 
     public bool isSpawning {  get; private set; }
 
-    private void Start()
+    public void RefillBoardRandomly()
     {
-        RefillBoard();
+        StartCoroutine(SpawnRandomEnemiesWithDelay());
     }
 
-    public void RefillBoard()
+    public void RefillBoardPredetermined(string enemyOne, string enemyTwo)
     {
-        StartCoroutine(SpawnEnemiesWithDelay());
+        StartCoroutine(SpawnPredeterminedEnemiesWithDelay(enemyOne, enemyTwo));
     }
 
-    private IEnumerator SpawnEnemiesWithDelay()
+    private IEnumerator SpawnPredeterminedEnemiesWithDelay(string enemyOne, string enemyTwo)
+    {
+        isSpawning = true;
+        yield return new WaitForSeconds(SPAWN_TIMER);
+        AddPredeterminedEnemy(enemyOne);
+        if (enemyTwo != null)
+        {
+            yield return new WaitForSeconds(SPAWN_TIMER);
+            AddPredeterminedEnemy(enemyTwo);
+        }
+        isSpawning = false;
+    }
+
+    private IEnumerator SpawnRandomEnemiesWithDelay()
     {
         isSpawning = true;
 
@@ -36,15 +49,21 @@ public class HordeLogic : MonoBehaviour
 
         for (int i = 0; i < amount; i++)
         {
-            AddEnemy();
+            AddRandomEnemy();
             yield return new WaitForSeconds(SPAWN_TIMER);
         }
         isSpawning = false;
     }
 
-    private void AddEnemy()
+    private void AddRandomEnemy()
     {
-        EnemyController newEnemy = Instantiate(_enemyPool[Random.Range(0, _enemyPool.Length)]);
+        EnemyController newEnemy = Instantiate(EnemyDataBase.Instance.GetRandomEnemy());
+        _board.AddEnemyToField(newEnemy);
+    }
+
+    private void AddPredeterminedEnemy(string enemy)
+    {
+        EnemyController newEnemy = Instantiate(EnemyDataBase.Instance.GetEnemyByName(enemy));
         _board.AddEnemyToField(newEnemy);
     }
 }

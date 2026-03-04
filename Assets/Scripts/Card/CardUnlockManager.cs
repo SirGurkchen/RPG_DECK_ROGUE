@@ -18,9 +18,16 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
         if (Instance != null)
         {
             Debug.Log("There are multiple Card Unlock Managers!");
+            Destroy(gameObject);
             return;
         }
-        Instance = this; 
+        Instance = this;
+        _unlockedItemsCards = new List<ItemBase>(); 
+    }
+
+    private void OnEnable()
+    {
+        DataPersistenceManager.Instance.Register(this);
     }
 
     public void SetCardUnlocked(ItemBase unlockItem)
@@ -63,5 +70,10 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
     public void SaveData(ref GameData data)
     {
         data.unlockedCards = _unlockedItemsCards;
+    }
+
+    private void OnDisable()
+    {
+        DataPersistenceManager.Instance?.Unregister(this);
     }
 }

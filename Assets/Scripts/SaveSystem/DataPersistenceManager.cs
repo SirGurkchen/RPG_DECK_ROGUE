@@ -22,12 +22,13 @@ public class DataPersistenceManager : MonoBehaviour
             return;
         }
         Instance = this; 
+        _dataScripts = new List<IDataPersistence>();
     }
 
     private void Start()
     {
+        DontDestroyOnLoad(this.gameObject);
         this._dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName);
-        this._dataScripts = FindAllDataPersistenceObjects();
         LoadGameData();
     }
 
@@ -43,17 +44,19 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void LoadGameData()
     {
+        Debug.Log("Load!");
         this._gameData = _dataHandler.Load();
 
         if (this._gameData == null)
         {
             StartNewGame();
         }
+    }
 
-        foreach (IDataPersistence data in _dataScripts)
-        {
-            data.LoadData(_gameData);
-        }
+    public void GiveObjectData(IDataPersistence obj)
+    {
+        Debug.Log("Object Data Loaded!");
+        obj.LoadData(_gameData);
     }
 
     public void DeleteSave()
@@ -76,9 +79,14 @@ public class DataPersistenceManager : MonoBehaviour
         _dataHandler.Save(_gameData);
     }
 
-    private List<IDataPersistence> FindAllDataPersistenceObjects()
+    public void Register(IDataPersistence data)
     {
-        IEnumerable<IDataPersistence> dataObjects = FindObjectsByType<MonoBehaviour>(0).OfType<IDataPersistence>();
-        return new List<IDataPersistence>(dataObjects);
+        _dataScripts.Add(data);
+        GiveObjectData(data);
+    }
+
+    public void Unregister(IDataPersistence data)
+    {
+        _dataScripts.Remove(data);
     }
 }

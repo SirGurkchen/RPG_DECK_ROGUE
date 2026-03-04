@@ -98,12 +98,12 @@ public class ItemController : MonoBehaviour
         return _itemImage;
     }
 
-    public void MarkItem()
+    public void Mark()
     {
         _itemImage.color = new Color(255, 0, 0, 100); // Highlights Item image in red
     }
 
-    public void DemarkItem()
+    public void Demark()
     {
         _itemImage.color = new Color(255, 255, 255, 255); // Resets the Item Image marking color
     }

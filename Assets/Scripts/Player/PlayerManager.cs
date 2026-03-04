@@ -24,6 +24,7 @@ public class PlayerManager : MonoBehaviour
     public event Action OnRewardConfirm;
     public event Action<int> OnShopSelect;
     public event Action OnShopConfirm;
+    public event Action OnPlayerDied;
 
     private void Start()
     {
@@ -71,7 +72,7 @@ public class PlayerManager : MonoBehaviour
 
     private void PlayerDead()
     {
-        Debug.Log("Dead!");
+        OnPlayerDied?.Invoke();
     }
 
     private void Input_OnEnemyRightSelect()

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Orchestrates the 'flow' of the game.
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour
         _player.GetPlayerStats().OnManaChange += HandleManaChange;
         _player.OnShopConfirm += HandleShopConfirm;
         _player.OnShopSelect += HandleShopSelect;
+        _player.OnPlayerDied += HandlePlayerDeath;
         _enemyBoard.OnBoardClear += BoardClear;
         _enemyBoard.OnEnemyKilled += HandleCoinsGain;
 
@@ -38,6 +40,17 @@ public class GameManager : MonoBehaviour
         _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
         _UIManager.UpdateCoinsUI(_player.GetPlayerStats().Coins);
         _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
+        StartFirstRound();
+    }
+
+    private void HandlePlayerDeath()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    private void StartFirstRound()
+    {
+        _roundManager.StartPredeterminedRound("Bandit");
     }
 
     private void HandleManaChange()
@@ -48,6 +61,7 @@ public class GameManager : MonoBehaviour
     private void HandleShopConfirm()
     {
         _roundManager.HandleShopConfirmation(_player, _UIManager);
+        _UIManager.ToggleSelectionPrompts(true);
     }
 
     private void HandleShopSelect(int index)
@@ -90,6 +104,7 @@ public class GameManager : MonoBehaviour
     private void HandleRewardConfirm()
     {
         _roundManager.HandleRewardConfirm(_player, _UIManager);
+        _UIManager.ToggleSelectionPrompts(true);
     }
 
     private void HandleRewardSelection(int rewardIndex)
@@ -130,6 +145,7 @@ public class GameManager : MonoBehaviour
 
     private void PlayerTurnEnd()
     {
+        _UIManager.ToggleSelectionPrompts(false);
         _roundManager.StartBufferedRound(_UIManager, _player, _enemyBoard);
     }
 
@@ -171,5 +187,6 @@ public class GameManager : MonoBehaviour
         _enemyBoard.OnEnemyKilled -= HandleCoinsGain;
         _player.OnShopConfirm -= HandleShopConfirm;
         _player.OnShopSelect -= HandleShopSelect;
+        _player.OnPlayerDied -= HandlePlayerDeath;
     }
 }

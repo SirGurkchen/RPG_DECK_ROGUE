@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -38,6 +39,7 @@ public class RoundManager : MonoBehaviour
         if (board.GetEnemies().Count > 0)
         {
             GameInput.Instance.ChangePlayerActive(true);
+            UI.ToggleSelectionPrompts(true);
         }
         _roundBufferRoutine = null;
     }
@@ -50,6 +52,7 @@ public class RoundManager : MonoBehaviour
             _roundBufferRoutine = null;
         }
         GameInput.Instance.ChangePlayerActive(false);
+        UI.ToggleSelectionPrompts(false);
 
         switch (RoundBufferPool.Instance.GetRandomRoundBuffer())
         {
@@ -73,7 +76,7 @@ public class RoundManager : MonoBehaviour
         else
         {
             GameInput.Instance.ChangeRewardActive(false);
-            _hordeLogic.RefillBoard();
+            _hordeLogic.RefillBoardRandomly();
         }
     }
 
@@ -93,7 +96,7 @@ public class RoundManager : MonoBehaviour
         _shopManager.HandleShopConfirm(player, UI);
         GameInput.Instance.ChangeShopActive(false);
         GameInput.Instance.ChangePlayerActive(true);
-        _hordeLogic.RefillBoard();
+        _hordeLogic.RefillBoardRandomly();
     }
 
     public void HandleRewardConfirm(PlayerManager player, UIManager UI)
@@ -109,12 +112,22 @@ public class RoundManager : MonoBehaviour
         UI.RemoveItemDescription();
         GameInput.Instance.ChangeRewardActive(false);
         GameInput.Instance.ChangePlayerActive(true);
-        _hordeLogic.RefillBoard();
+        _hordeLogic.RefillBoardRandomly();
     }
 
     public void HandleRewardSelection(int rewardIndex, UIManager UI)
     {
         _rewardManager.SetSelectReward(rewardIndex);
         UI.ShowRewardItemDescription(_rewardManager.GetSelectReward(), rewardIndex);
+    }
+
+    public void StartRound()
+    {
+        _hordeLogic.RefillBoardRandomly();
+    }
+
+    public void StartPredeterminedRound(string enemyOne, string enemyTwo = null)
+    {
+        _hordeLogic.RefillBoardPredetermined(enemyOne, enemyTwo); 
     }
 }
