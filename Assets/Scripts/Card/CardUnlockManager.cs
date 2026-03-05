@@ -6,12 +6,12 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
 {
     public static CardUnlockManager Instance { get; private set; }
 
-    private List<ItemBase> _unlockedItemsCards;
+    private List<string> _unlockedItemsCards;
 
-    public event Action<List<ItemBase>> OnLoadFinished;
-    public event Action<List<ItemBase>> OnNewCardUnlock;
+    public event Action<List<string>> OnLoadFinished;
+    public event Action<List<string>> OnNewCardUnlock;
 
-    public List<ItemBase> UnlockedItemsCards => _unlockedItemsCards;
+    public List<string> UnlockedItemsCards => _unlockedItemsCards;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
             return;
         }
         Instance = this;
-        _unlockedItemsCards = new List<ItemBase>(); 
+        _unlockedItemsCards = new List<string>(); 
     }
 
     private void OnEnable()
@@ -36,7 +36,7 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
         {
             return;
         }
-        _unlockedItemsCards.Add(unlockItem);
+        _unlockedItemsCards.Add(unlockItem.ItemName);
         DataPersistenceManager.Instance.SaveNewCardUnlock();
         OnNewCardUnlock?.Invoke(_unlockedItemsCards);
     }
@@ -48,9 +48,9 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
             return false;
         }
 
-        foreach(ItemBase unlockable in _unlockedItemsCards)
+        foreach(string unlockable in _unlockedItemsCards)
         {
-            if (unlockable.ItemName == itemName)
+            if (unlockable == itemName)
             {
                 return true;
             }

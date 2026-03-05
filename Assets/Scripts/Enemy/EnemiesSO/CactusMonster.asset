@@ -19,4 +19,6 @@ MonoBehaviour:
   _damage: 2
   _health: 4
   _weakness: 1
+  _coins: 0
+  _enemySprite: {fileID: -7605544741008658028, guid: d7a73094d6964394897dfac1a98c8d0d, type: 3}
   _thornsDamage: 1

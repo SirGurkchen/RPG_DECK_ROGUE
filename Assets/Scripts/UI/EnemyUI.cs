@@ -8,14 +8,33 @@ using UnityEngine.UI;
 /// </summary>
 public class EnemyUI : MonoBehaviour
 {
-    [SerializeField] private GameObject _marker;
     [SerializeField] private Image _healthbar;
     [SerializeField] private TextMeshProUGUI _enemyHealthUI;
     [SerializeField] private EnemyStatusUI _enemyStatusUI;
+    [SerializeField] private Image _enemyImage;
 
     public void SetEnemeyMarker(bool isMarked)
     {
-        _marker.SetActive(isMarked);
+        if (isMarked)
+        {
+            _enemyImage.color = Color.red;
+        }
+        else
+        {
+            _enemyImage.color = Color.white;
+        }
+    }
+
+    public void SetEnemyImage(Sprite sprite)
+    {
+        if (_enemyImage != null && sprite != null)
+        {
+            _enemyImage.sprite = sprite;
+        }
+        else
+        {
+            Debug.Log("Image did not Load!");
+        }
     }
 
     public void InitHealthText(int currentHealth, EnemyBase enemyData)

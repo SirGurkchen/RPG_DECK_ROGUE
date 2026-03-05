@@ -71,9 +71,9 @@ public class DataPersistenceManager : MonoBehaviour
             data.SaveData(ref _gameData);
         }
 
-        foreach (ItemBase card in _gameData.unlockedCards)
+        foreach (string card in _gameData.unlockedCards)
         {
-            Debug.Log("Cards Unlocked: " + card.UnlockCard.GetCard().Name);
+            Debug.Log("Cards Unlocked: " + card);
         }
 
         _dataHandler.Save(_gameData);

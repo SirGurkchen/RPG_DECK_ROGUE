@@ -31,7 +31,6 @@ public class GameInput : MonoBehaviour
 
         _inputActions = new InputActions();
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

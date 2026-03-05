@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Controls the in game instance of an enemy object.
@@ -23,6 +24,7 @@ public class EnemyController : MonoBehaviour
         InitializeEnemy();
         _myUI.InitHealthText(_currentHealth, _enemyData);
         _myUI.InitSpecialUI(_enemyData);
+        _myUI.SetEnemyImage(_enemyData.Icon);
     }
 
     private void InitializeEnemy()

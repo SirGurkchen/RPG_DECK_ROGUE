@@ -20,4 +20,5 @@ MonoBehaviour:
   _health: 10
   _weakness: 0
   _coins: 2
+  _enemySprite: {fileID: 6827581200123067571, guid: d7214fa30b901ee4c8311c1b2e9bf36e, type: 3}
   _block: 2

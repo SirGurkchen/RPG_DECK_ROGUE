@@ -13,17 +13,31 @@ public class ShopManager : MonoBehaviour
     private ItemController _selectItem;
     private ItemBase _selectCard;
 
-    private void Start()
+    private void Awake()
     {
-        CardUnlockManager.Instance.OnLoadFinished += UpdateAvailableCards;
-        CardUnlockManager.Instance.OnNewCardUnlock += UpdateAvailableCards;
         _availableItemCards = new List<ItemBase>();
         _availableItems = new List<ItemController>();
     }
 
-    public void UpdateAvailableCards(List<ItemBase> unlockedCards)
+    private void Start()
     {
-        _availableItemCards = unlockedCards;
+        CardUnlockManager.Instance.OnLoadFinished += UpdateAvailableCards;
+        CardUnlockManager.Instance.OnNewCardUnlock += UpdateAvailableCards;
+    }
+
+    public void UpdateAvailableCards(List<string> unlockedCards)
+    {
+        _availableItemCards.Clear();
+        foreach (string itemName in unlockedCards)
+        {
+            ItemController item = ItemsDataBase.Instance.GetItemByName(itemName);
+            if (item == null)
+            {
+                Debug.Log("No Item found while updating shop!");
+                continue;
+            }
+            _availableItemCards.Add(item.GetItemBase());
+        }
     }
 
     public void FillShop()
