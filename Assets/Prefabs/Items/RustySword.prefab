@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemController
   _itemData: {fileID: 11400000, guid: 1690c61ab37973346b954adfbb0f64ed, type: 2}
   _itemImage: {fileID: 5257680201884282861}
+  _attackSound: {fileID: 8300000, guid: 6c42ad26ed6160947855cc347c0ebe73, type: 3}
 --- !u!1001 &8946790750415689822
 PrefabInstance:
   m_ObjectHideFlags: 0

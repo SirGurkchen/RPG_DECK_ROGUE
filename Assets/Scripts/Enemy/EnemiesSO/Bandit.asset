@@ -16,7 +16,7 @@ MonoBehaviour:
   _description: 
   _type: 0
   _position: 0
-  _damage: 1
+  _damage: 2
   _health: 2
   _weakness: 1
   _coins: 2

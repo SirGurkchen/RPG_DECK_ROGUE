@@ -2,5 +2,5 @@ using UnityEngine;
 
 public interface IDodge
 {
-    abstract void Dodge();
+    int DodgeChance { get; }
 }

@@ -10,6 +10,7 @@ public class ItemController : MonoBehaviour
 {
     [SerializeField] private ItemBase _itemData;
     [SerializeField] private Image _itemImage;
+    [SerializeField] private AudioClip _attackSound;
     private int _currentEndurance;
 
     public event Action<ItemController> OnItemDestroy;
@@ -42,6 +43,7 @@ public class ItemController : MonoBehaviour
 
         if (suc)
         {
+            AudioManager.Instance.PlayAudioClip(_attackSound);
             if (_currentEndurance > 0)
             {
                 _currentEndurance--;

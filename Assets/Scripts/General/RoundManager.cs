@@ -51,33 +51,33 @@ public class RoundManager : MonoBehaviour
             StopCoroutine(_roundBufferRoutine);
             _roundBufferRoutine = null;
         }
-        GameInput.Instance.ChangePlayerActive(false);
-        UI.ToggleSelectionPrompts(false);
 
-        switch (RoundBufferPool.Instance.GetRandomRoundBuffer())
+        if (player.GetPlayerInventory().CanAddItem())
         {
-            case RoundBufferPool.BufferType.Shop:
-                ShowShopScreen();
-                break;
-            case RoundBufferPool.BufferType.Reward:
-                ShowRewardScreen(player, UI);
-                break;
+            GameInput.Instance.ChangePlayerActive(false);
+            UI.ToggleSelectionPrompts(false);
+            switch (RoundBufferPool.Instance.GetRandomRoundBuffer())
+            {
+                case RoundBufferPool.BufferType.Shop:
+                    ShowShopScreen();
+                    break;
+                case RoundBufferPool.BufferType.Reward:
+                    ShowRewardScreen(player, UI);
+                    break;
+            }
+        }
+        else
+        {
+            UI.ToggleSelectionPrompts(false);
+            _hordeLogic.RefillBoardRandomly();
         }
     }
 
     private void ShowRewardScreen(PlayerManager player, UIManager UI)
     {
-        if (player.GetPlayerInventory().CanAddItem())
-        {
-            List<ItemController> rewards = _rewardManager.GetRandomRewardItems();
-            UI.FillRewardUI(rewards[0], rewards[1]);
-            GameInput.Instance.ChangeRewardActive(true);
-        }
-        else
-        {
-            GameInput.Instance.ChangeRewardActive(false);
-            _hordeLogic.RefillBoardRandomly();
-        }
+        List<ItemController> rewards = _rewardManager.GetRandomRewardItems();
+        UI.FillRewardUI(rewards[0], rewards[1]);
+        GameInput.Instance.ChangeRewardActive(true);
     }
 
     private void ShowShopScreen()

@@ -1,4 +1,6 @@
+using JetBrains.Annotations;
 using System;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -35,6 +37,8 @@ public class EnemyController : MonoBehaviour
 
     public virtual void TakeDamage(int damage, AttackType attack)
     {
+        if (TryDodge()) return;
+
         if (attack == AttackType.None)
         {
             _currentHealth -= damage;
@@ -42,18 +46,10 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            int finalDamage = damage;
-
-            finalDamage *= GetWeakness(attack);
-
-            if (_enemyData is IBlock blocker)
+            int calcDamage = CalculateDamage(damage, attack);
+            if (calcDamage >= 0)
             {
-                finalDamage -= blocker.Block;
-            }
-
-            if (finalDamage >= 0)
-            {
-                _currentHealth -= finalDamage;
+                _currentHealth -= calcDamage;
                 _myUI.UpdateHealthbar(_currentHealth, _enemyData);
             }
         }
@@ -64,14 +60,22 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    private int CalculateDamage(int damage, AttackType attack)
+    {
+        int finalDamage = damage;
+
+        finalDamage *= GetWeakness(attack);
+
+        if (_enemyData is IBlock blocker)
+        {
+            finalDamage -= blocker.Block;
+        }
+        return finalDamage;
+    }
+
     private void Die()
     {
         OnEnemyDeath?.Invoke(this);
-    }
-
-    public string GetEnemyStats()
-    {
-        return _enemyData.GetEnemyStats() + " Health: " + _currentHealth;
     }
 
     private int GetWeakness(AttackType attack)
@@ -94,6 +98,24 @@ public class EnemyController : MonoBehaviour
     public void Attack(PlayerManager player)
     {
         player.TakeDamage(_enemyData.Damage);
+    }
+
+    private bool TryDodge()
+    {
+        if (_enemyData is IDodge dodge)
+        {
+            int rng = UnityEngine.Random.Range(0, dodge.DodgeChance);
+            if (rng == 0)
+            {
+                Debug.Log("Dodge!");
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return false;
     }
 
     public string GetEnemyName()

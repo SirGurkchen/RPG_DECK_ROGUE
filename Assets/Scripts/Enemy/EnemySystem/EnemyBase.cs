@@ -4,7 +4,6 @@ using UnityEngine;
 /// Contains configuration data for enemies.
 /// New enemy types use this SO to have necessary base data.
 /// </summary>
-[CreateAssetMenu(fileName = "New Base Enemy", menuName = "Enemy/Enemy")]
 public abstract class EnemyBase : ScriptableObject
 {
     [Header("Basic Info")]
@@ -25,6 +24,7 @@ public abstract class EnemyBase : ScriptableObject
     public AttackType Weakness => _weakness;
     public int Coins => _coins;
     public Sprite Icon => _enemySprite;
+    public EnemyType Type => _type;
 
 
     public virtual string GetEnemyStats()
@@ -39,7 +39,8 @@ public enum EnemyType
     Ghost,
     Orc,
     Beast,
-    Monster
+    Monster,
+    Animal
 }
 
 public enum FightPosition

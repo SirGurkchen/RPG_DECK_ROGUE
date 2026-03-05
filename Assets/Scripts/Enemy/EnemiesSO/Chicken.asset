@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 755bbd49ce33b3c43bb4f09c9326aa7a, type: 3}
+  m_Name: Chicken
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalEnemy
+  _enemyName: Chicken
+  _description: 
+  _type: 5
+  _position: 0
+  _damage: 1
+  _health: 1
+  _weakness: 0
+  _coins: 0
+  _enemySprite: {fileID: -1904988484476000161, guid: 0daf99c392c517449b33558d31ef0a9b, type: 3}
+  _dodgeChance: 4
