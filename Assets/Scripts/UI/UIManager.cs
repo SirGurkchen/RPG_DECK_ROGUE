@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Orchestrates the overall UI of the game.
@@ -9,23 +10,21 @@ using UnityEngine;
 /// </summary>
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _healthUI;
+    [SerializeField] private Image _healthBar;
+    [SerializeField] private TextMeshProUGUI _healthBarText;
     [SerializeField] private CardUIManager _cardUI;
     [SerializeField] private ItemUI _itemUI;
     [SerializeField] private RewardUI _rewardUI;
     [SerializeField] private TextMeshProUGUI _enemyInfo;
-    [SerializeField] private TextMeshProUGUI _manaUI;
+    [SerializeField] private Image _manaBar;
+    [SerializeField] private TextMeshProUGUI _manaBarText;
     [SerializeField] private TextMeshProUGUI _coinsUI;
     [SerializeField] private GameObject _selectionPrompts;
 
-    private string _defaultHealthText;
-    private string _defaultManaText;
     private string _defaultCoinsText;
 
     private void Start()
     {
-        _defaultHealthText = _healthUI.text;
-        _defaultManaText = _manaUI.text;
         _defaultCoinsText = _coinsUI.text;
     }
 
@@ -70,9 +69,12 @@ public class UIManager : MonoBehaviour
         _itemUI.RemoveDescriptionText();
     }
 
-    public void UpdateHealthText(int health, int maxHealth)
+    public void UpdateHealthBar(int health, int maxHealth)
     {
-        _healthUI.text = _defaultHealthText + health + " | " + maxHealth;
+        float fill = (float)health / maxHealth;
+
+        _healthBar.fillAmount = Mathf.Clamp01(fill);
+        _healthBarText.text = health + " | " + maxHealth;
     }
 
     public void AddCardUI(CardController card)
@@ -119,7 +121,10 @@ public class UIManager : MonoBehaviour
 
     public void UpdateManaUI(int mana, int maxMana)
     {
-        _manaUI.text = _defaultManaText + mana + " | " + maxMana;
+        float fill = (float)mana / maxMana;
+
+        _manaBar.fillAmount = Mathf.Clamp01(fill);
+        _manaBarText.text = mana + " | " + maxMana;
     }
 
     public void UpdateCoinsUI(int coins)

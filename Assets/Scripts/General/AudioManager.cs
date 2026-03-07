@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _soundEffectSource;
     [SerializeField] private AudioSource _musicSource;
 
+    public float EffectVolume => _soundEffectSource.volume;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)

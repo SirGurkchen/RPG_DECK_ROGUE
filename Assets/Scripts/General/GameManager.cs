@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
         _enemyBoard.OnEnemyKilled += HandleCoinsGain;
 
         _player.GetPlayerInventory().GetInventory()[4] = Instantiate(ItemsDataBase.Instance.GetItemByName("Hammer"));
-        _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
+        _UIManager.UpdateHealthBar(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
         _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
         _UIManager.UpdateCoinsUI(_player.GetPlayerStats().Coins);
         _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlayerHeal()
     {
-        _UIManager.UpdateHealthText(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
+        _UIManager.UpdateHealthBar(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
     }
 
     private void HandleCoinsGain(int coins)

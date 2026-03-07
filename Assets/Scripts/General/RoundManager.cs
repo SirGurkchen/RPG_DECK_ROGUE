@@ -33,7 +33,7 @@ public class RoundManager : MonoBehaviour
         }
 
         player.GetPlayerStats().AddMana(1);
-        UI.UpdateHealthText(player.GetPlayerStats().Health, player.GetPlayerStats().MaxHealth);
+        UI.UpdateHealthBar(player.GetPlayerStats().Health, player.GetPlayerStats().MaxHealth);
         UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
 
         if (board.GetEnemies().Count > 0)

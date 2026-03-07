@@ -39,11 +39,13 @@ public class MainMenuLogic : MonoBehaviour
     {
         AudioManager.Instance.PlayAudioClip(_buttonSound);
         SettingsManager.Instance.ChangeEffectVolumePlus();
+        _menuUI.ChangeEffectBarFill(AudioManager.Instance.EffectVolume);
     }
 
     public void DecreaseEffectVolume()
     {
         AudioManager.Instance.PlayAudioClip(_buttonSound);
         SettingsManager.Instance.ChangeEffectVolumeMinus();
+        _menuUI.ChangeEffectBarFill(AudioManager.Instance.EffectVolume);
     }
 }
