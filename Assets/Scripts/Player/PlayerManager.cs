@@ -77,12 +77,12 @@ public class PlayerManager : MonoBehaviour
 
     private void Input_OnEnemyRightSelect()
     {
-        _targeting.SetSelectTarget(_board.GetMostRighternEnemy());
+        _targeting.SetSelectTarget(_board.GetMostRighternEnemy(), Input.E);
     }
 
     private void Input_OnEnemyLeftSelect()
     {
-        _targeting.SetSelectTarget(_board.GetMostLefternEnemy());
+        _targeting.SetSelectTarget(_board.GetMostLefternEnemy(), Input.Q);
     }
 
     private void Input_OnItemSelect(int item_index)

@@ -80,9 +80,10 @@ public class GameManager : MonoBehaviour
         _UIManager.UpdateCoinsUI(_player.GetPlayerStats().Coins);
     }
 
-    private void HandleEnemyTargeted(EnemyController enemy)
+    private void HandleEnemyTargeted(EnemyController enemy, Input input)
     {
         _UIManager.ShowEnemyInfo(enemy);
+        _UIManager.ToggleInputPrompt(input);
     }
 
     private void HandleCardUnlock(CardController card, ItemController item)

@@ -20,13 +20,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _manaBarText;
     [SerializeField] private TextMeshProUGUI _coinsUI;
     [SerializeField] private GameObject _selectionPrompts;
-
-    private string _defaultCoinsText;
-
-    private void Start()
-    {
-        _defaultCoinsText = _coinsUI.text;
-    }
+    [SerializeField] private GameObject _leftOnPrompt;
+    [SerializeField] private GameObject _rightOnPrompt;
 
     public void UpdateWeaponUI(List<ItemController> inventory)
     {
@@ -129,11 +124,31 @@ public class UIManager : MonoBehaviour
 
     public void UpdateCoinsUI(int coins)
     {
-        _coinsUI.text = _defaultCoinsText + coins;
+        _coinsUI.text =  "" + coins;
     }
 
     public void ToggleSelectionPrompts(bool isOn)
     {
         _selectionPrompts.gameObject.SetActive(isOn);
     }
+
+    public void ToggleInputPrompt(Input type)
+    {
+        if (type == Input.Q)
+        {
+            _rightOnPrompt.SetActive(false);
+            _leftOnPrompt.SetActive(!_leftOnPrompt.activeSelf);
+        }
+        else
+        {
+            _leftOnPrompt.SetActive(false);
+            _rightOnPrompt.SetActive(!_rightOnPrompt.activeSelf);
+        }
+    }
+}
+
+public enum Input
+{
+    Q,
+    E
 }
