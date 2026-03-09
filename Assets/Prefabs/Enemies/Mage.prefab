@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5711284673414925336}
   - component: {fileID: 9034135916213941565}
   - component: {fileID: 6251565008911460508}
+  - component: {fileID: 7014518135557849632}
   m_Layer: 0
   m_Name: Mage
   m_TagString: Untagged
@@ -49,6 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   _enemyData: {fileID: 11400000, guid: 2bc630359de79d74fa0a024796ff4bf1, type: 2}
   _myUI: {fileID: 9034135916213941565}
+  _attackSound: {fileID: 8300000, guid: 6c42ad26ed6160947855cc347c0ebe73, type: 3}
+  _animator: {fileID: 7014518135557849632}
 --- !u!114 &9034135916213941565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,6 +81,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatusUI
   _statusIcons: []
+--- !u!114 &7014518135557849632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246744352385592028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf487d0a25d1dc428f8d1e7577264ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
 --- !u!1 &435710046250614762
 GameObject:
   m_ObjectHideFlags: 0

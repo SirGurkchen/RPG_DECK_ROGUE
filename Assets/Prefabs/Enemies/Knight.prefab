@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7527817422079845719}
   - component: {fileID: 5066959808358634397}
   - component: {fileID: 2014492829419337845}
+  - component: {fileID: 8258744918031296726}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -49,6 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Knight
   _enemyData: {fileID: 11400000, guid: c484878f61635474491fbad2fcb7d017, type: 2}
   _myUI: {fileID: 5066959808358634397}
+  _attackSound: {fileID: 8300000, guid: 6c42ad26ed6160947855cc347c0ebe73, type: 3}
+  _animator: {fileID: 8258744918031296726}
 --- !u!114 &5066959808358634397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,6 +84,18 @@ MonoBehaviour:
   - StatusName: Block
     Container: {fileID: 1518373966442912183}
     Value: {fileID: 205274378249010139}
+--- !u!114 &8258744918031296726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964256730234500924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf487d0a25d1dc428f8d1e7577264ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
 --- !u!1 &2651260262726862881
 GameObject:
   m_ObjectHideFlags: 0

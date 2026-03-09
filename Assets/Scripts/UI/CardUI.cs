@@ -14,6 +14,7 @@ public class CardUI : MonoBehaviour
     [SerializeField] private Image _cardMarker;
 
     private const float SELECT_HEIGHT = 2.5f;
+    private const float SELECT_ANIMATION_TIME = 0.2f;
     private bool _selected = false;
     private Vector3 _originalPos;
 
@@ -34,7 +35,7 @@ public class CardUI : MonoBehaviour
         {
             transform.DOKill();
             Vector3 selectPos = _originalPos + new Vector3(0, SELECT_HEIGHT, 0);
-            gameObject.transform.DOMove(selectPos, 0.2f);
+            gameObject.transform.DOMove(selectPos, SELECT_ANIMATION_TIME);
             _selected = true;
         }
     }
@@ -42,7 +43,7 @@ public class CardUI : MonoBehaviour
     public void VisualizeCardDeselect()
     {
         transform.DOKill();
-        gameObject.transform.DOMove(_originalPos, 0.2f);
+        gameObject.transform.DOMove(_originalPos, SELECT_ANIMATION_TIME);
         _selected = false;
     }
 

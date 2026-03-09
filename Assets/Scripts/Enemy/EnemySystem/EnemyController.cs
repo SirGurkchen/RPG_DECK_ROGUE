@@ -13,6 +13,8 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyBase _enemyData;
     [SerializeField] private EnemyUI _myUI;
+    [SerializeField] private AudioClip _attackSound;
+    [SerializeField] private EnemyAnimator _animator;
 
     private int _currentHealth;
     private int _coinsReward;
@@ -33,6 +35,7 @@ public class EnemyController : MonoBehaviour
     {
         _currentHealth = _enemyData.Health;
         _coinsReward = _enemyData.Coins;
+        _animator.SetOriginalPos(gameObject.transform.position);
     }
 
     public virtual void TakeDamage(int damage, AttackType attack)
@@ -57,6 +60,10 @@ public class EnemyController : MonoBehaviour
         if (_currentHealth <= 0)
         {
             Die();
+        }
+        else
+        {
+            _animator.PlayDamagingAnimation();
         }
     }
 
@@ -97,6 +104,8 @@ public class EnemyController : MonoBehaviour
 
     public void Attack(PlayerManager player)
     {
+        _animator.PlayAttackAnimation();
+        AudioManager.Instance.PlayAudioClip(_attackSound);
         player.TakeDamage(_enemyData.Damage);
     }
 

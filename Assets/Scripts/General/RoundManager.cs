@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +10,7 @@ public class RoundManager : MonoBehaviour
 
     private Coroutine _roundBufferRoutine;
     private const float ROUND_BUFFER_TIMER = 0.75f;
+    private const float DAMAGE_TIMER = 0.25f;
 
     public void StartBufferedRound(UIManager UI, PlayerManager player, EnemyBoard board)
     {
@@ -30,10 +30,15 @@ public class RoundManager : MonoBehaviour
         foreach (EnemyController enemy in board.GetEnemies())
         {
             enemy.Attack(player);
+            yield return new WaitForSeconds(DAMAGE_TIMER - 0.1f);
+            UI.ToggleDamageVisual(true);
+            UI.UpdateHealthBar(player.GetPlayerStats().Health, player.GetPlayerStats().MaxHealth);
+            yield return new WaitForSeconds(DAMAGE_TIMER);
+            UI.ToggleDamageVisual(false);
+            yield return new WaitForSeconds(ROUND_BUFFER_TIMER);
         }
 
         player.GetPlayerStats().AddMana(1);
-        UI.UpdateHealthBar(player.GetPlayerStats().Health, player.GetPlayerStats().MaxHealth);
         UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
 
         if (board.GetEnemies().Count > 0)

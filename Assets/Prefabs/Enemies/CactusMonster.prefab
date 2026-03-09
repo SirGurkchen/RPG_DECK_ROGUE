@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 8303330477042826683}
   - component: {fileID: 3691906725279287129}
   - component: {fileID: 931152233055783897}
+  - component: {fileID: 7666148989671971682}
   m_Layer: 0
   m_Name: CactusMonster
   m_TagString: Untagged
@@ -154,6 +155,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   _enemyData: {fileID: 11400000, guid: eb775b6ccda181240bd9ea55ad4b9ed4, type: 2}
   _myUI: {fileID: 3691906725279287129}
+  _attackSound: {fileID: 8300000, guid: 6c42ad26ed6160947855cc347c0ebe73, type: 3}
+  _animator: {fileID: 7666148989671971682}
 --- !u!114 &3691906725279287129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,6 +189,18 @@ MonoBehaviour:
   - StatusName: Thorns
     Container: {fileID: 5236784353104311802}
     Value: {fileID: 492907580840812486}
+--- !u!114 &7666148989671971682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038628332507850643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf487d0a25d1dc428f8d1e7577264ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
 --- !u!1 &2243799826836464860
 GameObject:
   m_ObjectHideFlags: 0

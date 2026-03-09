@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _selectionPrompts;
     [SerializeField] private GameObject _leftOnPrompt;
     [SerializeField] private GameObject _rightOnPrompt;
+    [SerializeField] private GameObject _damageTakenVisual;
 
     public void UpdateWeaponUI(List<ItemController> inventory)
     {
@@ -130,6 +131,11 @@ public class UIManager : MonoBehaviour
     public void ToggleSelectionPrompts(bool isOn)
     {
         _selectionPrompts.gameObject.SetActive(isOn);
+    }
+
+    public void ToggleDamageVisual(bool isOn)
+    {
+        _damageTakenVisual.SetActive(isOn);
     }
 
     public void ToggleInputPrompt(Input type)

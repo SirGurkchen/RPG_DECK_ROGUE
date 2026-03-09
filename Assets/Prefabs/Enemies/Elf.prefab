@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 161115054365059058}
   - component: {fileID: 6492084972575835716}
   - component: {fileID: 2099266343210146637}
+  - component: {fileID: 7757351283294646650}
   m_Layer: 0
   m_Name: Elf
   m_TagString: Untagged
@@ -124,6 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   _enemyData: {fileID: 11400000, guid: 6337de96106e87b419aa1dc198eb8348, type: 2}
   _myUI: {fileID: 6492084972575835716}
+  _attackSound: {fileID: 8300000, guid: 6c42ad26ed6160947855cc347c0ebe73, type: 3}
+  _animator: {fileID: 7757351283294646650}
 --- !u!114 &6492084972575835716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,6 +159,18 @@ MonoBehaviour:
   - StatusName: Block
     Container: {fileID: 2069396309118897450}
     Value: {fileID: 827789443079073606}
+--- !u!114 &7757351283294646650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5596145468437763642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf487d0a25d1dc428f8d1e7577264ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
 --- !u!1 &5831771584899514831
 GameObject:
   m_ObjectHideFlags: 0
