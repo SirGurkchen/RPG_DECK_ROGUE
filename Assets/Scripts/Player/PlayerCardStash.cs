@@ -83,4 +83,9 @@ public class PlayerCardStash : MonoBehaviour
     {
         return _playerCards.Count < MAX_CARDS;
     }
+
+    public int GetCardCount()
+    {
+        return _playerCards.Count;
+    }
 }

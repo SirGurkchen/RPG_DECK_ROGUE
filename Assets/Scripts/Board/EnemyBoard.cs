@@ -37,9 +37,9 @@ public class EnemyBoard : MonoBehaviour
 
     private void HandleEnemyDeath(EnemyController enemy)
     {
+        enemy.OnEnemyDeath -= HandleEnemyDeath;
         OnEnemyKilled?.Invoke(enemy.Coins);
         _enemiesOnField.Remove(enemy);
-        enemy.OnEnemyDeath -= HandleEnemyDeath;
         Destroy(enemy.gameObject);
         CheckBoardClear();
     }

@@ -67,7 +67,10 @@ public class PlayerManager : MonoBehaviour
 
     private void HandleCardSwitch()
     {
-        _isChoosingCard = !_isChoosingCard;
+        if (_cards.GetCardCount() != 0)
+        {
+            _isChoosingCard = !_isChoosingCard;
+        }
     }
 
     private void PlayerDead()
@@ -94,6 +97,7 @@ public class PlayerManager : MonoBehaviour
         }
         else
         {
+            if (_cards.GetCardCount() <= item_index) return;
             bool cardSelect = _cards.SetSelectedCard(item_index);
 
             if (cardSelect)

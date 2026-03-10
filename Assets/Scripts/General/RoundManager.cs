@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RoundManager : MonoBehaviour
@@ -14,21 +15,26 @@ public class RoundManager : MonoBehaviour
 
     public void StartBufferedRound(UIManager UI, PlayerManager player, EnemyBoard board)
     {
+        GameInput.Instance.ChangePlayerActive(false);
+        UI.ToggleSelectionPrompts(false);
         _roundBufferRoutine = StartCoroutine(ExecuteBufferedRound(UI, player, board));
     }
 
     private IEnumerator ExecuteBufferedRound(UIManager UI, PlayerManager player, EnemyBoard board)
     {
-        GameInput.Instance.ChangePlayerActive(false);
-        UI.RemoveItemDescription();
-        UI.ShowEnemyInfo(null);
-        player.DeselectAllItems();
-        UI.UpdateWeaponUI(player.GetPlayerInventory().GetInventory());
+        if (_roundBufferRoutine != null)
+        {
+            Debug.Log("Routine was running! Stopped!");
+            StopCoroutine(_roundBufferRoutine);
+            _roundBufferRoutine = null;
+        }
 
         yield return new WaitForSeconds(ROUND_BUFFER_TIMER);
 
-        foreach (EnemyController enemy in board.GetEnemies())
+        foreach (EnemyController enemy in board.GetEnemies().ToList())
         {
+            if (enemy == null || !board.GetEnemies().Contains(enemy)) continue;
+
             enemy.Attack(player);
             yield return new WaitForSeconds(DAMAGE_TIMER - 0.1f);
             UI.ToggleDamageVisual(true);
@@ -74,7 +80,9 @@ public class RoundManager : MonoBehaviour
         else
         {
             UI.ToggleSelectionPrompts(false);
+            GameInput.Instance.ChangePlayerActive(false);
             _hordeLogic.RefillBoardRandomly();
+            StartCoroutine(WaitForSpawnThenActivate(UI));
         }
     }
 
@@ -100,24 +108,21 @@ public class RoundManager : MonoBehaviour
     {
         _shopManager.HandleShopConfirm(player, UI);
         GameInput.Instance.ChangeShopActive(false);
-        GameInput.Instance.ChangePlayerActive(true);
         _hordeLogic.RefillBoardRandomly();
+        StartCoroutine(WaitForSpawnThenActivate(UI));
     }
 
     public void HandleRewardConfirm(PlayerManager player, UIManager UI)
     {
-        if (_rewardManager.GetSelectReward()  == null)
-        {
-            return;
-        }
+        if (_rewardManager.GetSelectReward() == null) return;
 
         _rewardManager.GivePlayerRewardItem(_rewardManager.GetSelectReward(), player, UI);
         _rewardManager.ClearRewards();
         UI.ClearRewardUI();
         UI.RemoveItemDescription();
         GameInput.Instance.ChangeRewardActive(false);
-        GameInput.Instance.ChangePlayerActive(true);
         _hordeLogic.RefillBoardRandomly();
+        StartCoroutine(WaitForSpawnThenActivate(UI));
     }
 
     public void HandleRewardSelection(int rewardIndex, UIManager UI)
@@ -126,13 +131,15 @@ public class RoundManager : MonoBehaviour
         UI.ShowRewardItemDescription(_rewardManager.GetSelectReward(), rewardIndex);
     }
 
-    public void StartRound()
-    {
-        _hordeLogic.RefillBoardRandomly();
-    }
-
     public void StartPredeterminedRound(string enemyOne, string enemyTwo = null)
     {
         _hordeLogic.RefillBoardPredetermined(enemyOne, enemyTwo); 
+    }
+
+    private IEnumerator WaitForSpawnThenActivate(UIManager UI)
+    {
+        yield return new WaitUntil(() => !_hordeLogic.isSpawning);
+        GameInput.Instance.ChangePlayerActive(true);
+        UI.ToggleSelectionPrompts(true);
     }
 }

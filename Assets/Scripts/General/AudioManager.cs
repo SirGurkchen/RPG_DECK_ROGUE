@@ -8,6 +8,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _musicSource;
 
     public float EffectVolume => _soundEffectSource.volume;
+    public float MusicVolume => _musicSource.volume;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class AudioManager : MonoBehaviour
 
     public void StartMusic(AudioClip music)
     {
+        if (music == null) return;
         _musicSource.loop = true;
         _musicSource.PlayOneShot(music);
     }

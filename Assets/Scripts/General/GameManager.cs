@@ -82,8 +82,11 @@ public class GameManager : MonoBehaviour
 
     private void HandleEnemyTargeted(EnemyController enemy, Input input)
     {
-        _UIManager.ShowEnemyInfo(enemy);
-        _UIManager.ToggleInputPrompt(input);
+        if (GameInput.Instance.IsInputActive())
+        {
+            _UIManager.ShowEnemyInfo(enemy);
+            _UIManager.ToggleInputPrompt(input);
+        }
     }
 
     private void HandleCardUnlock(CardController card, ItemController item)
@@ -146,7 +149,8 @@ public class GameManager : MonoBehaviour
 
     private void PlayerTurnEnd()
     {
-        _UIManager.ToggleSelectionPrompts(false);
+        DeactivatePlayer();
+        if (_enemyBoard.GetEnemies().Count == 0) return;
         _roundManager.StartBufferedRound(_UIManager, _player, _enemyBoard);
     }
 
@@ -171,6 +175,15 @@ public class GameManager : MonoBehaviour
             _player.GetPlayerInventory().GiveItemToInventory(Instantiate(item));
             _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
         }
+    }
+
+    private void DeactivatePlayer()
+    {
+        _UIManager.RemoveItemDescription();
+        _UIManager.ShowEnemyInfo(null);
+        _UIManager.ResetInputPrompt();
+        _player.DeselectAllItems();
+        _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
     }
 
     private void OnDisable()

@@ -53,6 +53,11 @@ public class GameInput : MonoBehaviour
         _inputActions.ShopInteract.Confirm.performed += ShopConfirm_performed;
     }
 
+    public bool IsInputActive()
+    {
+        return _inputActions.Player.enabled;
+    }
+
     private void ShopTwo_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnShopItemSelect?.Invoke(1);

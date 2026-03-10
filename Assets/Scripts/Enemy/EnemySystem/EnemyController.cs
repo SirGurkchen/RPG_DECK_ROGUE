@@ -1,8 +1,5 @@
-using JetBrains.Annotations;
 using System;
-using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Controls the in game instance of an enemy object.
@@ -13,7 +10,10 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyBase _enemyData;
     [SerializeField] private EnemyUI _myUI;
+    [Tooltip("Leave empty if no attack sound")]
     [SerializeField] private AudioClip _attackSound;
+    [Tooltip("Leave empty if no spawn sound")]
+    [SerializeField] private AudioClip _spawnSound;
     [SerializeField] private EnemyAnimator _animator;
 
     private int _currentHealth;
@@ -36,6 +36,7 @@ public class EnemyController : MonoBehaviour
         _currentHealth = _enemyData.Health;
         _coinsReward = _enemyData.Coins;
         _animator.SetOriginalPos(gameObject.transform.position);
+        AudioManager.Instance.PlayAudioClip(_spawnSound);
     }
 
     public virtual void TakeDamage(int damage, AttackType attack)

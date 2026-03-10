@@ -48,4 +48,18 @@ public class MainMenuLogic : MonoBehaviour
         SettingsManager.Instance.ChangeEffectVolumeMinus();
         _menuUI.ChangeEffectBarFill(AudioManager.Instance.EffectVolume);
     }
+
+    public void IncreaseMusicVolume()
+    {
+        AudioManager.Instance.PlayAudioClip(_buttonSound);
+        SettingsManager.Instance.ChangeMusicVolumePlus();
+        _menuUI.ChangeMusicBarFill(AudioManager.Instance.MusicVolume);
+    }
+
+    public void DecreaseMusicVolume()
+    {
+        AudioManager.Instance.PlayAudioClip(_buttonSound);
+        SettingsManager.Instance.ChangeMusicVolumeMinus();
+        _menuUI.ChangeMusicBarFill(AudioManager.Instance.MusicVolume);
+    }
 }

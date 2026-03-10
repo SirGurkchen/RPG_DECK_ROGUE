@@ -156,6 +156,7 @@ MonoBehaviour:
   _enemyData: {fileID: 11400000, guid: eb775b6ccda181240bd9ea55ad4b9ed4, type: 2}
   _myUI: {fileID: 3691906725279287129}
   _attackSound: {fileID: 8300000, guid: 6c42ad26ed6160947855cc347c0ebe73, type: 3}
+  _spawnSound: {fileID: 8300000, guid: 816acb9cf5921b149bb549b88786d053, type: 3}
   _animator: {fileID: 7666148989671971682}
 --- !u!114 &3691906725279287129
 MonoBehaviour:

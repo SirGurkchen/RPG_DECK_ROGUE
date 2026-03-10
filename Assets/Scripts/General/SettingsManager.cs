@@ -25,4 +25,14 @@ public class SettingsManager : MonoBehaviour
     {
         AudioManager.Instance.TryChangeEffectVolume(-0.1f);
     }
+
+    public void ChangeMusicVolumePlus()
+    {
+        AudioManager.Instance.TryChangeMusicVolume(0.1f);
+    }
+
+    public void ChangeMusicVolumeMinus()
+    {
+        AudioManager.Instance.TryChangeMusicVolume(-0.1f);
+    }
 }

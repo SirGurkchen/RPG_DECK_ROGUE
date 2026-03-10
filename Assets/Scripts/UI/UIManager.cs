@@ -151,6 +151,12 @@ public class UIManager : MonoBehaviour
             _rightOnPrompt.SetActive(!_rightOnPrompt.activeSelf);
         }
     }
+
+    public void ResetInputPrompt()
+    {
+        _rightOnPrompt.SetActive(false);
+        _leftOnPrompt.SetActive(false);
+    }
 }
 
 public enum Input
