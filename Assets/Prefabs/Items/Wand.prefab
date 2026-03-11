@@ -60,6 +60,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemIcon
       objectReference: {fileID: 0}
+    - target: {fileID: 7979966719481609661, guid: c611eec3d947d354cae2137e3a46ae8f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 99
+      objectReference: {fileID: 0}
+    - target: {fileID: 7979966719481609661, guid: c611eec3d947d354cae2137e3a46ae8f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 99
+      objectReference: {fileID: 0}
     - target: {fileID: 8460323603694623888, guid: c611eec3d947d354cae2137e3a46ae8f, type: 3}
       propertyPath: m_Pivot.x
       value: 0

@@ -47,7 +47,7 @@ public class CardUI : MonoBehaviour
         _selected = false;
     }
 
-        public void ToggleMarkCard(bool isOn)
+    public void ToggleMarkCard(bool isOn)
     {
         if (isOn)
         {

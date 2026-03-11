@@ -51,6 +51,7 @@ MonoBehaviour:
   _enemyData: {fileID: 11400000, guid: c484878f61635474491fbad2fcb7d017, type: 2}
   _myUI: {fileID: 5066959808358634397}
   _attackSound: {fileID: 8300000, guid: 6c42ad26ed6160947855cc347c0ebe73, type: 3}
+  _spawnSound: {fileID: 0}
   _animator: {fileID: 8258744918031296726}
 --- !u!114 &5066959808358634397
 MonoBehaviour:
@@ -558,8 +559,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -13.3, y: -21.5}
+  m_SizeDelta: {x: 145, y: 860}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &613919703343382809
 CanvasRenderer:
@@ -589,7 +590,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -5483215198695101708, guid: 0a6783241a41b7344998026d1ecc57e2, type: 3}
+  m_Sprite: {fileID: -2271706521547825618, guid: ac7e493f8a093ed44b337ae76d66213f, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -142,7 +142,6 @@ public class GameManager : MonoBehaviour
         if (card == null) return;
         _cardManager.PlayCard(card, _player, _player.GetPlayerInventory(), _enemyBoard);
         _UIManager.RemoveCardUI(card);
-        _UIManager.DemarkItems();
         _UIManager.RemoveItemDescription();
         _UIManager.ShowEnemyInfo(null);
     }
@@ -163,17 +162,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            _UIManager.MarkSelectItem(_player.GetPlayerInventory().GetInventory().IndexOf(item));
             _UIManager.ShowItemDescription(item);
-        }
-    }
-
-    private void GivePlayerItem(ItemController item)
-    {
-        if (_player.GetPlayerInventory().CanAddItem())
-        {
-            _player.GetPlayerInventory().GiveItemToInventory(Instantiate(item));
-            _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
         }
     }
 

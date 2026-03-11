@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class RoundManager : MonoBehaviour
 {
@@ -108,6 +109,8 @@ public class RoundManager : MonoBehaviour
     {
         _shopManager.HandleShopConfirm(player, UI);
         GameInput.Instance.ChangeShopActive(false);
+        player.GetPlayerStats().AddMana(1);
+        UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
         _hordeLogic.RefillBoardRandomly();
         StartCoroutine(WaitForSpawnThenActivate(UI));
     }
@@ -121,6 +124,8 @@ public class RoundManager : MonoBehaviour
         UI.ClearRewardUI();
         UI.RemoveItemDescription();
         GameInput.Instance.ChangeRewardActive(false);
+        player.GetPlayerStats().AddMana(1);
+        UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
         _hordeLogic.RefillBoardRandomly();
         StartCoroutine(WaitForSpawnThenActivate(UI));
     }

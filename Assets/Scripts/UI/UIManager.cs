@@ -32,17 +32,7 @@ public class UIManager : MonoBehaviour
             {
                 _itemUI.SetItemUI(inventory[i], i);
             }
-            else
-            {
-                _itemUI.SetEmptyItem(i);
-            }
         }
-        _itemUI.DemarkAll();
-    }
-
-    public void MarkSelectItem(int index)
-    {
-        _itemUI.MarkItem(index);
     }
 
     public void ShowItemDescription(ItemController item)
@@ -91,16 +81,6 @@ public class UIManager : MonoBehaviour
     public void ClearRewardUI()
     {
         _rewardUI.ClearRewardUI();
-    }
-
-    public void ShowFistDescription()
-    {
-        _itemUI.ShowItemDescription(null);
-    }
-
-    public void DemarkItems()
-    {
-        _itemUI.DemarkAll();
     }
 
     public void ShowEnemyInfo(EnemyController enemy)

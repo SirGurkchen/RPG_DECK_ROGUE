@@ -7,7 +7,6 @@ using UnityEngine;
 /// </summary>
 public class ItemUI : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI[] _itemList;
     [SerializeField] private GameObject[] _itemPositions;
     [SerializeField] private TextMeshProUGUI _description;
     [SerializeField] private TextMeshProUGUI _itemDamage;
@@ -20,31 +19,6 @@ public class ItemUI : MonoBehaviour
             if (item.GetItemIcon() != null)
             {
                 item.GetItemIcon().transform.position = _itemPositions[index].transform.position;
-            }
-        }
-    }
-
-    public void SetEmptyItem(int index)
-    {
-        if (index >= 0 && index < _itemList.Length)
-        {
-            _itemList[index].text = "";
-        }
-    }
-
-    public void MarkItem(int index)
-    {
-        DemarkAll();
-        _itemList[index].color = Color.red;
-    }
-
-    public void DemarkAll()
-    {
-        foreach (TextMeshProUGUI item in _itemList)
-        {
-            if (item != null && item.text != "")
-            {
-                item.color = Color.white;
             }
         }
     }
