@@ -22,6 +22,8 @@ public class EnemyController : MonoBehaviour
     public event Action<EnemyController> OnEnemyDeath;
 
     public int Coins => _coinsReward;
+    public string GetEnemyName() => _enemyData.Name;
+
 
     private void Start()
     {
@@ -41,31 +43,10 @@ public class EnemyController : MonoBehaviour
 
     public virtual void TakeDamage(int damage, AttackType attack)
     {
-        if (TryDodge()) return;
+        if (CheckDodge()) return;
 
-        if (attack == AttackType.None)
-        {
-            _currentHealth -= damage;
-            _myUI.UpdateHealthbar(_currentHealth, _enemyData);
-        }
-        else
-        {
-            int calcDamage = CalculateDamage(damage, attack);
-            if (calcDamage >= 0)
-            {
-                _currentHealth -= calcDamage;
-                _myUI.UpdateHealthbar(_currentHealth, _enemyData);
-            }
-        }
-
-        if (_currentHealth <= 0)
-        {
-            Die();
-        }
-        else
-        {
-            _animator.PlayDamagingAnimation();
-        }
+        GetDamaged(damage, attack);
+        AfterDamaged();
     }
 
     private int CalculateDamage(int damage, AttackType attack)
@@ -88,13 +69,41 @@ public class EnemyController : MonoBehaviour
 
     private int GetWeakness(AttackType attack)
     {
-        if (attack == _enemyData.Weakness)
+        return attack == _enemyData.Weakness ? 2 : 1;
+    }
+
+    private bool CheckDodge()
+    {
+        if (_enemyData is AnimalEnemy animal && TryDodge())
         {
-            return 2;
+            AudioManager.Instance.PlayAudioClip(animal.MissSound);
+            return true;
         }
         else
         {
-            return 1;
+            return false; 
+        }
+    }
+
+    private void AfterDamaged()
+    {
+        if (_currentHealth <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            _animator.PlayDamagingAnimation();
+        }
+    }
+
+    private void GetDamaged(int damage, AttackType attack)
+    {
+        int finalDamange = attack == AttackType.None ? damage : CalculateDamage(damage, attack);
+        if (finalDamange >= 0)
+        {
+            _currentHealth -= finalDamange;
+            _myUI.UpdateHealthbar(_currentHealth, _enemyData);
         }
     }
 
@@ -112,25 +121,7 @@ public class EnemyController : MonoBehaviour
 
     private bool TryDodge()
     {
-        if (_enemyData is IDodge dodge)
-        {
-            int rng = UnityEngine.Random.Range(0, dodge.DodgeChance);
-            if (rng == 0)
-            {
-                Debug.Log("Dodge!");
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-        return false;
-    }
-
-    public string GetEnemyName()
-    {
-        return _enemyData.Name;
+        return _enemyData is IDodge dodge && UnityEngine.Random.Range(0, dodge.DodgeChance) == 0;
     }
 
     private void OnDestroy()

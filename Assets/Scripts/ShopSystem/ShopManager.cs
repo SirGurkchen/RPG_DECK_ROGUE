@@ -99,6 +99,11 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public bool IsRewardSelected()
+    {
+        return _selectCard != null || _selectItem != null;
+    }
+
     private void EmptyShop()
     {
         _shopUI.ClearShopUI();

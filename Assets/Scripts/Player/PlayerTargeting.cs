@@ -8,15 +8,14 @@ public class PlayerTargeting : MonoBehaviour
 {
     private EnemyController _currentTarget;
 
+    public EnemyController GetCurrentTarget() => _currentTarget;
+
     public event Action<EnemyController, Input> OnEnemyTargeted;
     private Input _currentSelectPos;
 
     public void SetSelectTarget(EnemyController enemy, Input input)
     {
-        if (enemy == null)
-        {
-            return;
-        }
+        if (enemy == null) return;
 
         if (_currentTarget != null)
         {
@@ -40,15 +39,10 @@ public class PlayerTargeting : MonoBehaviour
 
     public void DeselectAll()
     {
-        if (_currentTarget != null )
+        if (_currentTarget != null)
         {
             _currentTarget.SetEnemeyMarker(false);
         }
         _currentTarget = null;
-    }
-
-    public EnemyController GetCurrentTarget()
-    {
-        return _currentTarget;
     }
 }

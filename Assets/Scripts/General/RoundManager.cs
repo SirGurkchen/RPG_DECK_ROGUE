@@ -107,6 +107,8 @@ public class RoundManager : MonoBehaviour
 
     public void HandleShopConfirmation(PlayerManager player, UIManager UI)
     {
+        if (!_shopManager.IsRewardSelected()) return;
+
         _shopManager.HandleShopConfirm(player, UI);
         GameInput.Instance.ChangeShopActive(false);
         player.GetPlayerStats().AddMana(1);

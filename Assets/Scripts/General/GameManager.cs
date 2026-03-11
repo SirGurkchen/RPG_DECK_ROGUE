@@ -61,7 +61,6 @@ public class GameManager : MonoBehaviour
     private void HandleShopConfirm()
     {
         _roundManager.HandleShopConfirmation(_player, _UIManager);
-        _UIManager.ToggleSelectionPrompts(true);
     }
 
     private void HandleShopSelect(int index)
@@ -99,16 +98,11 @@ public class GameManager : MonoBehaviour
                 AddCardToPlayer(card);
             }
         }
-        else
-        {
-            Debug.Log("No Card Unlocked!");
-        }
     }
 
     private void HandleRewardConfirm()
     {
         _roundManager.HandleRewardConfirm(_player, _UIManager);
-        _UIManager.ToggleSelectionPrompts(true);
     }
 
     private void HandleRewardSelection(int rewardIndex)

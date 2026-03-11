@@ -16,6 +16,11 @@ public class PlayerManager : MonoBehaviour
 
     private bool _isChoosingCard = false;
 
+    public PlayerStats GetPlayerStats() => _stats;
+    public PlayerInventory GetPlayerInventory() => _inventory;
+    public EnemyController GetTargetedEnemy() => _targeting.GetCurrentTarget();
+    public PlayerTargeting GetPlayerTargeting() => _targeting;
+
     public event Action OnPlayerTurnEnded;
     public event Action<ItemController> OnItemSelected;
     public event Action<CardController> OnCardSelected;
@@ -137,31 +142,15 @@ public class PlayerManager : MonoBehaviour
             OnPlayerTurnEnded?.Invoke();
             _targeting.DeselectAll();
         }
+        else
+        {
+            AudioManager.Instance.PlayErrorSound();
+        }
     }
 
     public void TakeDamage(int damage)
     {
         _combat.TakeDamage(_stats, damage);
-    }
-
-    public EnemyController GetTargetedEnemy()
-    {
-        return _targeting.GetCurrentTarget();
-    }
-
-    public PlayerInventory GetPlayerInventory()
-    {
-        return _inventory;
-    }
-
-    public PlayerStats GetPlayerStats()
-    {
-        return _stats;
-    }
-
-    public PlayerTargeting GetPlayerTargeting()
-    {
-        return _targeting;
     }
 
     public void TryGiveCard(CardController newCard)
@@ -184,6 +173,7 @@ public class PlayerManager : MonoBehaviour
         input.OnItemSelect -= Input_OnItemSelect;
         input.OnCardSwitch -= HandleCardSwitch;
         input.OnRewardSelect -= RewardSelected;
+        input.OnRewardConfirm -= RewardConfirmed;
         _stats.OnPlayerDeath -= PlayerDead;
         input.OnShopConfirmation -= ShopConfirm;
         input.OnShopSelection -= ShopSelect;

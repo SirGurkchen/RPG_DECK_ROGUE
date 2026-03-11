@@ -6,6 +6,7 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] private AudioSource _soundEffectSource;
     [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private AudioClip _errorSound;
 
     public float EffectVolume => _soundEffectSource.volume;
     public float MusicVolume => _musicSource.volume;
@@ -26,6 +27,11 @@ public class AudioManager : MonoBehaviour
     {
         if (sound == null) return;
         _soundEffectSource.PlayOneShot(sound);
+    }
+
+    public void PlayErrorSound()
+    {
+        _soundEffectSource.PlayOneShot(_errorSound);
     }
 
     public void StartMusic(AudioClip music)

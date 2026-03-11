@@ -664,6 +664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   _soundEffectSource: {fileID: 179131675}
   _musicSource: {fileID: 179131674}
+  _errorSound: {fileID: 8300000, guid: 2783db8b2aeafee4086487e9f001fbc3, type: 3}
 --- !u!4 &179131677
 Transform:
   m_ObjectHideFlags: 0

@@ -13,6 +13,10 @@ public class PlayerInventory : MonoBehaviour
 
     private const int MAX_INVENTORY_SIZE = 5;
 
+    public List<ItemController> GetInventory() => _inventory;
+    public ItemController GetEquippedItem() => _equippedItem;
+
+
     public event Action<CardController, ItemController> OnCardWasUnlocked;
 
     private void Awake()
@@ -54,10 +58,7 @@ public class PlayerInventory : MonoBehaviour
 
     public void GiveItemToInventory(ItemController item)
     {
-        if (item == null)
-        {
-            return;
-        }
+        if (item == null) return;
 
         for (int i = 0; i < _inventory.Count; i++)
         {
@@ -108,15 +109,5 @@ public class PlayerInventory : MonoBehaviour
     {
         _equippedItem.Demark();
         _equippedItem = null;
-    }
-
-    public ItemController GetEquippedItem()
-    {
-        return _equippedItem;
-    }
-
-    public List<ItemController> GetInventory()
-    {
-        return _inventory;
     }
 }
