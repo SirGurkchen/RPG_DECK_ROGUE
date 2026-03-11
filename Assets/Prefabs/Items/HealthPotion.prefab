@@ -47,6 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemController
   _itemData: {fileID: 11400000, guid: 973ed0dea3cc142438a43d8cacc382d4, type: 2}
   _itemImage: {fileID: 6739286897067879758}
+  _attackSound: {fileID: 0}
 --- !u!1001 &7591005439853157117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,6 +139,10 @@ PrefabInstance:
     - target: {fileID: 8460323603694623888, guid: c611eec3d947d354cae2137e3a46ae8f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8962919126261878131, guid: c611eec3d947d354cae2137e3a46ae8f, type: 3}
+      propertyPath: m_SortingOrder
+      value: 111
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

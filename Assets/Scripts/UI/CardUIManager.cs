@@ -22,7 +22,7 @@ public class CardUIManager : MonoBehaviour
         {
             if (_cards[i] == null)
             {
-                card.gameObject.transform.SetParent(_cardUIPositions[i]);
+                card.gameObject.transform.SetParent(_cardUIPositions[i], false);
                 card.gameObject.transform.localPosition = Vector3.zero;
                 _cards[i] = card.gameObject;
                 break;
