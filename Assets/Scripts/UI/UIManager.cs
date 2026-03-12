@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _cardOnPrompt;
     [SerializeField] private GameObject _cardMenuPrompt;
     [SerializeField] private GameObject _damageTakenVisual;
+    [SerializeField] private GameObject _leavePrompt;
 
     public void UpdateWeaponUI(List<ItemController> inventory)
     {
@@ -35,6 +36,11 @@ public class UIManager : MonoBehaviour
                 _itemUI.SetItemUI(inventory[i], i);
             }
         }
+    }
+
+    public void ToggleLeavePrompt()
+    {
+        _leavePrompt.SetActive(!_leavePrompt.activeSelf);
     }
 
     public void ShowItemDescription(ItemController item)

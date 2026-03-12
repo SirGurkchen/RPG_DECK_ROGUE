@@ -306,6 +306,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""21b01fd2-3fec-47cc-8109-f11c8d38aad5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -341,6 +350,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Confirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""04f6dc91-72ca-4c34-822e-0e19a3663830"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -370,6 +390,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""name"": ""Confirm"",
                     ""type"": ""Button"",
                     ""id"": ""ccaa8fdc-21e8-4157-b89d-686e6f61380b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""28107aa2-4802-4cbb-8de9-bfc13fc5bc5b"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -409,6 +438,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Confirm"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""879a32a2-821c-41f4-a55b-c0b48fb2d28b"",
+                    ""path"": ""<Keyboard>/backspace"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Cancel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -431,11 +471,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_ItemReward_ItemOne = m_ItemReward.FindAction("ItemOne", throwIfNotFound: true);
         m_ItemReward_ItemTwo = m_ItemReward.FindAction("ItemTwo", throwIfNotFound: true);
         m_ItemReward_Confirm = m_ItemReward.FindAction("Confirm", throwIfNotFound: true);
+        m_ItemReward_Cancel = m_ItemReward.FindAction("Cancel", throwIfNotFound: true);
         // ShopInteract
         m_ShopInteract = asset.FindActionMap("ShopInteract", throwIfNotFound: true);
         m_ShopInteract_ItemOne = m_ShopInteract.FindAction("ItemOne", throwIfNotFound: true);
         m_ShopInteract_ItemTwo = m_ShopInteract.FindAction("ItemTwo", throwIfNotFound: true);
         m_ShopInteract_Confirm = m_ShopInteract.FindAction("Confirm", throwIfNotFound: true);
+        m_ShopInteract_Cancel = m_ShopInteract.FindAction("Cancel", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -705,6 +747,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_ItemReward_ItemOne;
     private readonly InputAction m_ItemReward_ItemTwo;
     private readonly InputAction m_ItemReward_Confirm;
+    private readonly InputAction m_ItemReward_Cancel;
     /// <summary>
     /// Provides access to input actions defined in input action map "ItemReward".
     /// </summary>
@@ -728,6 +771,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "ItemReward/Confirm".
         /// </summary>
         public InputAction @Confirm => m_Wrapper.m_ItemReward_Confirm;
+        /// <summary>
+        /// Provides access to the underlying input action "ItemReward/Cancel".
+        /// </summary>
+        public InputAction @Cancel => m_Wrapper.m_ItemReward_Cancel;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -763,6 +810,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Confirm.started += instance.OnConfirm;
             @Confirm.performed += instance.OnConfirm;
             @Confirm.canceled += instance.OnConfirm;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
         }
 
         /// <summary>
@@ -783,6 +833,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Confirm.started -= instance.OnConfirm;
             @Confirm.performed -= instance.OnConfirm;
             @Confirm.canceled -= instance.OnConfirm;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
         }
 
         /// <summary>
@@ -823,6 +876,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_ShopInteract_ItemOne;
     private readonly InputAction m_ShopInteract_ItemTwo;
     private readonly InputAction m_ShopInteract_Confirm;
+    private readonly InputAction m_ShopInteract_Cancel;
     /// <summary>
     /// Provides access to input actions defined in input action map "ShopInteract".
     /// </summary>
@@ -846,6 +900,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "ShopInteract/Confirm".
         /// </summary>
         public InputAction @Confirm => m_Wrapper.m_ShopInteract_Confirm;
+        /// <summary>
+        /// Provides access to the underlying input action "ShopInteract/Cancel".
+        /// </summary>
+        public InputAction @Cancel => m_Wrapper.m_ShopInteract_Cancel;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -881,6 +939,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Confirm.started += instance.OnConfirm;
             @Confirm.performed += instance.OnConfirm;
             @Confirm.canceled += instance.OnConfirm;
+            @Cancel.started += instance.OnCancel;
+            @Cancel.performed += instance.OnCancel;
+            @Cancel.canceled += instance.OnCancel;
         }
 
         /// <summary>
@@ -901,6 +962,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Confirm.started -= instance.OnConfirm;
             @Confirm.performed -= instance.OnConfirm;
             @Confirm.canceled -= instance.OnConfirm;
+            @Cancel.started -= instance.OnCancel;
+            @Cancel.performed -= instance.OnCancel;
+            @Cancel.canceled -= instance.OnCancel;
         }
 
         /// <summary>
@@ -1033,6 +1097,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnConfirm(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCancel(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "ShopInteract" which allows adding and removing callbacks.
@@ -1062,5 +1133,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnConfirm(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Cancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnCancel(InputAction.CallbackContext context);
     }
 }

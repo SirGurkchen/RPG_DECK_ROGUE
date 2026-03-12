@@ -68,6 +68,7 @@ public class RoundManager : MonoBehaviour
         {
             GameInput.Instance.ChangePlayerActive(false);
             UI.ToggleSelectionPrompts(false);
+            UI.ToggleLeavePrompt();
             switch (RoundBufferPool.Instance.GetRandomRoundBuffer())
             {
                 case RoundBufferPool.BufferType.Shop:
@@ -109,12 +110,14 @@ public class RoundManager : MonoBehaviour
     {
         if (!_shopManager.IsRewardSelected()) return;
 
-        _shopManager.HandleShopConfirm(player, UI);
-        GameInput.Instance.ChangeShopActive(false);
-        player.GetPlayerStats().AddMana(1);
-        UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
-        _hordeLogic.RefillBoardRandomly();
-        StartCoroutine(WaitForSpawnThenActivate(UI));
+        if (_shopManager.HandleShopConfirm(player, UI))
+        {
+            GameInput.Instance.ChangeShopActive(false);
+            player.GetPlayerStats().AddMana(1);
+            UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
+            _hordeLogic.RefillBoardRandomly();
+            StartCoroutine(WaitForSpawnThenActivate(UI));
+        }
     }
 
     public void HandleRewardConfirm(PlayerManager player, UIManager UI)
@@ -128,6 +131,18 @@ public class RoundManager : MonoBehaviour
         GameInput.Instance.ChangeRewardActive(false);
         player.GetPlayerStats().AddMana(1);
         UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
+        _hordeLogic.RefillBoardRandomly();
+        StartCoroutine(WaitForSpawnThenActivate(UI));
+    }
+
+    public void CancelRoundBuffer(UIManager UI)
+    {
+        _rewardManager.ClearRewards();
+        _shopManager.EmptyShop();
+        UI.ToggleLeavePrompt();
+        UI.RemoveItemDescription();
+        GameInput.Instance.ChangeShopActive(false);
+        GameInput.Instance.ChangeRewardActive(false);
         _hordeLogic.RefillBoardRandomly();
         StartCoroutine(WaitForSpawnThenActivate(UI));
     }

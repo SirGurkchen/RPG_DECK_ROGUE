@@ -32,6 +32,7 @@ public class PlayerManager : MonoBehaviour
     public event Action OnShopConfirm;
     public event Action OnPlayerDied;
     public event Action OnPlayerCardSwitch;
+    public event Action OnPlayerCancel;
 
     private void Start()
     {
@@ -48,8 +49,14 @@ public class PlayerManager : MonoBehaviour
             input.OnRewardConfirm += RewardConfirmed;
             input.OnShopConfirmation += ShopConfirm;
             input.OnShopSelection += ShopSelect;
+            input.OnPlayerCancel += PlayerCancel;
             _stats.OnPlayerDeath += PlayerDead;
         }
+    }
+
+    private void PlayerCancel()
+    {
+        OnPlayerCancel?.Invoke();
     }
 
     private void ShopConfirm()
@@ -185,6 +192,7 @@ public class PlayerManager : MonoBehaviour
         _stats.OnPlayerDeath -= PlayerDead;
         input.OnShopConfirmation -= ShopConfirm;
         input.OnShopSelection -= ShopSelect;
+        input.OnPlayerCancel -= PlayerCancel;
     }
 
     private void OnDestroy()
@@ -197,5 +205,6 @@ public class PlayerManager : MonoBehaviour
         OnShopConfirm = null;
         OnShopSelect = null;
         OnPlayerCardSwitch = null;
+        OnPlayerCancel = null;
     }
 }

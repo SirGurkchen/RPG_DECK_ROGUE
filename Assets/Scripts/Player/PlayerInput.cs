@@ -17,6 +17,7 @@ public class PlayerInput : MonoBehaviour
     public event Action OnRewardConfirm;
     public event Action OnShopConfirmation;
     public event Action<int> OnShopSelection;
+    public event Action OnPlayerCancel;
 
 
     private void Start()
@@ -30,6 +31,12 @@ public class PlayerInput : MonoBehaviour
         GameInput.Instance.OnRewardConfirm += RewardConfirmed;
         GameInput.Instance.OnShopItemSelect += ShopSelect;
         GameInput.Instance.OnShopItemConfirm += ShopConfirm;
+        GameInput.Instance.OnCancel += PlayerCancel;
+    }
+
+    private void PlayerCancel()
+    {
+        OnPlayerCancel?.Invoke();
     }
 
     private void ShopConfirm()
@@ -127,6 +134,7 @@ public class PlayerInput : MonoBehaviour
             GameInput.Instance.OnRewardConfirm -= RewardConfirmed;
             GameInput.Instance.OnShopItemConfirm -= ShopConfirm;
             GameInput.Instance.OnShopItemSelect -= ShopSelect;
+            GameInput.Instance.OnCancel -= PlayerCancel;
         }
     }
 
@@ -141,5 +149,6 @@ public class PlayerInput : MonoBehaviour
         OnRewardConfirm = null;
         OnShopConfirmation = null;
         OnShopSelection = null;
+        OnPlayerCancel = null;
     }
 }

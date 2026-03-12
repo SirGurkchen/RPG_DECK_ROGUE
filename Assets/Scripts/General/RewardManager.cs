@@ -45,6 +45,7 @@ public class RewardManager : MonoBehaviour
         {
             player.GetPlayerInventory().GiveItemToInventory(Instantiate(item));
             UI.UpdateWeaponUI(player.GetPlayerInventory().GetInventory());
+            UI.ToggleLeavePrompt();
         }
     }
 }

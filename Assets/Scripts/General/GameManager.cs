@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour
         _player.OnShopSelect += HandleShopSelect;
         _player.OnPlayerDied += HandlePlayerDeath;
         _player.OnPlayerCardSwitch += HandlePlayerCardSwitch;
+        _player.OnPlayerCancel += HandlePlayerCancel;
         _enemyBoard.OnBoardClear += BoardClear;
         _enemyBoard.OnEnemyKilled += HandleCoinsGain;
 
@@ -42,6 +43,11 @@ public class GameManager : MonoBehaviour
         _UIManager.UpdateCoinsUI(_player.GetPlayerStats().Coins);
         _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
         StartFirstRound();
+    }
+
+    private void HandlePlayerCancel()
+    {
+        _roundManager.CancelRoundBuffer(_UIManager);
     }
 
     private void HandlePlayerCardSwitch()
@@ -198,5 +204,6 @@ public class GameManager : MonoBehaviour
         _player.OnShopSelect -= HandleShopSelect;
         _player.OnPlayerDied -= HandlePlayerDeath;
         _player.OnPlayerCardSwitch -= HandlePlayerCardSwitch;
+        _player.OnPlayerCancel -= HandlePlayerCancel;
     }
 }

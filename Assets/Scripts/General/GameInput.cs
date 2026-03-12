@@ -18,6 +18,7 @@ public class GameInput : MonoBehaviour
     public event Action OnRewardConfirm;
     public event Action<int> OnShopItemSelect;
     public event Action OnShopItemConfirm;
+    public event Action OnCancel;
 
     private InputActions _inputActions;
 
@@ -48,6 +49,8 @@ public class GameInput : MonoBehaviour
         _inputActions.ItemReward.ItemOne.performed += ItemOneReward;
         _inputActions.ItemReward.ItemTwo.performed += ItemTwoReward;
         _inputActions.ItemReward.Confirm.performed += RewardConfirmed;
+        _inputActions.ItemReward.Cancel.performed += CancelPerformed;
+        _inputActions.ShopInteract.Cancel.performed += CancelPerformed;
         _inputActions.ShopInteract.ItemOne.performed += ShopOne_performed;
         _inputActions.ShopInteract.ItemTwo.performed += ShopTwo_performed;
         _inputActions.ShopInteract.Confirm.performed += ShopConfirm_performed;
@@ -56,6 +59,11 @@ public class GameInput : MonoBehaviour
     public bool IsInputActive()
     {
         return _inputActions.Player.enabled;
+    }
+
+    private void CancelPerformed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnCancel?.Invoke();
     }
 
     private void ShopTwo_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -198,6 +206,8 @@ public class GameInput : MonoBehaviour
             _inputActions.ShopInteract.ItemOne.performed -= ShopOne_performed;
             _inputActions.ShopInteract.ItemTwo.performed -= ShopTwo_performed;
             _inputActions.ShopInteract.Confirm.performed -= ShopConfirm_performed;
+            _inputActions.ItemReward.Cancel.performed -= CancelPerformed;
+            _inputActions.ShopInteract.Cancel.performed -= CancelPerformed;
         }
 
         OnConfirmPress = null;
@@ -209,6 +219,7 @@ public class GameInput : MonoBehaviour
         OnRewardConfirm = null;
         OnShopItemConfirm = null;
         OnShopItemSelect = null;
+        OnCancel = null;
 
         if (Instance == this)
         {

@@ -82,21 +82,34 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void HandleShopConfirm(PlayerManager player, UIManager UI)
+    public bool HandleShopConfirm(PlayerManager player, UIManager UI)
     {
         if (player.GetPlayerInventory().CanAddItem() && _selectItem != null)
         {
+            if (_selectItem.GetItemBase().Price > player.GetPlayerStats().Coins)
+            {
+                AudioManager.Instance.PlayErrorSound();
+                return false;
+            }
+
             player.GetPlayerInventory().GiveItemToInventory(Instantiate(_selectItem));
             UI.UpdateWeaponUI(player.GetPlayerInventory().GetInventory());
             EmptyShop();
         }
         else if (_selectCard != null && player.CanAddCard())
         {
+            if (_selectCard.UnlockCard.GetCard().ShopPrice > player.GetPlayerStats().Coins)
+            {
+                AudioManager.Instance.PlayErrorSound();
+                return false;
+            }
+
             CardController newCard = Instantiate(_selectCard.UnlockCard);
             player.TryGiveCard(newCard);
             UI.AddCardUI(newCard);
             EmptyShop();
         }
+        return true;
     }
 
     public bool IsRewardSelected()
@@ -104,7 +117,7 @@ public class ShopManager : MonoBehaviour
         return _selectCard != null || _selectItem != null;
     }
 
-    private void EmptyShop()
+    public void EmptyShop()
     {
         _shopUI.ClearShopUI();
         _availableItems.Clear();
