@@ -31,6 +31,7 @@ public class RewardManager : MonoBehaviour
     {
         _currentRewards.Clear();
         _availableRewards.Clear();
+        _selectReward = null;
     }
 
     public ItemController GetSelectReward()

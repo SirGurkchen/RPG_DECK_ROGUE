@@ -107,7 +107,10 @@ public class PlayerInventory : MonoBehaviour
 
     public void DeselectItem()
     {
-        _equippedItem.Demark();
-        _equippedItem = null;
+        if (_equippedItem != null)
+        {
+            _equippedItem.Demark();
+            _equippedItem = null;
+        }
     }
 }

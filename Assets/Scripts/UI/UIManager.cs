@@ -22,6 +22,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _selectionPrompts;
     [SerializeField] private GameObject _leftOnPrompt;
     [SerializeField] private GameObject _rightOnPrompt;
+    [SerializeField] private GameObject _cardOnPrompt;
+    [SerializeField] private GameObject _cardMenuPrompt;
     [SerializeField] private GameObject _damageTakenVisual;
 
     public void UpdateWeaponUI(List<ItemController> inventory)
@@ -120,15 +122,20 @@ public class UIManager : MonoBehaviour
 
     public void ToggleInputPrompt(Input type)
     {
-        if (type == Input.Q)
+        switch (type)
         {
-            _rightOnPrompt.SetActive(false);
-            _leftOnPrompt.SetActive(!_leftOnPrompt.activeSelf);
-        }
-        else
-        {
-            _leftOnPrompt.SetActive(false);
-            _rightOnPrompt.SetActive(!_rightOnPrompt.activeSelf);
+            case Input.Q:
+                _rightOnPrompt.SetActive(false);
+                _leftOnPrompt.SetActive(!_leftOnPrompt.activeSelf);
+                break;
+            case Input.E:
+                _leftOnPrompt.SetActive(false);
+                _rightOnPrompt.SetActive(!_rightOnPrompt.activeSelf);
+                break;
+            case Input.Control:
+                _cardOnPrompt.SetActive(!_cardOnPrompt.activeSelf);
+                break;
+
         }
     }
 
@@ -137,10 +144,16 @@ public class UIManager : MonoBehaviour
         _rightOnPrompt.SetActive(false);
         _leftOnPrompt.SetActive(false);
     }
+
+    public void ToggleCardMenuPrompt(bool isOn)
+    {
+        _cardMenuPrompt.SetActive(isOn);
+    }
 }
 
 public enum Input
 {
     Q,
-    E
+    E,
+    Control
 }

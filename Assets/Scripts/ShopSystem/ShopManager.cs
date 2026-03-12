@@ -109,6 +109,8 @@ public class ShopManager : MonoBehaviour
         _shopUI.ClearShopUI();
         _availableItems.Clear();
         _availableCard = null;
+        _selectCard = null;
+        _selectItem = null;
     }
 
     private void OnDisable()

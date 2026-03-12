@@ -20,6 +20,7 @@ public class PlayerManager : MonoBehaviour
     public PlayerInventory GetPlayerInventory() => _inventory;
     public EnemyController GetTargetedEnemy() => _targeting.GetCurrentTarget();
     public PlayerTargeting GetPlayerTargeting() => _targeting;
+    public PlayerCardStash GetCardStash() => _cards;
 
     public event Action OnPlayerTurnEnded;
     public event Action<ItemController> OnItemSelected;
@@ -30,6 +31,7 @@ public class PlayerManager : MonoBehaviour
     public event Action<int> OnShopSelect;
     public event Action OnShopConfirm;
     public event Action OnPlayerDied;
+    public event Action OnPlayerCardSwitch;
 
     private void Start()
     {
@@ -75,6 +77,11 @@ public class PlayerManager : MonoBehaviour
         if (_cards.GetCardCount() != 0)
         {
             _isChoosingCard = !_isChoosingCard;
+            OnPlayerCardSwitch?.Invoke();
+            if (!_isChoosingCard)
+            {
+                _cards.DeselectCard();
+            }
         }
     }
 
@@ -135,6 +142,7 @@ public class PlayerManager : MonoBehaviour
             _cards.CardUsed();
             _isChoosingCard = false;
             _targeting.DeselectAll();
+            success = true;
         }
 
         if (success)
@@ -188,5 +196,6 @@ public class PlayerManager : MonoBehaviour
         OnRewardSelect = null;
         OnShopConfirm = null;
         OnShopSelect = null;
+        OnPlayerCardSwitch = null;
     }
 }

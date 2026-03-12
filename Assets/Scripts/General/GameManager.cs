@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
         _player.OnShopConfirm += HandleShopConfirm;
         _player.OnShopSelect += HandleShopSelect;
         _player.OnPlayerDied += HandlePlayerDeath;
+        _player.OnPlayerCardSwitch += HandlePlayerCardSwitch;
         _enemyBoard.OnBoardClear += BoardClear;
         _enemyBoard.OnEnemyKilled += HandleCoinsGain;
 
@@ -41,6 +42,11 @@ public class GameManager : MonoBehaviour
         _UIManager.UpdateCoinsUI(_player.GetPlayerStats().Coins);
         _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
         StartFirstRound();
+    }
+
+    private void HandlePlayerCardSwitch()
+    {
+        _UIManager.ToggleInputPrompt(Input.Control);
     }
 
     private void HandlePlayerDeath()
@@ -128,6 +134,7 @@ public class GameManager : MonoBehaviour
             CardController newCard = Instantiate(card);
             _player.TryGiveCard(newCard);
             _UIManager.AddCardUI(newCard);
+            _UIManager.ToggleCardMenuPrompt(true);
         }
     }
 
@@ -138,6 +145,11 @@ public class GameManager : MonoBehaviour
         _UIManager.RemoveCardUI(card);
         _UIManager.RemoveItemDescription();
         _UIManager.ShowEnemyInfo(null);
+        _UIManager.ToggleInputPrompt(Input.Control);
+        if (_player.GetCardStash().GetCardCount() - 1 <= 0) // Minus 1 because card stash Count has not been updated at this point, so the used card has to be subtracted manually.
+        {
+            _UIManager.ToggleCardMenuPrompt(false);
+        }
     }
 
     private void PlayerTurnEnd()
@@ -185,5 +197,6 @@ public class GameManager : MonoBehaviour
         _player.OnShopConfirm -= HandleShopConfirm;
         _player.OnShopSelect -= HandleShopSelect;
         _player.OnPlayerDied -= HandlePlayerDeath;
+        _player.OnPlayerCardSwitch -= HandlePlayerCardSwitch;
     }
 }

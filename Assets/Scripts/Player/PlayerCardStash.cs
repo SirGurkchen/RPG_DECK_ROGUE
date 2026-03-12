@@ -23,10 +23,6 @@ public class PlayerCardStash : MonoBehaviour
         {
             _playerCards.Add(newCard);
         }
-        else
-        {
-            Debug.Log("Card not Added!");
-        }
     }
 
     public bool SetSelectedCard(int index)
@@ -52,6 +48,16 @@ public class PlayerCardStash : MonoBehaviour
 
         _selectedCard = card;
         return true;
+    }
+
+    public void DeselectCard()
+    {
+        if (_selectedCard != null)
+        {
+            _selectedCard.DeselectCard();
+            _selectedCard = null;
+        }
+        Debug.Log(_selectedCard);
     }
 
     public void CardUsed()
