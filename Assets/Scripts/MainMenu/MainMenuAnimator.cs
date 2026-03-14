@@ -14,12 +14,6 @@ public class MainMenuAnimator : MonoBehaviour
     private Vector3 _selectionStartPos;
     private Vector3 _settingsStartPos;
 
-    private void Awake()
-    {
-        DOTween.Kill(_selectionObject.transform);
-        DOTween.Kill(_settingsObject.transform);
-    }
-
     private void Start()
     {
         _selectionStartPos = _selectionObject.transform.position;
@@ -77,5 +71,11 @@ public class MainMenuAnimator : MonoBehaviour
             AudioManager.Instance.PlayAudioClip(sound);
             _selectionObject.gameObject.transform.DOMove(_selectionEndPosition.transform.position, CHANGE_ANIMATION_TIME);
         });
+    }
+
+    public void KillAll()
+    {
+        _selectionObject.transform.DOKill();
+        _settingsObject.transform.DOKill();
     }
 }

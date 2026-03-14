@@ -1464,7 +1464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e81b55d79c66944a1c0aa1289c8cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  _maxHealth: 1
+  _maxHealth: 50
   _armor: 0
   _maxMana: 10
 --- !u!4 &291133426

@@ -242,8 +242,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b06822eec8e2ae443ba212e47d722ba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuUI
-  _defaultMenu: {fileID: 1326282603}
-  _settingsMenu: {fileID: 2074391345}
   _effectVolumeBar: {fileID: 742318990}
   _musicVolumeBar: {fileID: 1217803596}
   _animator: {fileID: 26073085}
@@ -1202,8 +1200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadingScreenManager
   _loadingScreen: {fileID: 2106079834}
-  _loadingEndPos: {fileID: 1108432371}
-  _loadingStartPos: {fileID: 2109901961}
+  _loadingEndPos: {fileID: 2109901961}
 --- !u!4 &757618594
 Transform:
   m_ObjectHideFlags: 0
@@ -1428,7 +1425,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2106079835}
-  - {fileID: 1108432372}
   - {fileID: 2109901962}
   m_Father: {fileID: 757618594}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1769,41 +1765,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1084668153}
   m_CullTransparentMesh: 1
---- !u!1 &1108432371
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1108432372}
-  m_Layer: 5
-  m_Name: LoadEndPos
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1108432372
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1108432371}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 895769763}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1105}
-  m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1202062321
 GameObject:
   m_ObjectHideFlags: 0
@@ -2701,7 +2662,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuLogic
   _buttonSound: {fileID: 8300000, guid: 1ba9ea697fe4a7a4683a06c5215ae8e1, type: 3}
   _menuUI: {fileID: 26073084}
-  _loading: {fileID: 757618593}
   _changeAnimationSound: {fileID: 8300000, guid: 3bb8923e1a6dee847a407429aada77b3, type: 3}
 --- !u!4 &1614543948
 Transform:
@@ -3976,7 +3936,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000076294, y: 0}
+  m_AnchoredPosition: {x: 0.0000076294, y: 1119}
   m_SizeDelta: {x: 1973.5428, y: 1118.2671}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2106079836
@@ -4027,7 +3987,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2109901962}
   m_Layer: 5
-  m_Name: LoadingStartPos
+  m_Name: LoadingEndPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

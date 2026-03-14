@@ -64,6 +64,12 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlayerDeath()
     {
+        StartCoroutine(WaitTillPlayerDead());
+    }
+
+    private IEnumerator WaitTillPlayerDead()
+    {
+        yield return new WaitUntil(() => GameInput.Instance.IsInputActive());
         LoadingScreenManager.Instance.PlayLoadAnimation("MainMenu");
     }
 

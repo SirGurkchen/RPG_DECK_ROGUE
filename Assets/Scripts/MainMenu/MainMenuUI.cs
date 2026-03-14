@@ -12,9 +12,10 @@ public class MainMenuUI : MonoBehaviour
         _animator.ToggleSettingsAnimation(isOn, sound);
     }
 
-    public void PlayStartAnimation()
+    public void PlayStartAnimation(AudioClip sound)
     {
         _animator.AnimateStartUp();
+        AudioManager.Instance.PlayAudioClip(sound);
     }
 
     public void ChangeEffectBarFill(float fillAmount)
@@ -25,5 +26,10 @@ public class MainMenuUI : MonoBehaviour
     public void ChangeMusicBarFill(float fillAmount)
     {
         _musicVolumeBar.fillAmount = fillAmount;
+    }
+
+    public void KillAllAnimations()
+    {
+        _animator.KillAll();
     }
 }

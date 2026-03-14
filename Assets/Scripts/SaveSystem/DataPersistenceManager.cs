@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 public class DataPersistenceManager : MonoBehaviour
 {
+    public static DataPersistenceManager Instance { get; private set; }
+
     [Header("File Storage Config")]
     [SerializeField] private string _fileName;
-
-    public static DataPersistenceManager Instance { get; private set; }
 
     private GameData _gameData;
     private List<IDataPersistence> _dataScripts;
@@ -16,19 +16,15 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
+        if (Instance != null && Instance != this)
         {
-            Debug.Log("There are multiple Data Persistence Managers!");
+            Destroy(gameObject);
             return;
         }
-        Instance = this; 
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
         _dataScripts = new List<IDataPersistence>();
-    }
-
-    private void Start()
-    {
-        DontDestroyOnLoad(this.gameObject);
-        this._dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName);
+        _dataHandler = new FileDataHandler(Application.persistentDataPath, _fileName);
         LoadGameData();
     }
 

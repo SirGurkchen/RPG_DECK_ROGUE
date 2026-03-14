@@ -37,9 +37,9 @@ public class EnemyAnimator : MonoBehaviour
 
     private IEnumerator ExecuteAttackAnimation(Vector3 attackPos, Vector3 startPos)
     {
-        gameObject.transform.DOMove(attackPos, ATTACK_TIME);
+        gameObject.transform.DOMove(attackPos, ATTACK_TIME).SetLink(gameObject);
         yield return new WaitForSeconds(ATTACK_TIME);
-        gameObject.transform.DOMove(startPos, ATTACK_TIME);
+        gameObject.transform.DOMove(startPos, ATTACK_TIME).SetLink(gameObject);
     }
 
     private IEnumerator ExecuteDamagingAnimation(Vector3 startPos, Vector3 positive, Vector3 negative)

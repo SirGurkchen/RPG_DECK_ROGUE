@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +10,7 @@ public class MainMenuLogic : MonoBehaviour
 
     private void Start()
     {
-        _menuUI.PlayStartAnimation();
+        _menuUI.PlayStartAnimation(_changeAnimationSound);
     }
 
     private void OnEnable()
@@ -25,9 +26,9 @@ public class MainMenuLogic : MonoBehaviour
 
     public void PlayGame()
     {
+        _menuUI.KillAllAnimations();
         AudioManager.Instance.PlayAudioClip(_buttonSound);
         LoadingScreenManager.Instance.PlayLoadAnimation("MainScene");
-        AudioManager.Instance.PlayAudioClip(_changeAnimationSound);
     }
 
     public void ChangeToSettings()
