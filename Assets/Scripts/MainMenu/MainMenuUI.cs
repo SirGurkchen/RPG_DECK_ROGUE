@@ -3,20 +3,18 @@ using UnityEngine.UI;
 
 public class MainMenuUI : MonoBehaviour
 {
-    [SerializeField] private GameObject _defaultMenu;
-    [SerializeField] private GameObject _settingsMenu;
     [SerializeField] private Image _effectVolumeBar;
     [SerializeField] private Image _musicVolumeBar;
     [SerializeField] private MainMenuAnimator _animator;
 
-    public void ToggleSettingsMenu(bool isOn)
+    public void ToggleSettingsMenu(bool isOn, AudioClip sound)
     {
-        _animator.ToggleSettingsAnimation(isOn);
+        _animator.ToggleSettingsAnimation(isOn, sound);
     }
 
-    public void StartGame()
+    public void PlayStartAnimation()
     {
-        _animator.StartGameAnimation();
+        _animator.AnimateStartUp();
     }
 
     public void ChangeEffectBarFill(float fillAmount)

@@ -5,6 +5,12 @@ public class MainMenuLogic : MonoBehaviour
 {
     [SerializeField] private AudioClip _buttonSound;
     [SerializeField] private MainMenuUI _menuUI;
+    [SerializeField] private AudioClip _changeAnimationSound;
+
+    private void Start()
+    {
+        _menuUI.PlayStartAnimation();
+    }
 
     private void OnEnable()
     {
@@ -20,19 +26,22 @@ public class MainMenuLogic : MonoBehaviour
     public void PlayGame()
     {
         AudioManager.Instance.PlayAudioClip(_buttonSound);
-        _menuUI.StartGame();
+        LoadingScreenManager.Instance.PlayLoadAnimation("MainScene");
+        AudioManager.Instance.PlayAudioClip(_changeAnimationSound);
     }
 
     public void ChangeToSettings()
     {
         AudioManager.Instance.PlayAudioClip(_buttonSound);
-        _menuUI.ToggleSettingsMenu(true);
+        _menuUI.ToggleSettingsMenu(true, _changeAnimationSound);
+        AudioManager.Instance.PlayAudioClip(_changeAnimationSound);
     }
 
     public void ChangeToMain()
     {
         AudioManager.Instance.PlayAudioClip(_buttonSound);
-        _menuUI.ToggleSettingsMenu(false);
+        _menuUI.ToggleSettingsMenu(false, _changeAnimationSound);
+        AudioManager.Instance.PlayAudioClip(_changeAnimationSound);
     }
 
     public void IncreaseEffectVolume()

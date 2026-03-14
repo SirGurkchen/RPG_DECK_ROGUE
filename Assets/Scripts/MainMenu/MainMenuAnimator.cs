@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,70 +8,73 @@ public class MainMenuAnimator : MonoBehaviour
     [SerializeField] private GameObject _settingsEndPostion;
     [SerializeField] private GameObject _selectionObject;
     [SerializeField] private GameObject _settingsObject;
-    [SerializeField] private AudioClip _changeAnimationSound;
 
     private const float START_ANIMATION_TIME = 1.2f;
     private const float CHANGE_ANIMATION_TIME = 0.9f;
     private Vector3 _selectionStartPos;
     private Vector3 _settingsStartPos;
 
+    private void Awake()
+    {
+        DOTween.Kill(_selectionObject.transform);
+        DOTween.Kill(_settingsObject.transform);
+    }
 
     private void Start()
     {
         _selectionStartPos = _selectionObject.transform.position;
         _settingsStartPos = _settingsObject.transform.position;
+    }
+
+    private void LoadingFinished()
+    {
+        LoadingScreenManager.Instance.OnLoadingScreenFinished -= LoadingFinished;
         AnimateStartUp();
     }
 
-    private void AnimateStartUp()
+    public void AnimateStartUp()
     {
+        if (_selectionObject == null) return;
         _selectionObject.transform.DOKill();
-        AudioManager.Instance.PlayAudioClip(_changeAnimationSound);
         _selectionObject.gameObject.transform.DOMove(_selectionEndPosition.transform.position, START_ANIMATION_TIME);
     }
 
-    public void StartGameAnimation()
-    {
-        _selectionObject.transform.DOKill();
-        AudioManager.Instance.PlayAudioClip(_changeAnimationSound);
-        _selectionObject.gameObject.transform.DOMove(_selectionStartPos, CHANGE_ANIMATION_TIME).OnComplete(() =>
-        {
-            SceneManager.LoadScene("MainScene");
-        });
-    }
-
-    public void ToggleSettingsAnimation(bool isOn)
+    public void ToggleSettingsAnimation(bool isOn, AudioClip sound)
     {
         if (isOn)
         {
-            ChangeToSettingsMenu();
+            ChangeToSettingsMenu(sound);
         }
         else
         {
-            ChangeToMainMenu();
+            ChangeToMainMenu(sound);
         }
     }
 
-    private void ChangeToSettingsMenu()
+    private void ChangeToSettingsMenu(AudioClip sound)
     {
+        if (_selectionObject == null) return;
+        if (_settingsObject == null) return;
         _selectionObject.transform.DOKill();
         _settingsObject.transform.DOKill();
-        AudioManager.Instance.PlayAudioClip(_changeAnimationSound);
+        AudioManager.Instance.PlayAudioClip(sound);
         _selectionObject.gameObject.transform.DOMove(_selectionStartPos, CHANGE_ANIMATION_TIME).OnComplete(() =>
         {
-            AudioManager.Instance.PlayAudioClip(_changeAnimationSound);
+            AudioManager.Instance.PlayAudioClip(sound);
             _settingsObject.gameObject.transform.DOMove(_settingsEndPostion.transform.position, CHANGE_ANIMATION_TIME);
         });
     }
 
-    private void ChangeToMainMenu()
+    private void ChangeToMainMenu(AudioClip sound)
     {
+        if (_selectionObject == null) return;
+        if (_settingsObject == null) return;
         _selectionObject.transform.DOKill();
         _settingsObject.transform.DOKill();
-        AudioManager.Instance.PlayAudioClip(_changeAnimationSound);
+        AudioManager.Instance.PlayAudioClip(sound);
         _settingsObject.gameObject.transform.DOMove(_settingsStartPos, CHANGE_ANIMATION_TIME).OnComplete(() =>
         {
-            AudioManager.Instance.PlayAudioClip(_changeAnimationSound);
+            AudioManager.Instance.PlayAudioClip(sound);
             _selectionObject.gameObject.transform.DOMove(_selectionEndPosition.transform.position, CHANGE_ANIMATION_TIME);
         });
     }

@@ -19,6 +19,18 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        LoadingScreenManager.Instance.OnLoadingScreenFinished += LoadingFinished;
+        _player.GetPlayerInventory().GetInventory()[4] = Instantiate(ItemsDataBase.Instance.GetItemByName("Hammer"));
+        _UIManager.UpdateHealthBar(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
+        _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
+        _UIManager.UpdateCoinsUI(_player.GetPlayerStats().Coins);
+        _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
+    }
+
+    private void LoadingFinished()
+    {
+        LoadingScreenManager.Instance.OnLoadingScreenFinished -= LoadingFinished;
+
         _player.OnPlayerTurnEnded += PlayerTurnEnd;
         _player.OnItemSelected += PlayerItemSelect;
         _player.OnCardUse += PlayerCardUse;
@@ -37,11 +49,6 @@ public class GameManager : MonoBehaviour
         _enemyBoard.OnBoardClear += BoardClear;
         _enemyBoard.OnEnemyKilled += HandleCoinsGain;
 
-        _player.GetPlayerInventory().GetInventory()[4] = Instantiate(ItemsDataBase.Instance.GetItemByName("Hammer"));
-        _UIManager.UpdateHealthBar(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
-        _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
-        _UIManager.UpdateCoinsUI(_player.GetPlayerStats().Coins);
-        _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
         StartFirstRound();
     }
 
@@ -57,7 +64,7 @@ public class GameManager : MonoBehaviour
 
     private void HandlePlayerDeath()
     {
-        SceneManager.LoadScene("MainMenu");
+        LoadingScreenManager.Instance.PlayLoadAnimation("MainMenu");
     }
 
     private void StartFirstRound()
@@ -205,5 +212,6 @@ public class GameManager : MonoBehaviour
         _player.OnPlayerDied -= HandlePlayerDeath;
         _player.OnPlayerCardSwitch -= HandlePlayerCardSwitch;
         _player.OnPlayerCancel -= HandlePlayerCancel;
+        LoadingScreenManager.Instance.OnLoadingScreenFinished -= LoadingFinished;
     }
 }
