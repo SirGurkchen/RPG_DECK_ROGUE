@@ -20,7 +20,7 @@ public class MainMenuLogic : MonoBehaviour
     public void PlayGame()
     {
         AudioManager.Instance.PlayAudioClip(_buttonSound);
-        SceneManager.LoadScene("MainScene");
+        _menuUI.StartGame();
     }
 
     public void ChangeToSettings()
