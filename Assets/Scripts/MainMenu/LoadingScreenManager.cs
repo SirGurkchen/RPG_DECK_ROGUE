@@ -35,14 +35,14 @@ public class LoadingScreenManager : MonoBehaviour
     {
         if (_loadingScreen == null) return;
         _loadingScreen.gameObject.transform.DOKill();
-        _loadingScreen.gameObject.transform.DOMove(_loadingEndPos.transform.position, CLOSE_ANIMATION_TIME).OnComplete(() =>
-        {
-            StartCoroutine(LoadSceneAndFinish(nextScene));
-        });
+        _loadingScreen.gameObject.transform.DOMove(_loadingEndPos.transform.position, CLOSE_ANIMATION_TIME)
+            .SetUpdate(true)
+            .OnComplete(() => StartCoroutine(LoadSceneAndFinish(nextScene)));
     }
 
     private IEnumerator LoadSceneAndFinish(string nextScene)
     {
+        Time.timeScale = 1f;
         AsyncOperation loading = SceneManager.LoadSceneAsync(nextScene);
         yield return new WaitUntil(() => loading.isDone);
         yield return new WaitForSeconds(ARTIFICIAL_LOAD_TIME);

@@ -77,7 +77,7 @@ public class EnemyBoard : MonoBehaviour
         for (int count = 0; count < _enemiesOnField.Count; count++)
         {
             Vector3 pos = _startPos + _enemyPositions[count].position;
-            _enemiesOnField[count].transform.DOMove(pos, 0.3f);
+            _enemiesOnField[count].transform.DOMove(pos, 0.3f).SetLink(_enemiesOnField[count].gameObject);
         }
     }
 

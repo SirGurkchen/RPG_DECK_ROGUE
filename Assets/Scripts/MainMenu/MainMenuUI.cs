@@ -7,15 +7,14 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Image _musicVolumeBar;
     [SerializeField] private MainMenuAnimator _animator;
 
-    public void ToggleSettingsMenu(bool isOn, AudioClip sound)
+    public void ToggleSettingsMenu(bool isOn)
     {
-        _animator.ToggleSettingsAnimation(isOn, sound);
+        _animator.ToggleSettingsAnimation(isOn);
     }
 
-    public void PlayStartAnimation(AudioClip sound)
+    public void PlayStartAnimation()
     {
         _animator.AnimateStartUp();
-        AudioManager.Instance.PlayAudioClip(sound);
     }
 
     public void ChangeEffectBarFill(float fillAmount)

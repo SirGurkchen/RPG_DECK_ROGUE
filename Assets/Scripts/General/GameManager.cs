@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RoundManager _roundManager;
     [SerializeField] private ShopManager _shopManager;
 
+    private bool isPaused = false;
+
     private void Start()
     {
         LoadingScreenManager.Instance.OnLoadingScreenFinished += LoadingFinished;
@@ -46,10 +48,27 @@ public class GameManager : MonoBehaviour
         _player.OnPlayerDied += HandlePlayerDeath;
         _player.OnPlayerCardSwitch += HandlePlayerCardSwitch;
         _player.OnPlayerCancel += HandlePlayerCancel;
+        _player.OnPlayerPaused += HandlePlayerPause;
         _enemyBoard.OnBoardClear += BoardClear;
         _enemyBoard.OnEnemyKilled += HandleCoinsGain;
 
+        GameInput.Instance.ChangePlayerActive(true);
         StartFirstRound();
+    }
+
+    private void HandlePlayerPause()
+    {
+        if (isPaused)
+        {
+            Time.timeScale = 1f;
+        }
+        else
+        {
+            Time.timeScale = 0f;
+        }
+        isPaused = !isPaused;
+        GameInput.Instance.ChangePlayerActive(!isPaused);
+        _UIManager.TogglePauseMenu(isPaused);
     }
 
     private void HandlePlayerCancel()

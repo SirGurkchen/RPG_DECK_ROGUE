@@ -4,13 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuLogic : MonoBehaviour
 {
-    [SerializeField] private AudioClip _buttonSound;
     [SerializeField] private MainMenuUI _menuUI;
-    [SerializeField] private AudioClip _changeAnimationSound;
 
     private void Start()
     {
-        _menuUI.PlayStartAnimation(_changeAnimationSound);
+        _menuUI.PlayStartAnimation();
+        AudioManager.Instance.PlayChainSound();
     }
 
     private void OnEnable()
@@ -20,55 +19,55 @@ public class MainMenuLogic : MonoBehaviour
 
     public void QuitGame()
     {
-        AudioManager.Instance.PlayAudioClip(_buttonSound);
+        AudioManager.Instance.PlayButtonPress();
         Application.Quit();
     }
 
     public void PlayGame()
     {
         _menuUI.KillAllAnimations();
-        AudioManager.Instance.PlayAudioClip(_buttonSound);
+        AudioManager.Instance.PlayButtonPress();
         LoadingScreenManager.Instance.PlayLoadAnimation("MainScene");
     }
 
     public void ChangeToSettings()
     {
-        AudioManager.Instance.PlayAudioClip(_buttonSound);
-        _menuUI.ToggleSettingsMenu(true, _changeAnimationSound);
-        AudioManager.Instance.PlayAudioClip(_changeAnimationSound);
+        AudioManager.Instance.PlayButtonPress();
+        _menuUI.ToggleSettingsMenu(true);
+        AudioManager.Instance.PlayChainSound();
     }
 
     public void ChangeToMain()
     {
-        AudioManager.Instance.PlayAudioClip(_buttonSound);
-        _menuUI.ToggleSettingsMenu(false, _changeAnimationSound);
-        AudioManager.Instance.PlayAudioClip(_changeAnimationSound);
+        AudioManager.Instance.PlayButtonPress();
+        _menuUI.ToggleSettingsMenu(false);
+        AudioManager.Instance.PlayChainSound();
     }
 
     public void IncreaseEffectVolume()
     {
-        AudioManager.Instance.PlayAudioClip(_buttonSound);
+        AudioManager.Instance.PlayButtonPress();
         SettingsManager.Instance.ChangeEffectVolumePlus();
         _menuUI.ChangeEffectBarFill(AudioManager.Instance.EffectVolume);
     }
 
     public void DecreaseEffectVolume()
     {
-        AudioManager.Instance.PlayAudioClip(_buttonSound);
+        AudioManager.Instance.PlayButtonPress();
         SettingsManager.Instance.ChangeEffectVolumeMinus();
         _menuUI.ChangeEffectBarFill(AudioManager.Instance.EffectVolume);
     }
 
     public void IncreaseMusicVolume()
     {
-        AudioManager.Instance.PlayAudioClip(_buttonSound);
+        AudioManager.Instance.PlayButtonPress();
         SettingsManager.Instance.ChangeMusicVolumePlus();
         _menuUI.ChangeMusicBarFill(AudioManager.Instance.MusicVolume);
     }
 
     public void DecreaseMusicVolume()
     {
-        AudioManager.Instance.PlayAudioClip(_buttonSound);
+        AudioManager.Instance.PlayButtonPress();
         SettingsManager.Instance.ChangeMusicVolumeMinus();
         _menuUI.ChangeMusicBarFill(AudioManager.Instance.MusicVolume);
     }

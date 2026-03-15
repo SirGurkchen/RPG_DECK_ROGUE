@@ -7,6 +7,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _soundEffectSource;
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioClip _errorSound;
+    [SerializeField] private AudioClip _chainSound;
+    [SerializeField] private AudioClip _buttonSound;
 
     public float EffectVolume => _soundEffectSource.volume;
     public float MusicVolume => _musicSource.volume;
@@ -21,6 +23,16 @@ public class AudioManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void PlayChainSound()
+    {
+        _soundEffectSource.PlayOneShot(_chainSound);
+    }
+
+    public void PlayButtonPress()
+    {
+        _soundEffectSource.PlayOneShot(_buttonSound);
     }
 
     public void PlayAudioClip(AudioClip sound)

@@ -33,6 +33,7 @@ public class PlayerManager : MonoBehaviour
     public event Action OnPlayerDied;
     public event Action OnPlayerCardSwitch;
     public event Action OnPlayerCancel;
+    public event Action OnPlayerPaused;
 
     private void Start()
     {
@@ -50,8 +51,14 @@ public class PlayerManager : MonoBehaviour
             input.OnShopConfirmation += ShopConfirm;
             input.OnShopSelection += ShopSelect;
             input.OnPlayerCancel += PlayerCancel;
+            input.OnPlayerPause += PlayerPaused;
             _stats.OnPlayerDeath += PlayerDead;
         }
+    }
+
+    private void PlayerPaused()
+    {
+        OnPlayerPaused?.Invoke();
     }
 
     private void PlayerCancel()
@@ -193,6 +200,7 @@ public class PlayerManager : MonoBehaviour
         input.OnShopConfirmation -= ShopConfirm;
         input.OnShopSelection -= ShopSelect;
         input.OnPlayerCancel -= PlayerCancel;
+        input.OnPlayerPause -= PlayerPaused;
     }
 
     private void OnDestroy()
@@ -206,5 +214,6 @@ public class PlayerManager : MonoBehaviour
         OnShopSelect = null;
         OnPlayerCardSwitch = null;
         OnPlayerCancel = null;
+        OnPlayerPaused = null;
     }
 }

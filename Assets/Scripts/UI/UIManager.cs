@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
@@ -26,6 +27,17 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _cardMenuPrompt;
     [SerializeField] private GameObject _damageTakenVisual;
     [SerializeField] private GameObject _leavePrompt;
+    [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private GameObject _pauseMenuEndPos;
+
+    private Vector3 _pauseMenuStartPos;
+
+    private const float PAUSE_ANIMATION_TIME = 0.6f;
+
+    private void Start()
+    {
+        _pauseMenuStartPos = _pauseMenu.transform.position;
+    }
 
     public void UpdateWeaponUI(List<ItemController> inventory)
     {
@@ -35,6 +47,21 @@ public class UIManager : MonoBehaviour
             {
                 _itemUI.SetItemUI(inventory[i], i);
             }
+        }
+    }
+
+    public void TogglePauseMenu(bool isOn)
+    {
+        if (_pauseMenu == null) return;
+        _pauseMenu.transform.DOKill();
+        AudioManager.Instance.PlayChainSound();
+        if (isOn)
+        {
+            _pauseMenu.transform.DOMove(_pauseMenuEndPos.transform.position, PAUSE_ANIMATION_TIME).SetUpdate(true);
+        }
+        else
+        {
+            _pauseMenu.transform.DOMove(_pauseMenuStartPos, PAUSE_ANIMATION_TIME).SetUpdate(true);
         }
     }
 

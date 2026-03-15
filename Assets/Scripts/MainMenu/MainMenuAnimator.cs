@@ -33,42 +33,42 @@ public class MainMenuAnimator : MonoBehaviour
         _selectionObject.gameObject.transform.DOMove(_selectionEndPosition.transform.position, START_ANIMATION_TIME);
     }
 
-    public void ToggleSettingsAnimation(bool isOn, AudioClip sound)
+    public void ToggleSettingsAnimation(bool isOn)
     {
         if (isOn)
         {
-            ChangeToSettingsMenu(sound);
+            ChangeToSettingsMenu();
         }
         else
         {
-            ChangeToMainMenu(sound);
+            ChangeToMainMenu();
         }
     }
 
-    private void ChangeToSettingsMenu(AudioClip sound)
+    private void ChangeToSettingsMenu()
     {
         if (_selectionObject == null) return;
         if (_settingsObject == null) return;
         _selectionObject.transform.DOKill();
         _settingsObject.transform.DOKill();
-        AudioManager.Instance.PlayAudioClip(sound);
+        AudioManager.Instance.PlayChainSound();
         _selectionObject.gameObject.transform.DOMove(_selectionStartPos, CHANGE_ANIMATION_TIME).OnComplete(() =>
         {
-            AudioManager.Instance.PlayAudioClip(sound);
+            AudioManager.Instance.PlayChainSound();
             _settingsObject.gameObject.transform.DOMove(_settingsEndPostion.transform.position, CHANGE_ANIMATION_TIME);
         });
     }
 
-    private void ChangeToMainMenu(AudioClip sound)
+    private void ChangeToMainMenu()
     {
         if (_selectionObject == null) return;
         if (_settingsObject == null) return;
         _selectionObject.transform.DOKill();
         _settingsObject.transform.DOKill();
-        AudioManager.Instance.PlayAudioClip(sound);
+        AudioManager.Instance.PlayChainSound();
         _settingsObject.gameObject.transform.DOMove(_settingsStartPos, CHANGE_ANIMATION_TIME).OnComplete(() =>
         {
-            AudioManager.Instance.PlayAudioClip(sound);
+            AudioManager.Instance.PlayChainSound();
             _selectionObject.gameObject.transform.DOMove(_selectionEndPosition.transform.position, CHANGE_ANIMATION_TIME);
         });
     }
