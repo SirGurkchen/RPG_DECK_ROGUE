@@ -132,6 +132,8 @@ GameObject:
   - component: {fileID: 41659689}
   - component: {fileID: 41659690}
   - component: {fileID: 41659691}
+  - component: {fileID: 41659692}
+  - component: {fileID: 41659693}
   m_Layer: 0
   m_Name: UIManager
   m_TagString: Untagged
@@ -151,24 +153,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 942f7da4eea427e428001b31ccbbb638, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  _healthBar: {fileID: 2142769492}
-  _healthBarText: {fileID: 178971544}
   _cardUI: {fileID: 41659689}
   _itemUI: {fileID: 41659690}
   _rewardUI: {fileID: 41659691}
   _enemyInfo: {fileID: 1774329104}
-  _manaBar: {fileID: 152323393}
-  _manaBarText: {fileID: 1676752679}
-  _coinsUI: {fileID: 1099198265}
-  _selectionPrompts: {fileID: 586869861}
-  _leftOnPrompt: {fileID: 1854035186}
-  _rightOnPrompt: {fileID: 872232738}
-  _cardOnPrompt: {fileID: 1227162778}
-  _cardMenuPrompt: {fileID: 870141456}
   _damageTakenVisual: {fileID: 1197284225}
-  _leavePrompt: {fileID: 573791546}
   _pauseMenu: {fileID: 185114513}
   _pauseMenuEndPos: {fileID: 138529168}
+  _inputUI: {fileID: 41659692}
+  _statsUI: {fileID: 41659693}
 --- !u!4 &41659688
 Transform:
   m_ObjectHideFlags: 0
@@ -238,6 +231,41 @@ MonoBehaviour:
   _rewardUI:
   - {fileID: 239726912}
   - {fileID: 1302063954}
+--- !u!114 &41659692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41659686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8292267f4de3594e95c4a3a89360215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InputUI
+  _leavePrompt: {fileID: 573791546}
+  _selectionPrompts: {fileID: 586869861}
+  _leftOnPrompt: {fileID: 1854035186}
+  _rightOnPrompt: {fileID: 872232738}
+  _cardOnPrompt: {fileID: 1227162778}
+  _cardMenuPrompt: {fileID: 870141456}
+--- !u!114 &41659693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41659686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68cf4a35a94278c479f831282fb500ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::StatsUIManager
+  _healthBar: {fileID: 2142769492}
+  _healthBarText: {fileID: 178971544}
+  _manaBar: {fileID: 152323393}
+  _manaBarText: {fileID: 1676752679}
+  _coinsUI: {fileID: 1099198265}
 --- !u!1 &81119433
 GameObject:
   m_ObjectHideFlags: 0

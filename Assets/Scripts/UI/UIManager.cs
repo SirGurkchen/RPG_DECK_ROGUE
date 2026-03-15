@@ -1,34 +1,23 @@
 using DG.Tweening;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Orchestrates the overall UI of the game.
-/// Controls CardUI, enemy UIs, RewardUI, ItemUI and playey UI elements.
+/// Controls CardUI, Input UI, enemy UIs, RewardUI, ItemUI and player UI elements.
 /// </summary>
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Image _healthBar;
-    [SerializeField] private TextMeshProUGUI _healthBarText;
     [SerializeField] private CardUIManager _cardUI;
     [SerializeField] private ItemUI _itemUI;
     [SerializeField] private RewardUI _rewardUI;
     [SerializeField] private TextMeshProUGUI _enemyInfo;
-    [SerializeField] private Image _manaBar;
-    [SerializeField] private TextMeshProUGUI _manaBarText;
-    [SerializeField] private TextMeshProUGUI _coinsUI;
-    [SerializeField] private GameObject _selectionPrompts;
-    [SerializeField] private GameObject _leftOnPrompt;
-    [SerializeField] private GameObject _rightOnPrompt;
-    [SerializeField] private GameObject _cardOnPrompt;
-    [SerializeField] private GameObject _cardMenuPrompt;
     [SerializeField] private GameObject _damageTakenVisual;
-    [SerializeField] private GameObject _leavePrompt;
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _pauseMenuEndPos;
+    [SerializeField] private InputUI _inputUI;
+    [SerializeField] private StatsUIManager _statsUI;
 
     private Vector3 _pauseMenuStartPos;
 
@@ -67,7 +56,7 @@ public class UIManager : MonoBehaviour
 
     public void ToggleLeavePrompt()
     {
-        _leavePrompt.SetActive(!_leavePrompt.activeSelf);
+        _inputUI.ToggleLeavePrompt();
     }
 
     public void ShowItemDescription(ItemController item)
@@ -80,11 +69,6 @@ public class UIManager : MonoBehaviour
         _rewardUI.ShowRewardItemDescription(item, index, _itemUI);
     }
 
-    public void DemarkAllRewards()
-    {
-        _rewardUI.DemarkAllRewards();
-    }
-
     public void RemoveItemDescription()
     {
         _itemUI.RemoveDescriptionText();
@@ -92,10 +76,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateHealthBar(int health, int maxHealth)
     {
-        float fill = (float)health / maxHealth;
-
-        _healthBar.fillAmount = Mathf.Clamp01(fill);
-        _healthBarText.text = health + " | " + maxHealth;
+        _statsUI.UpdateHealthBar(health, maxHealth);
     }
 
     public void AddCardUI(CardController card)
@@ -132,20 +113,17 @@ public class UIManager : MonoBehaviour
 
     public void UpdateManaUI(int mana, int maxMana)
     {
-        float fill = (float)mana / maxMana;
-
-        _manaBar.fillAmount = Mathf.Clamp01(fill);
-        _manaBarText.text = mana + " | " + maxMana;
+        _statsUI.UpdateManaUI(mana, maxMana);
     }
 
     public void UpdateCoinsUI(int coins)
     {
-        _coinsUI.text =  "" + coins;
+        _statsUI.UpdateCoinsUI(coins);
     }
 
     public void ToggleSelectionPrompts(bool isOn)
     {
-        _selectionPrompts.gameObject.SetActive(isOn);
+        _inputUI.ToggleSelectionPrompts(isOn);
     }
 
     public void ToggleDamageVisual(bool isOn)
@@ -155,38 +133,16 @@ public class UIManager : MonoBehaviour
 
     public void ToggleInputPrompt(Input type)
     {
-        switch (type)
-        {
-            case Input.Q:
-                _rightOnPrompt.SetActive(false);
-                _leftOnPrompt.SetActive(!_leftOnPrompt.activeSelf);
-                break;
-            case Input.E:
-                _leftOnPrompt.SetActive(false);
-                _rightOnPrompt.SetActive(!_rightOnPrompt.activeSelf);
-                break;
-            case Input.Control:
-                _cardOnPrompt.SetActive(!_cardOnPrompt.activeSelf);
-                break;
-
-        }
+        _inputUI.ToggleInputPrompt(type);
     }
 
     public void ResetInputPrompt()
     {
-        _rightOnPrompt.SetActive(false);
-        _leftOnPrompt.SetActive(false);
+        _inputUI.ResetInputPrompt();
     }
 
     public void ToggleCardMenuPrompt(bool isOn)
     {
-        _cardMenuPrompt.SetActive(isOn);
+        _inputUI.ToggleCardMenuPrompt(isOn);
     }
-}
-
-public enum Input
-{
-    Q,
-    E,
-    Control
 }
