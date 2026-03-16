@@ -35,6 +35,7 @@ public class LoadingScreenManager : MonoBehaviour
     {
         if (_loadingScreen == null) return;
         _loadingScreen.gameObject.transform.DOKill();
+        AudioManager.Instance.PlayChangeSound();
         _loadingScreen.gameObject.transform.DOMove(_loadingEndPos.transform.position, CLOSE_ANIMATION_TIME)
             .SetUpdate(true)
             .OnComplete(() => StartCoroutine(LoadSceneAndFinish(nextScene)));

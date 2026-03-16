@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _errorSound;
     [SerializeField] private AudioClip _chainSound;
     [SerializeField] private AudioClip _buttonSound;
+    [SerializeField] private AudioClip _sceneChangeSound;
 
     public float EffectVolume => _soundEffectSource.volume;
     public float MusicVolume => _musicSource.volume;
@@ -23,6 +24,11 @@ public class AudioManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void PlayChangeSound()
+    {
+        _soundEffectSource.PlayOneShot(_sceneChangeSound);
     }
 
     public void PlayChainSound()
