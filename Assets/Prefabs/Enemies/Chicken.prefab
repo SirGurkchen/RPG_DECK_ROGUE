@@ -234,10 +234,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9199307978476616173}
-  - component: {fileID: 6193746157129818169}
   - component: {fileID: -5019061358010828849}
   - component: {fileID: -6429099613136939224}
   - component: {fileID: 2639813498709362526}
+  - component: {fileID: 3235703017814325657}
   m_Layer: 0
   m_Name: Chicken
   m_TagString: Untagged
@@ -261,23 +261,6 @@ Transform:
   - {fileID: 5199507174442113091}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6193746157129818169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2225885502451636297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb228c87882170341b60e3b7f1fa1926, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  _enemyData: {fileID: 11400000, guid: e04bdc9cb0e82724eb460dbfc614a34b, type: 2}
-  _myUI: {fileID: -5019061358010828849}
-  _attackSound: {fileID: 8300000, guid: 6c42ad26ed6160947855cc347c0ebe73, type: 3}
-  _spawnSound: {fileID: 0}
-  _animator: {fileID: 2639813498709362526}
 --- !u!114 &-5019061358010828849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,6 +302,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaf487d0a25d1dc428f8d1e7577264ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAnimator
+--- !u!114 &3235703017814325657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2225885502451636297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57191e82b12f0e4088150e7af49dfc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalEnemyController
+  _enemyData: {fileID: 11400000, guid: e04bdc9cb0e82724eb460dbfc614a34b, type: 2}
+  _myUI: {fileID: -5019061358010828849}
+  _attackSound: {fileID: 8300000, guid: 6c42ad26ed6160947855cc347c0ebe73, type: 3}
+  _spawnSound: {fileID: 0}
+  _animator: {fileID: 2639813498709362526}
 --- !u!1 &2526798824490549626
 GameObject:
   m_ObjectHideFlags: 0

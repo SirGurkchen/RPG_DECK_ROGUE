@@ -54,4 +54,9 @@ public class EnemyUI : MonoBehaviour
     {
         _enemyStatusUI.UpdateStatus(enemy);
     }
+
+    public void UpdateThornsDisplay(int thorns)
+    {
+        _enemyStatusUI.UpdateThorns(thorns);
+    }
 }

@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5527524536486846827}
-  - component: {fileID: 8472401652923507562}
   - component: {fileID: 8793443482019962901}
   - component: {fileID: 6891345673338466091}
   - component: {fileID: 7243368978368867242}
+  - component: {fileID: 92635208499097938}
   m_Layer: 0
   m_Name: Wolf
   m_TagString: Untagged
@@ -36,23 +36,6 @@ Transform:
   - {fileID: 3394619935308232746}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8472401652923507562
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5693459684163889225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb228c87882170341b60e3b7f1fa1926, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  _enemyData: {fileID: 11400000, guid: 84b303dcecbcd5046a11ab9a843f56d7, type: 2}
-  _myUI: {fileID: 8793443482019962901}
-  _attackSound: {fileID: 8300000, guid: 6c42ad26ed6160947855cc347c0ebe73, type: 3}
-  _spawnSound: {fileID: 8300000, guid: 3a2d9a56e40a9284bbe3e9c366b6ac52, type: 3}
-  _animator: {fileID: 6891345673338466091}
 --- !u!114 &8793443482019962901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +77,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStatusUI
   _statusIcons: []
+--- !u!114 &92635208499097938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5693459684163889225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b57191e82b12f0e4088150e7af49dfc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AnimalEnemyController
+  _enemyData: {fileID: 11400000, guid: 84b303dcecbcd5046a11ab9a843f56d7, type: 2}
+  _myUI: {fileID: 8793443482019962901}
+  _attackSound: {fileID: 8300000, guid: 6c42ad26ed6160947855cc347c0ebe73, type: 3}
+  _spawnSound: {fileID: 8300000, guid: 3a2d9a56e40a9284bbe3e9c366b6ac52, type: 3}
+  _animator: {fileID: 6891345673338466091}
 --- !u!1001 &7122835513449105613
 PrefabInstance:
   m_ObjectHideFlags: 0

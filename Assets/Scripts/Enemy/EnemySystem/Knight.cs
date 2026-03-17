@@ -9,7 +9,7 @@ public class Knight : EnemyController
     {
         if (attack == AttackType.Range)
         {
-            Debug.Log("Immune!");
+            return;
         }
         else
         {

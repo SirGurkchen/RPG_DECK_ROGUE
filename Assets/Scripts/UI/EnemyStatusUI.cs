@@ -23,6 +23,17 @@ public class EnemyStatusUI : MonoBehaviour
         UpdateStatusDisplay("Thorns", enemyData is IThorns thorn ? thorn.ThornsDamage : -1);
     }
 
+    public void UpdateThorns(int numb)
+    {
+        foreach (StatusIcon icon in  _statusIcons)
+        {
+            if (icon.StatusName == "Thorns")
+            {
+                icon.Value.text = numb.ToString();
+            }
+        }
+    }
+
     private void UpdateStatusDisplay(string statusName, int value)
     {
         StatusIcon icons = _statusIcons.Find(s => s.StatusName == statusName);

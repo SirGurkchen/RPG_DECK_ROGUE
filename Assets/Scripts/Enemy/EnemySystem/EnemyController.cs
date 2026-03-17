@@ -8,8 +8,11 @@ using UnityEngine;
 /// </summary>
 public class EnemyController : MonoBehaviour
 {
-    [SerializeField] private EnemyBase _enemyData;
-    [SerializeField] private EnemyUI _myUI;
+    [Header("Base Info. Available to subclasses")]
+    [SerializeField] protected EnemyBase _enemyData;
+    [SerializeField] protected EnemyUI _myUI;
+
+    [Header("Visual Info")]
     [Tooltip("Leave empty if no attack sound")]
     [SerializeField] private AudioClip _attackSound;
     [Tooltip("Leave empty if no spawn sound")]
@@ -33,7 +36,7 @@ public class EnemyController : MonoBehaviour
         _myUI.SetEnemyImage(_enemyData.Icon);
     }
 
-    private void InitializeEnemy()
+    protected virtual void InitializeEnemy()
     {
         _currentHealth = _enemyData.Health;
         _coinsReward = _enemyData.Coins;
@@ -43,8 +46,6 @@ public class EnemyController : MonoBehaviour
 
     public virtual void TakeDamage(int damage, AttackType attack)
     {
-        if (CheckDodge()) return;
-
         GetDamaged(damage, attack);
         AfterDamaged();
     }
@@ -70,19 +71,6 @@ public class EnemyController : MonoBehaviour
     private int GetWeakness(AttackType attack)
     {
         return attack == _enemyData.Weakness ? 2 : 1;
-    }
-
-    private bool CheckDodge()
-    {
-        if (_enemyData is AnimalEnemy animal && TryDodge())
-        {
-            AudioManager.Instance.PlayAudioClip(animal.MissSound);
-            return true;
-        }
-        else
-        {
-            return false; 
-        }
     }
 
     private void AfterDamaged()
@@ -112,16 +100,11 @@ public class EnemyController : MonoBehaviour
         _myUI.SetEnemeyMarker(isMarked);
     }
 
-    public void Attack(PlayerManager player)
+    public virtual void Attack(PlayerManager player)
     {
         _animator.PlayAttackAnimation();
         AudioManager.Instance.PlayAudioClip(_attackSound);
         player.TakeDamage(_enemyData.Damage);
-    }
-
-    private bool TryDodge()
-    {
-        return _enemyData is IDodge dodge && UnityEngine.Random.Range(0, dodge.DodgeChance) == 0;
     }
 
     private void OnDestroy()
