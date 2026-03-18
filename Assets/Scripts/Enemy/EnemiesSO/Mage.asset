@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HumanData
   _enemyName: Mage
   _description: 
+  _coins: 2
+  _enemySprite: {fileID: -2685484975440392679, guid: e7311bfd642843b4b8a2d6733ebd7667, type: 3}
   _type: 0
   _position: 1
   _damage: 5
   _health: 4
   _weakness: 4
-  _coins: 2
-  _enemySprite: {fileID: -2685484975440392679, guid: e7311bfd642843b4b8a2d6733ebd7667, type: 3}
+  _roundAppear: 6
+  _roundDisappear: 0
   _block: 0

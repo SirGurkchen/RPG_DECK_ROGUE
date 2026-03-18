@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Human
   _enemyName: Knight
   _description: 
+  _coins: 2
+  _enemySprite: {fileID: 6827581200123067571, guid: d7214fa30b901ee4c8311c1b2e9bf36e, type: 3}
   _type: 0
   _position: 0
   _damage: 2
   _health: 10
   _weakness: 0
-  _coins: 2
-  _enemySprite: {fileID: 6827581200123067571, guid: d7214fa30b901ee4c8311c1b2e9bf36e, type: 3}
+  _roundAppear: 10
+  _roundDisappear: 0
   _block: 2

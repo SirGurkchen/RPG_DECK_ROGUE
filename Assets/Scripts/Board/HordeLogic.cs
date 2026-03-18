@@ -16,9 +16,9 @@ public class HordeLogic : MonoBehaviour
 
     public bool isSpawning {  get; private set; }
 
-    public void RefillBoardRandomly()
+    public void RefillBoardRandomly(int round)
     {
-        StartCoroutine(SpawnRandomEnemiesWithDelay());
+        StartCoroutine(SpawnRandomEnemiesWithDelay(round));
     }
 
     public void RefillBoardPredetermined(string enemyOne, string enemyTwo)
@@ -39,7 +39,7 @@ public class HordeLogic : MonoBehaviour
         isSpawning = false;
     }
 
-    private IEnumerator SpawnRandomEnemiesWithDelay()
+    private IEnumerator SpawnRandomEnemiesWithDelay(int round)
     {
         isSpawning = true;
 
@@ -49,15 +49,15 @@ public class HordeLogic : MonoBehaviour
 
         for (int i = 0; i < amount; i++)
         {
-            AddRandomEnemy();
+            AddRandomEnemy(round);
             yield return new WaitForSeconds(SPAWN_TIMER);
         }
         isSpawning = false;
     }
 
-    private void AddRandomEnemy()
+    private void AddRandomEnemy(int currentRound)
     {
-        EnemyController newEnemy = Instantiate(EnemyDataBase.Instance.GetRandomEnemy());
+        EnemyController newEnemy = Instantiate(EnemyDataBase.Instance.GetRandomEnemy(currentRound));
         _board.AddEnemyToField(newEnemy);
     }
 

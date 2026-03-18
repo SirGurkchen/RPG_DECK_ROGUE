@@ -18,14 +18,18 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _pauseMenuEndPos;
     [SerializeField] private InputUI _inputUI;
     [SerializeField] private StatsUIManager _statsUI;
+    [SerializeField] private TextMeshProUGUI _roundCounter;
 
     private Vector3 _pauseMenuStartPos;
+    private string _defaultRoundText;
 
     private const float PAUSE_ANIMATION_TIME = 0.6f;
 
     private void Start()
     {
         _pauseMenuStartPos = _pauseMenu.transform.position;
+        _defaultRoundText = "Round: ";
+        _roundCounter.text = _defaultRoundText + "1";
     }
 
     public void UpdateWeaponUI(List<ItemController> inventory)
@@ -37,6 +41,11 @@ public class UIManager : MonoBehaviour
                 _itemUI.SetItemUI(inventory[i], i);
             }
         }
+    }
+
+    public void UpdateRoundCounter(int roundNumber)
+    {
+        _roundCounter.text = _defaultRoundText + roundNumber;
     }
 
     public void TogglePauseMenu(bool isOn)

@@ -17,9 +17,27 @@ public class EnemyDataBase : MonoBehaviour
         Instance = this;
     }
 
-    public EnemyController GetRandomEnemy()
+    public EnemyController GetRandomEnemy(int currentRound)
     {
-        return _enemyDatabase[Random.Range(0, _enemyDatabase.Count)];
+        List<EnemyController> validEnemies = new List<EnemyController>();
+
+        foreach (EnemyController enemy in _enemyDatabase)
+        {
+            if (enemy.AppearRound <= currentRound) // Check if enemy round conditions are met, e.g. the current round is between Appear and Disappear Round
+            {
+                if (enemy.DisappearRound >= currentRound || enemy.DisappearRound == 0)
+                {
+                    validEnemies.Add(enemy);
+                }
+            }
+        }
+
+        foreach (EnemyController enemy in validEnemies)
+        {
+            Debug.Log(enemy.GetEnemyName());
+        }
+
+        return validEnemies[Random.Range(0, validEnemies.Count)];
     }
 
     public EnemyController GetEnemyByName(string enemyName)

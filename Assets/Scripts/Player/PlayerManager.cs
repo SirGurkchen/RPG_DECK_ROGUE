@@ -185,6 +185,11 @@ public class PlayerManager : MonoBehaviour
         return _cards.CanAdd();
     }
 
+    public void RemoveCoins(int coins)
+    {
+        _stats.RemoveCoins(coins);
+    }
+
     private void OnDisable()
     {
         var input = GetComponent<PlayerInput>();

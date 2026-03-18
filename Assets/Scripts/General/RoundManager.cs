@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class RoundManager : MonoBehaviour
 {
@@ -13,6 +12,12 @@ public class RoundManager : MonoBehaviour
     private Coroutine _roundBufferRoutine;
     private const float ROUND_BUFFER_TIMER = 0.75f;
     private const float DAMAGE_TIMER = 0.25f;
+    private int _rounds;
+
+    private void Start()
+    {
+        _rounds = 1;
+    }
 
     public void StartBufferedRound(UIManager UI, PlayerManager player, EnemyBoard board)
     {
@@ -81,9 +86,11 @@ public class RoundManager : MonoBehaviour
         }
         else
         {
+            _rounds++;
             UI.ToggleSelectionPrompts(false);
+            UI.UpdateRoundCounter(_rounds);
             GameInput.Instance.ChangePlayerActive(false);
-            _hordeLogic.RefillBoardRandomly();
+            _hordeLogic.RefillBoardRandomly(_rounds);
             StartCoroutine(WaitForSpawnThenActivate(UI));
         }
     }
@@ -114,8 +121,10 @@ public class RoundManager : MonoBehaviour
         {
             GameInput.Instance.ChangeShopActive(false);
             player.GetPlayerStats().AddMana(1);
+            _rounds++;
             UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
-            _hordeLogic.RefillBoardRandomly();
+            UI.UpdateRoundCounter(_rounds);
+            _hordeLogic.RefillBoardRandomly(_rounds);
             StartCoroutine(WaitForSpawnThenActivate(UI));
         }
     }
@@ -130,8 +139,10 @@ public class RoundManager : MonoBehaviour
         UI.RemoveItemDescription();
         GameInput.Instance.ChangeRewardActive(false);
         player.GetPlayerStats().AddMana(1);
+        _rounds++;
+        UI.UpdateRoundCounter(_rounds);
         UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
-        _hordeLogic.RefillBoardRandomly();
+        _hordeLogic.RefillBoardRandomly(_rounds);
         StartCoroutine(WaitForSpawnThenActivate(UI));
     }
 
@@ -141,9 +152,11 @@ public class RoundManager : MonoBehaviour
         _shopManager.EmptyShop();
         UI.ToggleLeavePrompt();
         UI.RemoveItemDescription();
+        _rounds++;
+        UI.UpdateRoundCounter(_rounds);
         GameInput.Instance.ChangeShopActive(false);
         GameInput.Instance.ChangeRewardActive(false);
-        _hordeLogic.RefillBoardRandomly();
+        _hordeLogic.RefillBoardRandomly(_rounds);
         StartCoroutine(WaitForSpawnThenActivate(UI));
     }
 

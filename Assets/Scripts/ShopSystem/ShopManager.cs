@@ -93,6 +93,8 @@ public class ShopManager : MonoBehaviour
             }
 
             player.GetPlayerInventory().GiveItemToInventory(Instantiate(_selectItem));
+            player.RemoveCoins(_selectItem.GetItemBase().Price);
+            UI.UpdateCoinsUI(player.GetPlayerStats().Coins);
             UI.UpdateWeaponUI(player.GetPlayerInventory().GetInventory());
             EmptyShop();
         }
@@ -106,6 +108,8 @@ public class ShopManager : MonoBehaviour
 
             CardController newCard = Instantiate(_selectCard.UnlockCard);
             player.TryGiveCard(newCard);
+            player.RemoveCoins(_selectCard.UnlockCard.GetCard().ShopPrice);
+            UI.UpdateCoinsUI(player.GetPlayerStats().Coins);
             UI.AddCardUI(newCard);
             EmptyShop();
         }

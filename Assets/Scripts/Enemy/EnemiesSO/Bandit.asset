@@ -14,11 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HumanData
   _enemyName: Bandit
   _description: 
+  _coins: 2
+  _enemySprite: {fileID: 5831869553964989578, guid: d6843905d45755c4fa7c70fc0d81c3f1, type: 3}
   _type: 0
   _position: 0
   _damage: 2
   _health: 2
   _weakness: 1
-  _coins: 2
-  _enemySprite: {fileID: 5831869553964989578, guid: d6843905d45755c4fa7c70fc0d81c3f1, type: 3}
+  _roundAppear: 0
+  _roundDisappear: 10
   _block: 1

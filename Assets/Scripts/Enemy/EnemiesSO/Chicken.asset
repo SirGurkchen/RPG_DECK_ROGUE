@@ -14,12 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AnimalEnemy
   _enemyName: Chicken
   _description: 
+  _coins: 0
+  _enemySprite: {fileID: -1904988484476000161, guid: 0daf99c392c517449b33558d31ef0a9b, type: 3}
   _type: 5
   _position: 0
   _damage: 1
   _health: 1
-  _weakness: 0
-  _coins: 0
-  _enemySprite: {fileID: -1904988484476000161, guid: 0daf99c392c517449b33558d31ef0a9b, type: 3}
+  _weakness: 4
+  _roundAppear: 0
+  _roundDisappear: 0
   _dodgeChance: 4
   _dodgeAudio: {fileID: 8300000, guid: 6eb4d3d4bc8aa2b4db55e5072720f399, type: 3}

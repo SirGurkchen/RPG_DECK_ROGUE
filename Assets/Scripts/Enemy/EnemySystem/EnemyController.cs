@@ -26,6 +26,8 @@ public class EnemyController : MonoBehaviour
 
     public int Coins => _coinsReward;
     public string GetEnemyName() => _enemyData.Name;
+    public int AppearRound => _enemyData.RoundAppear;
+    public int DisappearRound => _enemyData.RoundDisappear;
 
 
     private void Start()

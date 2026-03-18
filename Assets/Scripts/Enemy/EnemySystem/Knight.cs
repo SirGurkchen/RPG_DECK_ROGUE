@@ -1,5 +1,3 @@
-using UnityEngine;
-
 /// <summary>
 /// Contains overwrites for the Knight Enemy.
 /// </summary>
