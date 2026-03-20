@@ -1386,6 +1386,8 @@ MonoBehaviour:
   - {fileID: 7024923934106523206, guid: 5633f2d9b0f480d408acc4f6f7ad8c32, type: 3}
   - {fileID: 3427539295078791036, guid: 1e0e07e2e23075840bdf057e7a1d4b96, type: 3}
   - {fileID: 1646058023579539374, guid: 021dab69b032b274494d47da3318b77e, type: 3}
+  - {fileID: 7675935763007194780, guid: dabaf718bd3eca240848f762978fd334, type: 3}
+  - {fileID: 6576438190804989013, guid: 6ad7b9eb345783f478716ed1a7db6e7a, type: 3}
 --- !u!4 &221469678
 Transform:
   m_ObjectHideFlags: 0

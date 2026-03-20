@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c26c6b02f9a8134280f31015268ef5e, type: 3}
-  m_Name: HealthPotion
+  m_Name: BigHealthPotion
   m_EditorClassIdentifier: Assembly-CSharp::Potion
-  _itemName: Health Potion
-  _description: A small health potion. Heals you for 5 health.
-  _itemShopPrice: 6
+  _itemName: Big Health Potion
+  _description: A big health potion. Heals you for 15 health.
+  _itemShopPrice: 12
   _itemType: 2
   _isUnrewardable: 0
-  _itemIcon: {fileID: -7898352098092256996, guid: 3a3ebd75131f8d74bbe6c0029208afca, type: 3}
+  _itemIcon: {fileID: 8302107470834574910, guid: eadbc96b643b68840baa56606f2945ca, type: 3}
   _rarity: 0
   _unlockableCard: {fileID: 0}
-  _amount: 5
+  _amount: 15
   _type: 0

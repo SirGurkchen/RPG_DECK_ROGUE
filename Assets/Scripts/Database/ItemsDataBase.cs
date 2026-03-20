@@ -18,6 +18,7 @@ public class ItemsDataBase : MonoBehaviour
         if (Instance != null)
         {
             Debug.Log("There are multiple Item Databases!");
+            Destroy(gameObject);
             return;
         }
         Instance = this;
@@ -33,8 +34,7 @@ public class ItemsDataBase : MonoBehaviour
             }
         }
 
-        int rng = Random.Range(0, _validItems.Count);
-        ItemController reward = _validItems[rng];
+        ItemController reward = _validItems[Random.Range(0, _validItems.Count)];
         _validItems.Clear();
         return reward;
     }
