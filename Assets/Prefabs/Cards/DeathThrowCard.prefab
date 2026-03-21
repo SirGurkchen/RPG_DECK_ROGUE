@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7476379526778067575
+--- !u!1 &1412120103116809565
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,73 +8,69 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3041872132636569786}
-  - component: {fileID: 7036658307534412435}
-  - component: {fileID: 6452040712559535826}
+  - component: {fileID: 4354885855157016695}
+  - component: {fileID: 241349703357192833}
+  - component: {fileID: 4898726668403581639}
   m_Layer: 0
-  m_Name: CleanSweepCard
+  m_Name: DeathThrowCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3041872132636569786
+--- !u!4 &4354885855157016695
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7476379526778067575}
+  m_GameObject: {fileID: 1412120103116809565}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 6321573519584397093}
+  - {fileID: 4969445526299555213}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7036658307534412435
+--- !u!114 &241349703357192833
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7476379526778067575}
+  m_GameObject: {fileID: 1412120103116809565}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6bdb39bfa2dd8f547b46d7be9f62ecaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardController
-  _card: {fileID: 11400000, guid: b97ec9eaf7705d444b8b7e0cfc51973d, type: 2}
-  _myUI: {fileID: 6452040712559535826}
---- !u!114 &6452040712559535826
+  _card: {fileID: 11400000, guid: bd848df300ce5b54d8bfdcf0650e133d, type: 2}
+  _myUI: {fileID: 4898726668403581639}
+--- !u!114 &4898726668403581639
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7476379526778067575}
+  m_GameObject: {fileID: 1412120103116809565}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a97f6f2c49fecd4a9699fb01f76b909, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardUI
-  _cardNameText: {fileID: 7027408309895979523}
-  _cardDescText: {fileID: 7115565793887202265}
-  _cardMarker: {fileID: 598803601840525016}
---- !u!1001 &8425979631552658364
+  _cardNameText: {fileID: 8271959535923450027}
+  _cardDescText: {fileID: 8210669724442564977}
+  _cardMarker: {fileID: 1946356905325165680}
+--- !u!1001 &7467722627591325972
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 3041872132636569786}
+    m_TransformParent: {fileID: 4354885855157016695}
     m_Modifications:
-    - target: {fileID: 1607933186565623909, guid: d3294f9aac94ae844b115a70ae38b70e, type: 3}
-      propertyPath: m_text
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2546128401283382425, guid: d3294f9aac94ae844b115a70ae38b70e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -168,20 +164,20 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3294f9aac94ae844b115a70ae38b70e, type: 3}
---- !u!1 &598803601840525016 stripped
+--- !u!1 &1946356905325165680 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8980308915718894948, guid: d3294f9aac94ae844b115a70ae38b70e, type: 3}
-  m_PrefabInstance: {fileID: 8425979631552658364}
+  m_PrefabInstance: {fileID: 7467722627591325972}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &6321573519584397093 stripped
+--- !u!224 &4969445526299555213 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2546128401283382425, guid: d3294f9aac94ae844b115a70ae38b70e, type: 3}
-  m_PrefabInstance: {fileID: 8425979631552658364}
+  m_PrefabInstance: {fileID: 7467722627591325972}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7027408309895979523 stripped
+--- !u!114 &8210669724442564977 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1542845114305812927, guid: d3294f9aac94ae844b115a70ae38b70e, type: 3}
-  m_PrefabInstance: {fileID: 8425979631552658364}
+  m_CorrespondingSourceObject: {fileID: 1607933186565623909, guid: d3294f9aac94ae844b115a70ae38b70e, type: 3}
+  m_PrefabInstance: {fileID: 7467722627591325972}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -189,10 +185,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
---- !u!114 &7115565793887202265 stripped
+--- !u!114 &8271959535923450027 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1607933186565623909, guid: d3294f9aac94ae844b115a70ae38b70e, type: 3}
-  m_PrefabInstance: {fileID: 8425979631552658364}
+  m_CorrespondingSourceObject: {fileID: 1542845114305812927, guid: d3294f9aac94ae844b115a70ae38b70e, type: 3}
+  m_PrefabInstance: {fileID: 7467722627591325972}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1

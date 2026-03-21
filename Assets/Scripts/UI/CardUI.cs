@@ -11,7 +11,7 @@ public class CardUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _cardNameText;
     [SerializeField] private TextMeshProUGUI _cardDescText;
-    [SerializeField] private Image _cardMarker;
+    [SerializeField] private GameObject _cardMarker;
 
     private const float SELECT_HEIGHT = 2.5f;
     private const float SELECT_ANIMATION_TIME = 0.2f;

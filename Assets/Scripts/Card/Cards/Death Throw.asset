@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d1a03d044988b4bab56318949b8988, type: 3}
+  m_Name: Death Throw
+  m_EditorClassIdentifier: Assembly-CSharp::CardBase
+  _cardName: Death Throw
+  _cardDescription: 'If you have the dagger equipped, consume it and instantly kill
+    a targeted enemy.
+
+    Else, if you have any other weapon equipped, consume it
+    and deal double its damage to a targeted enemy.'
+  _cardShopPrice: 20
+  _mainEffect:
+    requiredItem: {fileID: 11400000, guid: 323d3ffb3568e8b4db5a2a9946ef1387, type: 2}
+    requiredAttackType: 4
+    effect: {fileID: 11400000, guid: 247784397abf51741a6183462c09c716, type: 2}
+  _secondaryEffect:
+    requiredItem: {fileID: 0}
+    requiredAttackType: 4
+    effect: {fileID: 11400000, guid: 9a4e79421e225004c9ad9b1e48b8adb9, type: 2}

@@ -17,7 +17,8 @@ MonoBehaviour:
     enemy on the board.
 
     Else, if you have any Blade Weapon equipped, deal 5
-    damage to a selected enemy.'
+    damage to a targeted enemy.'
+  _cardShopPrice: 8
   _mainEffect:
     requiredItem: {fileID: 11400000, guid: 1690c61ab37973346b954adfbb0f64ed, type: 2}
     requiredAttackType: 4

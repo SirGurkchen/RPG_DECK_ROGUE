@@ -2,10 +2,11 @@ public class AnimalEnemyController : EnemyController
 {
     public override void TakeDamage(int damage, AttackType attack)
     {
-        if (CheckDodge()) return;
+       if (CheckDodge() && attack != AttackType.None) return;
 
        base.TakeDamage(damage, attack);
     }
+
     private bool CheckDodge()
     {
         if (_enemyData is AnimalEnemy animal && TryDodge())

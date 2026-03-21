@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -14,7 +15,7 @@ public class SlashEffect : CardEffect
         EnemyController target = context.player.GetTargetedEnemy();
         if (target != null)
         {
-            target.TakeDamage(damage, AttackType.Melee);
+            target.TakeDamage(damage, AttackType.None);
         }
     }
 

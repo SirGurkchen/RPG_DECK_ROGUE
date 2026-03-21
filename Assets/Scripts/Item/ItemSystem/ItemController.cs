@@ -75,9 +75,14 @@ public class ItemController : MonoBehaviour
 
         if (_currentEndurance <= 0)
         {
-            OnItemDestroy?.Invoke(this);
-            Destroy(this.gameObject);
+            DestroyItem();
         }
+    }
+
+    public void DestroyItem()
+    {
+        OnItemDestroy?.Invoke(this);
+        Destroy(this.gameObject);
     }
 
     public bool CheckCardUnlock()
