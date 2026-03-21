@@ -56,6 +56,7 @@ public class RoundManager : MonoBehaviour
         if (board.GetEnemies().Count > 0)
         {
             GameInput.Instance.ChangePlayerActive(true);
+            yield return null; 
             UI.ToggleSelectionPrompts(true);
         }
         _roundBufferRoutine = null;

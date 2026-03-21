@@ -19,6 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private InputUI _inputUI;
     [SerializeField] private StatsUIManager _statsUI;
     [SerializeField] private TextMeshProUGUI _roundCounter;
+    [SerializeField] private GameObject _deathScreen;
 
     private Vector3 _pauseMenuStartPos;
     private string _defaultRoundText;
@@ -153,5 +154,10 @@ public class UIManager : MonoBehaviour
     public void ToggleCardMenuPrompt(bool isOn)
     {
         _inputUI.ToggleCardMenuPrompt(isOn);
+    }
+
+    public void ToggleDeathText()
+    {
+        _deathScreen.SetActive(!_deathScreen.activeSelf);
     }
 }

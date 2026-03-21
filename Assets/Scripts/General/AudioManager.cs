@@ -26,6 +26,11 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
+    public bool IsSoundFinished()
+    {
+        return !_soundEffectSource.isPlaying;
+    }
+
     public void PlayChangeSound()
     {
         _soundEffectSource.PlayOneShot(_sceneChangeSound);

@@ -59,4 +59,12 @@ public class LoadingScreenManager : MonoBehaviour
             OnLoadingScreenFinished?.Invoke();
         });
     }
+
+    public void ShowLoadingScreen()
+    {
+        if (_loadingScreen == null) return;
+        AudioManager.Instance.PlayChangeSound();
+        _loadingScreen.gameObject.transform.DOMove(_loadingEndPos.transform.position, CLOSE_ANIMATION_TIME)
+            .SetUpdate(true);
+    }
 }

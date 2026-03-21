@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private CardController _testCard;
     [SerializeField] private RoundManager _roundManager;
     [SerializeField] private ShopManager _shopManager;
+    [SerializeField] private AudioClip _deathSound;
 
     private bool isPaused = false;
 
@@ -89,6 +90,10 @@ public class GameManager : MonoBehaviour
     private IEnumerator WaitTillPlayerDead()
     {
         yield return new WaitUntil(() => GameInput.Instance.IsInputActive());
+        _UIManager.ToggleDeathText();
+        GameInput.Instance.ChangePlayerActive(false);
+        AudioManager.Instance.PlayAudioClip(_deathSound);
+        yield return new WaitUntil(() => AudioManager.Instance.IsSoundFinished());
         LoadingScreenManager.Instance.PlayLoadAnimation("MainMenu");
     }
 
