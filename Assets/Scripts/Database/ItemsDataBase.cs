@@ -41,6 +41,6 @@ public class ItemsDataBase : MonoBehaviour
 
     public ItemController GetItemByName(string itemName)
     {
-        return _itemDatabase.Find(item => item.name == itemName);
+        return _itemDatabase.Find(item => item.GetItemName() == itemName);
     }
 }

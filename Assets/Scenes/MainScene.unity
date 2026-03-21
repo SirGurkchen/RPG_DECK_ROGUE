@@ -1885,7 +1885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e81b55d79c66944a1c0aa1289c8cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  _maxHealth: 1
+  _maxHealth: 50
   _armor: 0
   _maxMana: 10
 --- !u!4 &291133426
@@ -6611,7 +6611,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -163.6, y: 334.4}
+  m_AnchoredPosition: {x: -315, y: 160}
   m_SizeDelta: {x: 26.1371, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1262936132
@@ -9582,7 +9582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 235.8, y: 334.4}
+  m_AnchoredPosition: {x: 380, y: 160}
   m_SizeDelta: {x: 20.7875, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2041731210

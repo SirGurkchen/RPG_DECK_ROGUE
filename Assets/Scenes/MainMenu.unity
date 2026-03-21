@@ -3460,6 +3460,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DataPersistenceManager
   _fileName: unlock.game
+  _useEncryption: 1
 --- !u!4 &1853362772
 Transform:
   m_ObjectHideFlags: 0

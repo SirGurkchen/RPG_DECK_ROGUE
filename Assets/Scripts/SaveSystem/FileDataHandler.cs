@@ -7,11 +7,14 @@ public class FileDataHandler
 {
     private string _dataDirPath = "";
     private string _dataFileName = "";
+    private bool _useEncryption = false;
+    private readonly string _encryptionCodeWord = "❄︎♒︎♏︎☟︎◆︎■︎⧫︎♏︎❒︎✋︎⬧︎✌︎👍︎□︎❍︎❍︎◆︎■︎♓︎⬧︎⧫︎";
 
-    public FileDataHandler(string dataDirPath, string dataFileName)
+    public FileDataHandler(string dataDirPath, string dataFileName, bool useEncryption)
     {
         this._dataDirPath = dataDirPath;
         this._dataFileName = dataFileName;
+        _useEncryption = useEncryption;
     }
 
     public GameData Load()
@@ -32,13 +35,18 @@ public class FileDataHandler
                     }
                 }
 
+                if (_useEncryption)
+                {
+                    dataToLoad = EncryptDecrypt(dataToLoad);
+                }
+
                 loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
             }
             catch (Exception e)
             {
                 Debug.LogError("Error while Loading Game Data!" + "\n" + e);
             }
-        } 
+        }
         return loadedData;
     }
 
@@ -52,6 +60,11 @@ public class FileDataHandler
 
             string dataToStore = JsonUtility.ToJson(data, true);
 
+            if (_useEncryption)
+            {
+                dataToStore = EncryptDecrypt(dataToStore);
+            }
+
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
             {
                 using (StreamWriter writer = new StreamWriter(stream))
@@ -64,5 +77,15 @@ public class FileDataHandler
         {
             Debug.LogError("Error while trying to save the game to the file: " + fullPath + "\n" + e);
         }
+    }
+
+    private string EncryptDecrypt(string data)
+    {
+        string modifiedData = "";
+        for (int i = 0; i < data.Length; i++)
+        {
+            modifiedData += (char)(data[i] ^ _encryptionCodeWord[i % _encryptionCodeWord.Length]);
+        }
+        return modifiedData;
     }
 }

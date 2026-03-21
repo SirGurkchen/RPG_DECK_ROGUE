@@ -21,13 +21,13 @@ public class ShopManager : MonoBehaviour
 
     private void Start()
     {
-        CardUnlockManager.Instance.OnLoadFinished += UpdateAvailableCards;
-        CardUnlockManager.Instance.OnNewCardUnlock += UpdateAvailableCards;
+        UpdateAvailableCards(CardUnlockManager.Instance.UnlockedItemsCards);
     }
 
     public void UpdateAvailableCards(List<string> unlockedCards)
     {
         _availableItemCards.Clear();
+
         foreach (string itemName in unlockedCards)
         {
             ItemController item = ItemsDataBase.Instance.GetItemByName(itemName);
