@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private AudioClip _spawnSound;
     [SerializeField] private EnemyAnimator _animator;
 
-    private int _currentHealth;
+    protected int _currentHealth;
     private int _coinsReward;
 
     public event Action<EnemyController> OnEnemyDeath;
@@ -65,7 +65,7 @@ public class EnemyController : MonoBehaviour
         return finalDamage;
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         OnEnemyDeath?.Invoke(this);
     }
@@ -89,7 +89,7 @@ public class EnemyController : MonoBehaviour
 
     private void GetDamaged(int damage, AttackType attack)
     {
-        int finalDamange = attack == AttackType.None ? damage : CalculateDamage(damage, attack);
+        int finalDamange = attack == AttackType.Hammer ? damage : CalculateDamage(damage, attack);
         if (finalDamange >= 0)
         {
             _currentHealth -= finalDamange;

@@ -1,5 +1,4 @@
 using System.Collections;
-using NUnit.Framework;
 using UnityEngine;
 
 /// <summary>
@@ -24,6 +23,11 @@ public class HordeLogic : MonoBehaviour
     public void RefillBoardPredetermined(string enemyOne, string enemyTwo)
     {
         StartCoroutine(SpawnPredeterminedEnemiesWithDelay(enemyOne, enemyTwo));
+    }
+
+    public void RefillBoardWithBoss()
+    {
+        StartCoroutine(SpawnBossEnemy());
     }
 
     private IEnumerator SpawnPredeterminedEnemiesWithDelay(string enemyOne, string enemyTwo)
@@ -55,6 +59,15 @@ public class HordeLogic : MonoBehaviour
         isSpawning = false;
     }
 
+    private IEnumerator SpawnBossEnemy()
+    {
+        isSpawning = true;
+        yield return new WaitForSeconds(SPAWN_TIMER);
+        AddBossEnemy();
+        yield return new WaitForSeconds(SPAWN_TIMER);
+        isSpawning = false;
+    }
+
     private void AddRandomEnemy(int currentRound)
     {
         EnemyController newEnemy = Instantiate(EnemyDataBase.Instance.GetRandomEnemy(currentRound));
@@ -65,5 +78,11 @@ public class HordeLogic : MonoBehaviour
     {
         EnemyController newEnemy = Instantiate(EnemyDataBase.Instance.GetEnemyByName(enemy));
         _board.AddEnemyToField(newEnemy);
+    }
+
+    private void AddBossEnemy()
+    {
+        EnemyController newBoss = Instantiate(EnemyDataBase.Instance.GetEnemyByName("Slime King"));
+        _board.AddBossToField(newBoss);
     }
 }

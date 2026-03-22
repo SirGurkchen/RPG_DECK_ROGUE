@@ -22,7 +22,7 @@ public class PlayerTargeting : MonoBehaviour
             _currentTarget.SetEnemeyMarker(false);
         }
 
-        if (_currentTarget != enemy)
+        if (_currentTarget != enemy || _currentSelectPos != input)
         {
             _currentTarget = enemy;
             _currentSelectPos = input;

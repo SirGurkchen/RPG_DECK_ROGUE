@@ -56,5 +56,6 @@ public enum AttackType
     Range,
     Magic,
     Blade,
+    Hammer,
     None
 }

@@ -1561,6 +1561,7 @@ MonoBehaviour:
   - {fileID: 5711284673414925336, guid: cb9a42618254d444aa4674c13d1e77de, type: 3}
   - {fileID: 92635208499097938, guid: 44b95d3785aac664bb8d5a7759db952b, type: 3}
   - {fileID: 3235703017814325657, guid: 83957b84d3425b948a88e76e4b5c3e79, type: 3}
+  - {fileID: 1102942399041900484, guid: 7f3756033bdd0174e841b5637d078550, type: 3}
 --- !u!1 &239726910
 GameObject:
   m_ObjectHideFlags: 0
@@ -3048,6 +3049,7 @@ MonoBehaviour:
   _enemyPositions:
   - {fileID: 1962670621}
   - {fileID: 1094797607}
+  _bossPosition: {fileID: 1817480377}
 --- !u!4 &496978642
 Transform:
   m_ObjectHideFlags: 0
@@ -3063,6 +3065,7 @@ Transform:
   m_Children:
   - {fileID: 1962670621}
   - {fileID: 1094797607}
+  - {fileID: 1817480377}
   m_Father: {fileID: 1977628455}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &496978643
@@ -8904,6 +8907,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774329102}
   m_CullTransparentMesh: 1
+--- !u!1 &1817480376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1817480377}
+  m_Layer: 0
+  m_Name: BossPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1817480377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817480376}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.25, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 496978642}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1854035186
 GameObject:
   m_ObjectHideFlags: 0

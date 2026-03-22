@@ -1,7 +1,6 @@
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 /// <summary>
@@ -14,6 +13,7 @@ public class EnemyBoard : MonoBehaviour
     [SerializeField] private List<EnemyController> _enemiesOnField;
     [SerializeField] private Vector3 _startPos = new Vector3(0, 1.5f, 0);
     [SerializeField] private Transform[] _enemyPositions;
+    [SerializeField] private Transform _bossPosition;
 
     private const int MAX_ENEMIES = 2;
 
@@ -33,6 +33,13 @@ public class EnemyBoard : MonoBehaviour
             SetUpEnemyVisuals();
             enemy.OnEnemyDeath += HandleEnemyDeath;
         }
+    }
+
+    public void AddBossToField(EnemyController boss)
+    {
+        _enemiesOnField.Add(boss);
+        SetUpBossVisual();
+        boss.OnEnemyDeath += HandleEnemyDeath;
     }
 
     private void HandleEnemyDeath(EnemyController enemy)
@@ -64,7 +71,7 @@ public class EnemyBoard : MonoBehaviour
 
         if (_enemiesOnField.Count == 1)
         {
-            return null;
+            return _enemiesOnField[0];
         }
         else
         {
@@ -79,6 +86,12 @@ public class EnemyBoard : MonoBehaviour
             Vector3 pos = _startPos + _enemyPositions[count].position;
             _enemiesOnField[count].transform.DOMove(pos, 0.3f).SetLink(_enemiesOnField[count].gameObject);
         }
+    }
+
+    private void SetUpBossVisual()
+    {
+        Vector3 pos = _startPos + _bossPosition.position;
+        _enemiesOnField[0].transform.DOMove(pos, 0.3f).SetLink(_enemiesOnField[0].gameObject);
     }
 
     private void CheckBoardClear()

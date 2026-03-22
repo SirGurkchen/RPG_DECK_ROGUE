@@ -91,8 +91,7 @@ public class RoundManager : MonoBehaviour
             UI.ToggleSelectionPrompts(false);
             UI.UpdateRoundCounter(_rounds);
             GameInput.Instance.ChangePlayerActive(false);
-            _hordeLogic.RefillBoardRandomly(_rounds);
-            StartCoroutine(WaitForSpawnThenActivate(UI));
+            StartNextRound(UI);
         }
     }
 
@@ -125,8 +124,7 @@ public class RoundManager : MonoBehaviour
             _rounds++;
             UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
             UI.UpdateRoundCounter(_rounds);
-            _hordeLogic.RefillBoardRandomly(_rounds);
-            StartCoroutine(WaitForSpawnThenActivate(UI));
+            StartNextRound(UI);
         }
     }
 
@@ -143,7 +141,19 @@ public class RoundManager : MonoBehaviour
         _rounds++;
         UI.UpdateRoundCounter(_rounds);
         UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
-        _hordeLogic.RefillBoardRandomly(_rounds);
+        StartNextRound(UI);
+    }
+
+    private void StartNextRound(UIManager UI)
+    {
+        if (_rounds % 10 == 0)
+        {
+            _hordeLogic.RefillBoardWithBoss();
+        }
+        else
+        {
+            _hordeLogic.RefillBoardRandomly(_rounds);
+        }
         StartCoroutine(WaitForSpawnThenActivate(UI));
     }
 
@@ -157,8 +167,7 @@ public class RoundManager : MonoBehaviour
         UI.UpdateRoundCounter(_rounds);
         GameInput.Instance.ChangeShopActive(false);
         GameInput.Instance.ChangeRewardActive(false);
-        _hordeLogic.RefillBoardRandomly(_rounds);
-        StartCoroutine(WaitForSpawnThenActivate(UI));
+        StartNextRound(UI);
     }
 
     public void HandleRewardSelection(int rewardIndex, UIManager UI)

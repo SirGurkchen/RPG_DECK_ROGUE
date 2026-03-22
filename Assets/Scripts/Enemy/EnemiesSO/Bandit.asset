@@ -19,7 +19,7 @@ MonoBehaviour:
   _type: 0
   _position: 0
   _damage: 2
-  _health: 2
+  _health: 3
   _weakness: 1
   _roundAppear: 0
   _roundDisappear: 10

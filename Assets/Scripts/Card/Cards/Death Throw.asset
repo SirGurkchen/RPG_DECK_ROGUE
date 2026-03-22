@@ -21,9 +21,9 @@ MonoBehaviour:
   _cardShopPrice: 20
   _mainEffect:
     requiredItem: {fileID: 11400000, guid: 323d3ffb3568e8b4db5a2a9946ef1387, type: 2}
-    requiredAttackType: 4
+    requiredAttackType: 5
     effect: {fileID: 11400000, guid: 247784397abf51741a6183462c09c716, type: 2}
   _secondaryEffect:
     requiredItem: {fileID: 0}
-    requiredAttackType: 4
+    requiredAttackType: 5
     effect: {fileID: 11400000, guid: 9a4e79421e225004c9ad9b1e48b8adb9, type: 2}

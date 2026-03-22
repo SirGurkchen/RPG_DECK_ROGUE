@@ -1,5 +1,4 @@
 using UnityEngine;
-using static Unity.Collections.AllocatorManager;
 
 [CreateAssetMenu(fileName = "New Animal Enemy", menuName = "Enemy/Animal")]
 public class AnimalEnemy : EnemyBase, IDodge
