@@ -1,6 +1,4 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenuLogic : MonoBehaviour
 {
@@ -10,6 +8,7 @@ public class MainMenuLogic : MonoBehaviour
     {
         _menuUI.PlayStartAnimation();
         AudioManager.Instance.PlayChainSound();
+        AudioManager.Instance.PlayDefaultMusic();
     }
 
     private void OnEnable()

@@ -15,7 +15,7 @@ MonoBehaviour:
   _itemName: Bow
   _description: A standard wooden bow that deals ranged damage. Some enemies might
     be immune to ranged attacks!
-  _itemShopPrice: 9
+  _itemShopPrice: 4
   _itemType: 0
   _isUnrewardable: 0
   _itemIcon: {fileID: -6791923525815039421, guid: 1d3410e7dae598041a00a840f8c6217e, type: 3}

@@ -20,7 +20,7 @@ MonoBehaviour:
   _position: 3
   _damage: 3
   _health: 5
-  _weakness: 4
-  _roundAppear: 8
+  _weakness: 5
+  _roundAppear: 5
   _roundDisappear: 25
   _block: 1

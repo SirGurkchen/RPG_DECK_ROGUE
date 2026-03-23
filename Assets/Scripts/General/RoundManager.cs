@@ -13,6 +13,7 @@ public class RoundManager : MonoBehaviour
     private const float ROUND_BUFFER_TIMER = 0.75f;
     private const float DAMAGE_TIMER = 0.25f;
     private int _rounds;
+    private RoundBuffer _currentBuffer;
 
     private void Start()
     {
@@ -78,9 +79,11 @@ public class RoundManager : MonoBehaviour
             switch (RoundBufferPool.Instance.GetRandomRoundBuffer())
             {
                 case RoundBufferPool.BufferType.Shop:
+                    _currentBuffer = RoundBuffer.Shop;
                     ShowShopScreen();
                     break;
                 case RoundBufferPool.BufferType.Reward:
+                    _currentBuffer = RoundBuffer.Reward;
                     ShowRewardScreen(player, UI);
                     break;
             }
@@ -104,7 +107,7 @@ public class RoundManager : MonoBehaviour
 
     private void ShowShopScreen()
     {
-        _shopManager.FillShop();
+        _shopManager.EnterShop();
         GameInput.Instance.ChangeShopActive(true);
     }
 
@@ -124,6 +127,7 @@ public class RoundManager : MonoBehaviour
             _rounds++;
             UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
             UI.UpdateRoundCounter(_rounds);
+            UI.ToggleLeavePrompt();
             StartNextRound(UI);
         }
     }
@@ -141,6 +145,7 @@ public class RoundManager : MonoBehaviour
         _rounds++;
         UI.UpdateRoundCounter(_rounds);
         UI.UpdateManaUI(player.GetPlayerStats().Mana, player.GetPlayerStats().MaxMana);
+        UI.ToggleLeavePrompt();
         StartNextRound(UI);
     }
 
@@ -159,8 +164,13 @@ public class RoundManager : MonoBehaviour
 
     public void CancelRoundBuffer(UIManager UI)
     {
+        if (_currentBuffer == RoundBuffer.Shop)
+        {
+            StartCoroutine(_shopManager.EmptyShop());
+        }
+
         _rewardManager.ClearRewards();
-        _shopManager.EmptyShop();
+        UI.ClearRewardUI();
         UI.ToggleLeavePrompt();
         UI.RemoveItemDescription();
         _rounds++;
@@ -186,5 +196,11 @@ public class RoundManager : MonoBehaviour
         yield return new WaitUntil(() => !_hordeLogic.isSpawning);
         GameInput.Instance.ChangePlayerActive(true);
         UI.ToggleSelectionPrompts(true);
+    }
+
+    private enum RoundBuffer
+    {
+        Shop,
+        Reward
     }
 }

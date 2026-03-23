@@ -1,9 +1,12 @@
+using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private ShopUIManager _shopUI;
+    [SerializeField] private ShopAnimator _shopAnimator;
 
     private List<ItemBase> _availableItemCards;
     private List<ItemController> _availableItems;
@@ -40,8 +43,20 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public void FillShop()
+    public void EnterShop()
     {
+        StartCoroutine(FillShop());
+    }
+
+    public IEnumerator FillShop()
+    {
+        yield return new WaitUntil(() => AudioManager.Instance.IsSoundFinished());
+        Tween enterTween = _shopAnimator.PlayShopEnterAnimation();
+        if (enterTween != null)
+        {
+            yield return enterTween.WaitForCompletion();
+        }
+
         _availableItems.Add(ItemsDataBase.Instance.GetRandomItem());
         if (_availableItemCards.Count <= 0)
         {
@@ -96,7 +111,7 @@ public class ShopManager : MonoBehaviour
             player.RemoveCoins(_selectItem.GetItemBase().Price);
             UI.UpdateCoinsUI(player.GetPlayerStats().Coins);
             UI.UpdateWeaponUI(player.GetPlayerInventory().GetInventory());
-            EmptyShop();
+            StartCoroutine(EmptyShop());
         }
         else if (_selectCard != null && player.CanAddCard())
         {
@@ -111,7 +126,7 @@ public class ShopManager : MonoBehaviour
             player.RemoveCoins(_selectCard.UnlockCard.GetCard().ShopPrice);
             UI.UpdateCoinsUI(player.GetPlayerStats().Coins);
             UI.AddCardUI(newCard);
-            EmptyShop();
+            StartCoroutine(EmptyShop());
         }
         return true;
     }
@@ -121,13 +136,19 @@ public class ShopManager : MonoBehaviour
         return _selectCard != null || _selectItem != null;
     }
 
-    public void EmptyShop()
+    public IEnumerator EmptyShop()
     {
         _shopUI.ClearShopUI();
         _availableItems.Clear();
         _availableCard = null;
         _selectCard = null;
         _selectItem = null;
+
+        Tween exitTween = _shopAnimator.PlayShopLeaveAnimation();
+        if (exitTween != null)
+        {
+            yield return exitTween.WaitForCompletion();
+        }
     }
 
     private void OnDisable()

@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip _chainSound;
     [SerializeField] private AudioClip _buttonSound;
     [SerializeField] private AudioClip _sceneChangeSound;
+    [SerializeField] private AudioClip _defaultMusic;
 
     public float EffectVolume => _soundEffectSource.volume;
     public float MusicVolume => _musicSource.volume;
@@ -57,11 +58,11 @@ public class AudioManager : MonoBehaviour
         _soundEffectSource.PlayOneShot(_errorSound);
     }
 
-    public void StartMusic(AudioClip music)
+    public void PlayDefaultMusic()
     {
-        if (music == null) return;
         _musicSource.loop = true;
-        _musicSource.PlayOneShot(music);
+        _musicSource.clip = _defaultMusic;
+        _musicSource.Play();
     }
 
     public void StopMusic()

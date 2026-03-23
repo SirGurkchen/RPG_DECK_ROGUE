@@ -21,6 +21,6 @@ MonoBehaviour:
   _damage: 2
   _health: 6
   _weakness: 1
-  _roundAppear: 5
-  _roundDisappear: 25
+  _roundAppear: 10
+  _roundDisappear: 35
   _thornsDamage: 1

@@ -762,6 +762,7 @@ MonoBehaviour:
   _chainSound: {fileID: 8300000, guid: 3bb8923e1a6dee847a407429aada77b3, type: 3}
   _buttonSound: {fileID: 8300000, guid: 1ba9ea697fe4a7a4683a06c5215ae8e1, type: 3}
   _sceneChangeSound: {fileID: 8300000, guid: 28873158f0412684ea3e34604076cafe, type: 3}
+  _defaultMusic: {fileID: 8300000, guid: 75a550beb3334434391b6b45cd35e013, type: 3}
 --- !u!4 &179131677
 Transform:
   m_ObjectHideFlags: 0

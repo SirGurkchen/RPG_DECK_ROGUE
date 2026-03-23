@@ -17,13 +17,13 @@ MonoBehaviour:
     enemies might be immune to blade attacks!
 
 '
-  _itemShopPrice: 8
+  _itemShopPrice: 10
   _itemType: 0
   _isUnrewardable: 0
   _itemIcon: {fileID: 8962610242271416363, guid: d7fa739d0dacd6e42af81ed7086ac132, type: 3}
   _rarity: 0
   _unlockableCard: {fileID: 7036658307534412435, guid: 14c1e02c3a5207d4aaf4f52b8b036cbd, type: 3}
-  _damage: 6
+  _damage: 5
   _attackType: 3
   _endurance: 3
   _manaCost: 0

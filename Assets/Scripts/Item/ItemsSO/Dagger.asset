@@ -23,7 +23,7 @@ MonoBehaviour:
   _itemIcon: {fileID: -1695194368090466013, guid: 28da9a85ced30384cb021de95bf80a80, type: 3}
   _rarity: 0
   _unlockableCard: {fileID: 241349703357192833, guid: 3325b83befaa504499ae7a09de4d781c, type: 3}
-  _damage: 4
+  _damage: 3
   _attackType: 3
   _endurance: 7
   _manaCost: 0

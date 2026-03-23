@@ -91,6 +91,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitUntil(() => GameInput.Instance.IsInputActive());
         _UIManager.ToggleDeathText();
+        AudioManager.Instance.StopMusic();
         GameInput.Instance.ChangePlayerActive(false);
         AudioManager.Instance.PlayAudioClip(_deathSound);
         yield return new WaitUntil(() => AudioManager.Instance.IsSoundFinished());

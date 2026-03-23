@@ -20,6 +20,6 @@ MonoBehaviour:
   _position: 0
   _damage: 8
   _health: 25
-  _weakness: 4
+  _weakness: 5
   _roundAppear: 1000000
   _roundDisappear: 0

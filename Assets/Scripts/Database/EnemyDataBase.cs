@@ -32,11 +32,6 @@ public class EnemyDataBase : MonoBehaviour
             }
         }
 
-        foreach (EnemyController enemy in validEnemies)
-        {
-            Debug.Log(enemy.GetEnemyName());
-        }
-
         return validEnemies[Random.Range(0, validEnemies.Count)];
     }
 
