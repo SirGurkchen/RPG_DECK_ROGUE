@@ -2,6 +2,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the loading and saving of unlocked cards.
+/// Unlocked Cards data comes from DataPersitenceManager.
+/// New cards are also saved in that manager.
+/// </summary>
 public class CardUnlockManager : MonoBehaviour, IDataPersistence
 {
     public static CardUnlockManager Instance { get; private set; }
@@ -30,6 +35,11 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
         DataPersistenceManager.Instance.Register(this);
     }
 
+    /// <summary>
+    /// Sets a card as unlocked.
+    /// Saves the new unlocked card.
+    /// </summary>
+    /// <param name="unlockItem">Item which the card has ben unlocked of.</param>
     public void SetCardUnlocked(ItemBase unlockItem)
     {
         if (IsCardUnlcoked(unlockItem.ItemName))
@@ -41,6 +51,11 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
         OnNewCardUnlock?.Invoke(_unlockedItemsCards);
     }
 
+    /// <summary>
+    /// Checks if the card of an item is unlocked.
+    /// </summary>
+    /// <param name="itemName">Name of the item to check if the card is unlocked.</param>
+    /// <returns>True if the card is unlocked.</returns>
     public bool IsCardUnlcoked(string itemName)
     {
         if (_unlockedItemsCards.Count == 0)
@@ -58,6 +73,10 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
         return false;
     }
 
+    /// <summary>
+    /// Loads unlocked cards game data
+    /// </summary>
+    /// <param name="data">Saved game data of the game.</param>
     public void LoadData(GameData data)
     {
         if (data != null)
@@ -67,6 +86,10 @@ public class CardUnlockManager : MonoBehaviour, IDataPersistence
         }
     }
 
+    /// <summary>
+    /// Saves data to the game data.
+    /// </summary>
+    /// <param name="data">Data to save.</param>
     public void SaveData(ref GameData data)
     {
         data.unlockedCards = _unlockedItemsCards;

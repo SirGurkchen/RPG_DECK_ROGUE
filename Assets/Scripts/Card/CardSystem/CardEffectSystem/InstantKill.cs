@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Card Effect for instantly killing an enemy.
+/// </summary>
 [CreateAssetMenu(menuName = "Card Effects/Instant Kill")]
 public class InstantKill : CardEffect
 {

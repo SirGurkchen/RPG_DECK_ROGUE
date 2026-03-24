@@ -34,6 +34,10 @@ public class PlayerStats : MonoBehaviour
         _coins = 0;
     }
 
+    /// <summary>
+    /// Receives damage.
+    /// </summary>
+    /// <param name="damage">Damage to receive.</param>
     public void ReceiveDamage(int damage)
     {
         int finalDamage = damage - _armor;
@@ -50,6 +54,10 @@ public class PlayerStats : MonoBehaviour
         CheckDeath();
     }
 
+    /// <summary>
+    /// Heals the player.
+    /// </summary>
+    /// <param name="healAmount">Amount to heal player.</param>
     public void HealPlayer(int healAmount)
     {
         if (_health < _maxHealth)
@@ -71,12 +79,20 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Removes mana from player.
+    /// </summary>
+    /// <param name="amount">Amount to remove.</param>
     public void RemoveMana(int amount)
     {
         _mana -= amount;
         OnManaChange?.Invoke();
     }
 
+    /// <summary>
+    /// Adds mana to the player.
+    /// </summary>
+    /// <param name="amount">Amount to add.</param>
     public void AddMana(int amount)
     {
         if (_mana < _maxMana)
@@ -90,11 +106,19 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds coins to player.
+    /// </summary>
+    /// <param name="amount">Coins to add.</param>
     public void AddCoins(int amount)
     {
         _coins += amount;
     }
 
+    /// <summary>
+    /// Removes coins from player.
+    /// </summary>
+    /// <param name="amount">Coins to remove.</param>
     public void RemoveCoins(int amount)
     {
         _coins -= amount; 

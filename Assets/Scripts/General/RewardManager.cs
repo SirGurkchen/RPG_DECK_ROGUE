@@ -10,6 +10,10 @@ public class RewardManager : MonoBehaviour
     private List<ItemController> _availableRewards = new List<ItemController>();
     private ItemController _selectReward;
 
+    /// <summary>
+    /// Builds a list of random reward items and returns it.
+    /// </summary>
+    /// <returns>List of ItemControllers of chosen items.</returns>
     public List<ItemController> GetRandomRewardItems()
     {
         ItemController itemOne = ItemsDataBase.Instance.GetRandomItem();
@@ -22,11 +26,18 @@ public class RewardManager : MonoBehaviour
         return _currentRewards;
     }
 
+    /// <summary>
+    /// Sets the selected reward.
+    /// </summary>
+    /// <param name="index">Index of reward.</param>
     public void SetSelectReward(int index)
     {
         _selectReward = _currentRewards[index];
     }
 
+    /// <summary>
+    /// Clears the rewards.
+    /// </summary>
     public void ClearRewards()
     {
         _currentRewards.Clear();
@@ -34,17 +45,27 @@ public class RewardManager : MonoBehaviour
         _selectReward = null;
     }
 
+    /// <summary>
+    /// Return selected reward
+    /// </summary>
+    /// <returns>ItemController of selected reward.</returns>
     public ItemController GetSelectReward()
     {
         return _selectReward;
     }
 
+    /// <summary>
+    /// Gives the player a reward item.
+    /// </summary>
+    /// <param name="item">Item to reward.</param>
+    /// <param name="player">Player main class.</param>
+    /// <param name="UI">UI.</param>
     public void GivePlayerRewardItem(ItemController item, PlayerManager player, UIManager UI)
     {
         if (player.GetPlayerInventory().CanAddItem())
         {
             player.GetPlayerInventory().GiveItemToInventory(Instantiate(item));
-            UI.UpdateWeaponUI(player.GetPlayerInventory().GetInventory());
+            UI.UpdateInventoryUI(player.GetPlayerInventory().GetInventory());
         }
     }
 }

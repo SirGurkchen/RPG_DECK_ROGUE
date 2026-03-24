@@ -1,3 +1,6 @@
+/// <summary>
+/// Enemy Controller for enemies which have thorn damage.
+/// </summary>
 public class SpikeyEnemyController : EnemyController
 {
     private int _currentThorns;

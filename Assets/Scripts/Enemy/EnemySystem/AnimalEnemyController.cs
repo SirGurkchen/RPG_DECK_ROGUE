@@ -1,3 +1,7 @@
+/// <summary>
+/// Enemy Controller for Animal Enemies.
+/// Checks if the enemy dodges when being attacked.
+/// </summary>
 public class AnimalEnemyController : EnemyController
 {
     public override void TakeDamage(int damage, AttackType attack)

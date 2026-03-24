@@ -6,6 +6,14 @@ using UnityEngine;
 /// </summary>
 public class CardManager : MonoBehaviour
 {
+    /// <summary>
+    /// Plays a given card.
+    /// Builds the card context so the card can be played correctly.
+    /// </summary>
+    /// <param name="card">Card to be played.</param>
+    /// <param name="player">Player Main class.</param>
+    /// <param name="playerInventory">Inventory of the player.</param>
+    /// <param name="board">Enemyboard of the game.</param>
     public void PlayCard(CardController card, PlayerManager player, PlayerInventory playerInventory, EnemyBoard board)
     {
         ItemBase equippedItem = null;

@@ -12,6 +12,11 @@ public class ItemUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _itemDamage;
     [SerializeField] private TextMeshProUGUI _itemEndurance;
 
+    /// <summary>
+    /// Sets an item UI.
+    /// </summary>
+    /// <param name="item">Item to display.</param>
+    /// <param name="index">Index of item slot.</param>
     public void SetItemUI(ItemController item, int index)
     {
         if (index >= 0 && index < _itemPositions.Length)
@@ -23,6 +28,10 @@ public class ItemUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shows an item description.
+    /// </summary>
+    /// <param name="item">Item to show description for.</param>
     public void ShowItemDescription(ItemController item)
     {
         _description.text = item.GetItemBase().Description;
@@ -38,6 +47,10 @@ public class ItemUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Shows the item reward description.
+    /// </summary>
+    /// <param name="item">Item to show description for.</param>
     public void ShowRewardItemDescription(ItemController item)
     {
         _description.text = item.GetItemBase().Description;
@@ -54,6 +67,9 @@ public class ItemUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Removes all item descriptions.
+    /// </summary>
     public void RemoveDescriptionText()
     {
         _description.text = string.Empty;

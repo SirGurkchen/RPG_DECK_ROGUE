@@ -1,7 +1,10 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Handles the animation of the Main Menu visual elements.
+/// Animations include Start UP and sub menu switching.
+/// </summary>
 public class MainMenuAnimator : MonoBehaviour
 {
     [SerializeField] private GameObject _selectionEndPosition;
@@ -20,12 +23,9 @@ public class MainMenuAnimator : MonoBehaviour
         _settingsStartPos = _settingsObject.transform.position;
     }
 
-    private void LoadingFinished()
-    {
-        LoadingScreenManager.Instance.OnLoadingScreenFinished -= LoadingFinished;
-        AnimateStartUp();
-    }
-
+    /// <summary>
+    /// Animates the main menu start up.
+    /// </summary>
     public void AnimateStartUp()
     {
         if (_selectionObject == null) return;
@@ -33,6 +33,10 @@ public class MainMenuAnimator : MonoBehaviour
         _selectionObject.gameObject.transform.DOMove(_selectionEndPosition.transform.position, START_ANIMATION_TIME);
     }
 
+    /// <summary>
+    /// Toggles the settings/main menu animation
+    /// </summary>
+    /// <param name="isOn">Activity of main menu.</param>
     public void ToggleSettingsAnimation(bool isOn)
     {
         if (isOn)
@@ -73,6 +77,9 @@ public class MainMenuAnimator : MonoBehaviour
         });
     }
 
+    /// <summary>
+    /// Kills all animation in the main menu.
+    /// </summary>
     public void KillAll()
     {
         _selectionObject.transform.DOKill();

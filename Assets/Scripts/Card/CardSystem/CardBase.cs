@@ -23,6 +23,10 @@ public class CardBase : ScriptableObject
     public string Description => _cardDescription;
     public int ShopPrice => _cardShopPrice;
 
+    /// <summary>
+    /// Uses the card and determines which effect to use.
+    /// </summary>
+    /// <param name="context">Context of the card played.</param>
     public void Play(CardContext context)
     {
         if (_mainEffect.ItemConditionMet(context))

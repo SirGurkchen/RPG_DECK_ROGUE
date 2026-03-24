@@ -54,16 +54,28 @@ public class ItemController : MonoBehaviour
         return suc;
     }
 
+    /// <summary>
+    /// Reutrn name of item.
+    /// </summary>
+    /// <returns>Item name.</returns>
     public string GetItemName()
     {
         return _itemData.ItemName;
     }
 
+    /// <summary>
+    /// Returns ItemBase data class.
+    /// </summary>
+    /// <returns>ItemBase class.</returns>
     public ItemBase GetItemBase()
     {
         return _itemData;
     }
 
+    /// <summary>
+    /// Returns current item endurance.
+    /// </summary>
+    /// <returns>Current endurance.</returns>
     public int GetCurrentEndurance()
     {
         return _currentEndurance;
@@ -79,12 +91,19 @@ public class ItemController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Destroys the item.
+    /// </summary>
     public void DestroyItem()
     {
         OnItemDestroy?.Invoke(this);
         Destroy(this.gameObject);
     }
 
+    /// <summary>
+    /// Checks if the item can unlock a new card.
+    /// </summary>
+    /// <returns></returns>
     public bool CheckCardUnlock()
     {
         if (CardUnlockManager.Instance.IsCardUnlcoked(_itemData.ItemName)) // Card of Item is already unlocked
@@ -100,16 +119,26 @@ public class ItemController : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Returns image of item.
+    /// </summary>
+    /// <returns>Item icon image.</returns>
     public Image GetItemIcon()
     {
         return _itemImage;
     }
 
+    /// <summary>
+    /// Marks the item.
+    /// </summary>
     public void Mark()
     {
         _itemImage.color = new Color(255, 0, 0, 100); // Highlights Item image in red
     }
 
+    /// <summary>
+    /// Demarks the item.
+    /// </summary>
     public void Demark()
     {
         _itemImage.color = new Color(255, 255, 255, 255); // Resets the Item Image marking color

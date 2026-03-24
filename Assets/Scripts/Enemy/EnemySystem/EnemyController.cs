@@ -3,7 +3,7 @@ using UnityEngine;
 
 /// <summary>
 /// Controls the in game instance of an enemy object.
-/// Each new enemy has this script as part of their components.
+/// Each new enemy has this script as part of their components or their inherited controller classes.
 /// Orchestrates its data and UI representation.
 /// </summary>
 public class EnemyController : MonoBehaviour
@@ -38,6 +38,9 @@ public class EnemyController : MonoBehaviour
         _myUI.SetEnemyImage(_enemyData.Icon);
     }
 
+    /// <summary>
+    /// Initializes the enemy with given coins, health and animating to fighting position.
+    /// </summary>
     protected virtual void InitializeEnemy()
     {
         _currentHealth = _enemyData.Health;
@@ -46,6 +49,11 @@ public class EnemyController : MonoBehaviour
         AudioManager.Instance.PlayAudioClip(_spawnSound);
     }
 
+    /// <summary>
+    /// Calculates and takes damage.
+    /// </summary>
+    /// <param name="damage">Damage given.</param>
+    /// <param name="attack">AttackType of incoming damage.</param>
     public virtual void TakeDamage(int damage, AttackType attack)
     {
         GetDamaged(damage, attack);
@@ -97,11 +105,19 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the enemy marker of the enemy active or inactive.
+    /// </summary>
+    /// <param name="isMarked">Activation of enemy marker.</param>
     public void SetEnemeyMarker(bool isMarked)
     {
         _myUI.SetEnemeyMarker(isMarked);
     }
 
+    /// <summary>
+    /// Attacks the player.
+    /// </summary>
+    /// <param name="player">Player main class.</param>
     public virtual void Attack(PlayerManager player)
     {
         _animator.PlayAttackAnimation();

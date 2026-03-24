@@ -73,7 +73,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Instance_OnSelectLeftPress()
     {
-        if (_horde.isSpawning)
+        if (_horde.IsSpawning)
         {
             return;
         }
@@ -83,7 +83,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Instance_OnSelectRightPress()
     {
-        if (_horde.isSpawning)
+        if (_horde.IsSpawning)
         {
             return;
         }
@@ -93,7 +93,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Instance_OnConfirmPress()
     {
-        if (_horde.isSpawning)
+        if (_horde.IsSpawning)
         {
             return;
         }
@@ -103,7 +103,7 @@ public class PlayerInput : MonoBehaviour
 
     private void Instance_OnItemSelect(int item_numb)
     {
-        if (_horde.isSpawning)
+        if (_horde.IsSpawning)
         {
             return;
         }

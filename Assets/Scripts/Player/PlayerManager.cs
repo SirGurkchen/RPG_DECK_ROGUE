@@ -106,12 +106,12 @@ public class PlayerManager : MonoBehaviour
 
     private void Input_OnEnemyRightSelect()
     {
-        _targeting.SetSelectTarget(_board.GetMostRighternEnemy(), Input.E);
+        _targeting.SetSelectTarget(_board.GetRightmostEnemy(), Input.E);
     }
 
     private void Input_OnEnemyLeftSelect()
     {
-        _targeting.SetSelectTarget(_board.GetMostLefternEnemy(), Input.Q);
+        _targeting.SetSelectTarget(_board.GetLeftmostEnemy(), Input.Q);
     }
 
     private void Input_OnItemSelect(int item_index)
@@ -170,21 +170,37 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Take damage.
+    /// </summary>
+    /// <param name="damage">Damage to take.</param>
     public void TakeDamage(int damage)
     {
         _combat.TakeDamage(_stats, damage);
     }
 
+    /// <summary>
+    /// Tries to give player new card.
+    /// </summary>
+    /// <param name="newCard">Card to add.</param>
     public void TryGiveCard(CardController newCard)
     {
         _cards.AddCardToStash(newCard);
     }
 
+    /// <summary>
+    /// Checks if player can add card.
+    /// </summary>
+    /// <returns>True if card can be added.</returns>
     public bool CanAddCard()
     {
         return _cards.CanAdd();
     }
 
+    /// <summary>
+    /// Removes coins from player
+    /// </summary>
+    /// <param name="coins">Coins to remove.</param>
     public void RemoveCoins(int coins)
     {
         _stats.RemoveCoins(coins);

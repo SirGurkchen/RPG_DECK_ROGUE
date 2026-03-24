@@ -1,7 +1,6 @@
 using TMPro;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 /// <summary>
 /// Visualizes an instance of a card as its placement and animation.
@@ -23,12 +22,19 @@ public class CardUI : MonoBehaviour
         _originalPos = transform.position;
     }
 
+    /// <summary>
+    /// Initializes a card UI.
+    /// </summary>
+    /// <param name="card">Card Data.</param>
     public void InitCard(CardBase card)
     {
         _cardNameText.text = card.Name;
         _cardDescText.text = card.Description;
     }
 
+    /// <summary>
+    /// Plays card select animation.
+    /// </summary>
     public void VisualizeCardSelect()
     {
         if (!_selected)
@@ -40,6 +46,9 @@ public class CardUI : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Plays card deselect animation.
+    /// </summary>
     public void VisualizeCardDeselect()
     {
         transform.DOKill();
@@ -47,6 +56,10 @@ public class CardUI : MonoBehaviour
         _selected = false;
     }
 
+    /// <summary>
+    /// Toggles mark of the card.
+    /// </summary>
+    /// <param name="isOn">Activity of mark.</param>
     public void ToggleMarkCard(bool isOn)
     {
         if (isOn)

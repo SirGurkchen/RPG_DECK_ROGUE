@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -11,11 +10,15 @@ public class CardUIManager : MonoBehaviour
 
     private GameObject[] _cards;
 
-    public void Start()
+    private void Start()
     {
         _cards = new GameObject[_cardUIPositions.Length];
     }
 
+    /// <summary>
+    /// Adds card UI to card stash.
+    /// </summary>
+    /// <param name="card">Card to add.</param>
     public void FillUIWithCard(CardController card)
     {
         for (int i = 0; i <  _cards.Length; i++)
@@ -30,6 +33,10 @@ public class CardUIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Removes card UI from card stash.
+    /// </summary>
+    /// <param name="card">Card to remove.</param>
     public void RemoveCardFromUI(CardController card)
     {
         for (int i = 0; i < _cards.Length; i++)

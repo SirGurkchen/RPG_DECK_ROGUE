@@ -1,8 +1,11 @@
 using DG.Tweening;
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handles the Animation of the Shop.
+/// Animates and enter and exit animation.
+/// </summary>
 public class ShopAnimator : MonoBehaviour
 {
     [SerializeField] private Image _shopSign;
@@ -18,6 +21,9 @@ public class ShopAnimator : MonoBehaviour
         _startPos = _shopSign.transform.position;
     }
 
+    /// <summary>
+    /// Plays the shop enter animation
+    /// </summary>
     public Tween PlayShopEnterAnimation()
     {
         if (_shopSignEndPos == null) return null;
@@ -27,6 +33,9 @@ public class ShopAnimator : MonoBehaviour
             .SetLink(_shopSign.gameObject);
     }
 
+    /// <summary>
+    /// Plays the shop leave animation.
+    /// </summary>
     public Tween PlayShopLeaveAnimation()
     {
         if (_shopSign == null) return null;

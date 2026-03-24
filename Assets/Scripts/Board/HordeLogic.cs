@@ -13,18 +13,30 @@ public class HordeLogic : MonoBehaviour
     private const int MIN_ENEMIES = 1;
     private const int MAX_ENEMIES = 2;
 
-    public bool isSpawning {  get; private set; }
+    public bool IsSpawning { get; private set; }
 
+    /// <summary>
+    /// Starts refilling the board randomly
+    /// </summary>
+    /// <param name="round">The current round number</param>
     public void RefillBoardRandomly(int round)
     {
         StartCoroutine(SpawnRandomEnemiesWithDelay(round));
     }
 
-    public void RefillBoardPredetermined(string enemyOne, string enemyTwo)
+    /// <summary>
+    /// Starts refilling the board with predetermined enemies
+    /// </summary>
+    /// <param name="enemyOne">The name of the first enemy</param>
+    /// <param name="enemyTwo">The name of the second enemy. Can be left empty.</param>
+    public void RefillBoardPredetermined(string enemyOne, string enemyTwo = null)
     {
         StartCoroutine(SpawnPredeterminedEnemiesWithDelay(enemyOne, enemyTwo));
     }
 
+    /// <summary>
+    /// Starts refilling the board with the boss enemy.
+    /// </summary>
     public void RefillBoardWithBoss()
     {
         StartCoroutine(SpawnBossEnemy());
@@ -32,7 +44,7 @@ public class HordeLogic : MonoBehaviour
 
     private IEnumerator SpawnPredeterminedEnemiesWithDelay(string enemyOne, string enemyTwo)
     {
-        isSpawning = true;
+        IsSpawning = true;
         yield return new WaitForSeconds(SPAWN_TIMER);
         AddPredeterminedEnemy(enemyOne);
         if (enemyTwo != null)
@@ -40,12 +52,12 @@ public class HordeLogic : MonoBehaviour
             yield return new WaitForSeconds(SPAWN_TIMER);
             AddPredeterminedEnemy(enemyTwo);
         }
-        isSpawning = false;
+        IsSpawning = false;
     }
 
     private IEnumerator SpawnRandomEnemiesWithDelay(int round)
     {
-        isSpawning = true;
+        IsSpawning = true;
 
         yield return new WaitForSeconds(SPAWN_TIMER);
 
@@ -56,16 +68,16 @@ public class HordeLogic : MonoBehaviour
             AddRandomEnemy(round);
             yield return new WaitForSeconds(SPAWN_TIMER);
         }
-        isSpawning = false;
+        IsSpawning = false;
     }
 
     private IEnumerator SpawnBossEnemy()
     {
-        isSpawning = true;
+        IsSpawning = true;
         yield return new WaitForSeconds(SPAWN_TIMER);
         AddBossEnemy();
         yield return new WaitForSeconds(SPAWN_TIMER);
-        isSpawning = false;
+        IsSpawning = false;
     }
 
     private void AddRandomEnemy(int currentRound)

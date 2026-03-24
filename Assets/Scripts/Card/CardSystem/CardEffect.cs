@@ -16,6 +16,15 @@ public class CardContext
 /// </summary>
 public abstract class CardEffect : ScriptableObject
 {
+    /// <summary>
+    /// Executes the card effect given.
+    /// </summary>
+    /// <param name="context">Context of the card played.</param>
     public abstract void Execute(CardContext context);
+
+    /// <summary>
+    /// Return the description of the card.
+    /// </summary>
+    /// <returns>Card Description.</returns>
     public abstract string GetDescription();
 }

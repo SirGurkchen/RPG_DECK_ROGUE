@@ -28,6 +28,10 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets an equipped item.
+    /// </summary>
+    /// <param name="item_index">Index of item to be equipped.</param>
     public void SetEquippedItem(int item_index)
     {
         if (item_index >= _inventory.Count)
@@ -56,6 +60,10 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds an item to inventory.
+    /// </summary>
+    /// <param name="item">Item to add to inventory.</param>
     public void GiveItemToInventory(ItemController item)
     {
         if (item == null) return;
@@ -82,6 +90,10 @@ public class PlayerInventory : MonoBehaviour
         item.OnItemFirstAddedToInventory -= FirstEquip;
     }
 
+    /// <summary>
+    /// Checks if item can be added.
+    /// </summary>
+    /// <returns>True if an item can be added.</returns>
     public bool CanAddItem()
     {
         for (int i = 0; i < _inventory.Count; i++)
@@ -105,6 +117,9 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Deselects and item.
+    /// </summary>
     public void DeselectItem()
     {
         if (_equippedItem != null)

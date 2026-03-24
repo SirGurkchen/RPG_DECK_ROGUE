@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// Scriptable Object for Animal Enemies.
+/// Stores data for dodge sound and its dodge chance.
+/// </summary>
 [CreateAssetMenu(fileName = "New Animal Enemy", menuName = "Enemy/Animal")]
 public class AnimalEnemy : EnemyBase, IDodge
 {

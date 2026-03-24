@@ -17,6 +17,10 @@ public class PlayerCardStash : MonoBehaviour
         _playerCards = new List<CardController>();
     }
 
+    /// <summary>
+    /// Adds a card to the card stash
+    /// </summary>
+    /// <param name="newCard">Newly added card.</param>
     public void AddCardToStash(CardController newCard)
     {
         if (_playerCards.Count < _maxStashSize)
@@ -25,6 +29,11 @@ public class PlayerCardStash : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets selected card and returns if the selection was succesful.
+    /// </summary>
+    /// <param name="index">Index of selected card.</param>
+    /// <returns>True if selection was succesful.</returns>
     public bool SetSelectedCard(int index)
     {
         CardController card = GetCardAtStash(index);
@@ -50,6 +59,9 @@ public class PlayerCardStash : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Deselects a card.
+    /// </summary>
     public void DeselectCard()
     {
         if (_selectedCard != null)
@@ -60,6 +72,10 @@ public class PlayerCardStash : MonoBehaviour
         Debug.Log(_selectedCard);
     }
 
+    /// <summary>
+    /// Handles logic after a card was used.
+    /// Removes used card out of player card stash.
+    /// </summary>
     public void CardUsed()
     {
         if (_selectedCard != null)
@@ -75,21 +91,38 @@ public class PlayerCardStash : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Return equipped card.
+    /// </summary>
+    /// <returns>CardController of equipped card.</returns>
     public CardController GetEquippedCard()
     {
         return _selectedCard;
     }
 
+    /// <summary>
+    /// Returns card at index position.
+    /// </summary>
+    /// <param name="index">Index of position.</param>
+    /// <returns>CardController of card at index.</returns>
     public CardController GetCardAtStash(int index)
     {
         return _playerCards[index];
     }
 
+    /// <summary>
+    /// Checks if card can be added.
+    /// </summary>
+    /// <returns>True if another card can be added to card stash</returns>
     public bool CanAdd()
     {
         return _playerCards.Count < MAX_CARDS;
     }
 
+    /// <summary>
+    /// Returns card count in stash
+    /// </summary>
+    /// <returns>Number of cards in stash.</returns>
     public int GetCardCount()
     {
         return _playerCards.Count;

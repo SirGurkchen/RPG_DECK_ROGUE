@@ -2,6 +2,10 @@ using DG.Tweening;
 using System.Collections;
 using UnityEngine;
 
+/// <summary>
+/// Handles the animation of the enemy object the script is attached to.
+/// Animation include attack and getting damaged animations.
+/// </summary>
 public class EnemyAnimator : MonoBehaviour
 {
     private const float ATTACK_ANIMATION_HEIGHT = 0.6f;
@@ -10,11 +14,18 @@ public class EnemyAnimator : MonoBehaviour
     private const float DAMAGING_SWAY = 0.1f;
     private Vector3 _originalPos;
 
+    /// <summary>
+    /// Sets the original postion of the enemy.
+    /// </summary>
+    /// <param name="pos">Original position of the enemy.</param>
     public void SetOriginalPos(Vector3 pos)
     {
         _originalPos = pos;
     }
 
+    /// <summary>
+    /// Starts the attack animation.
+    /// </summary>
     public void PlayAttackAnimation()
     {
         if (gameObject != null)
@@ -26,6 +37,9 @@ public class EnemyAnimator : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts the take damage animation.
+    /// </summary>
     public void PlayDamagingAnimation()
     {
         transform.DOKill();

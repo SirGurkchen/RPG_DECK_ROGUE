@@ -17,12 +17,20 @@ public class EnemyStatusUI : MonoBehaviour
 
     [SerializeField] private List<StatusIcon> _statusIcons;
 
+    /// <summary>
+    /// Updates the status UI.
+    /// </summary>
+    /// <param name="enemyData">Enemy data.</param>
     public void UpdateStatus(EnemyBase enemyData)
     {
         UpdateStatusDisplay("Block", enemyData is IBlock block ? block.Block : -1);
         UpdateStatusDisplay("Thorns", enemyData is IThorns thorn ? thorn.ThornsDamage : -1);
     }
 
+    /// <summary>
+    /// Updates thorns value
+    /// </summary>
+    /// <param name="numb">Number of thorns.</param>
     public void UpdateThorns(int numb)
     {
         foreach (StatusIcon icon in  _statusIcons)

@@ -1,6 +1,11 @@
 using System;
 using UnityEngine;
 
+/// <summary>
+/// Stores the Round Buffers the game has.
+/// Chooses which next round buffer is being played.
+/// No Round buffer can be chosen more than twice in a row.
+/// </summary>
 public class RoundBufferPool : MonoBehaviour
 {
     public static RoundBufferPool Instance { get; private set; }
@@ -24,6 +29,11 @@ public class RoundBufferPool : MonoBehaviour
         Reward
     }
 
+    /// <summary>
+    /// Determines a random round buffer.
+    /// Same round buffer cannot be returned twice in a row.
+    /// </summary>
+    /// <returns>Selected round buffer.</returns>
     public BufferType GetRandomRoundBuffer()
     {
         if (CheckRepeated())

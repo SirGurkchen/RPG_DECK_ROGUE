@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Orchestrates the 'flow' of the game.
@@ -27,7 +25,7 @@ public class GameManager : MonoBehaviour
         _UIManager.UpdateHealthBar(_player.GetPlayerStats().Health, _player.GetPlayerStats().MaxHealth);
         _UIManager.UpdateManaUI(_player.GetPlayerStats().Mana, _player.GetPlayerStats().MaxMana);
         _UIManager.UpdateCoinsUI(_player.GetPlayerStats().Coins);
-        _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
+        _UIManager.UpdateInventoryUI(_player.GetPlayerInventory().GetInventory());
     }
 
     private void LoadingFinished()
@@ -222,7 +220,7 @@ public class GameManager : MonoBehaviour
         _UIManager.ShowEnemyInfo(null);
         _UIManager.ResetInputPrompt();
         _player.DeselectAllItems();
-        _UIManager.UpdateWeaponUI(_player.GetPlayerInventory().GetInventory());
+        _UIManager.UpdateInventoryUI(_player.GetPlayerInventory().GetInventory());
     }
 
     private void OnDisable()

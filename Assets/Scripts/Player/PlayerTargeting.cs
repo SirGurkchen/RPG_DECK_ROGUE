@@ -13,6 +13,11 @@ public class PlayerTargeting : MonoBehaviour
     public event Action<EnemyController, Input> OnEnemyTargeted;
     private Input _currentSelectPos;
 
+    /// <summary>
+    /// Sets the selected target.
+    /// </summary>
+    /// <param name="enemy">Enemy to target.</param>
+    /// <param name="input">Input received.</param>
     public void SetSelectTarget(EnemyController enemy, Input input)
     {
         if (enemy == null) return;
@@ -37,6 +42,9 @@ public class PlayerTargeting : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Deselects all targeted enemies.
+    /// </summary>
     public void DeselectAll()
     {
         if (_currentTarget != null)

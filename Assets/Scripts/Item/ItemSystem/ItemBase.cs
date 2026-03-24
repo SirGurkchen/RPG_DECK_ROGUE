@@ -15,7 +15,6 @@ public abstract class ItemBase : ScriptableObject
     [SerializeField] private Sprite _itemIcon;
 
     [Header("Item Properties")]
-    [SerializeField] private Rarity _rarity;
     [SerializeField] CardController _unlockableCard;
 
     public string ItemName => _itemName;
@@ -25,6 +24,12 @@ public abstract class ItemBase : ScriptableObject
     public Sprite Icon => _itemIcon;
     public int Price => _itemShopPrice;
 
+    /// <summary>
+    /// Usage logic of the item.
+    /// </summary>
+    /// <param name="player">Player stats.</param>
+    /// <param name="target">Potential enemy target. Can be left empty.</param>
+    /// <returns></returns>
     public abstract bool Use(PlayerStats player, EnemyController target = null);
 
     public virtual string GetItemToString()
@@ -44,14 +49,4 @@ public enum ItemType
     Shield,
     Potion,
     Misc
-}
-
-public enum Rarity
-{
-    Common,
-    Uncommon,
-    Rare,
-    Epic,
-    Legendary,
-    Mythical
 }

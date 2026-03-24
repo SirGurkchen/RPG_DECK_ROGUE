@@ -1,26 +1,37 @@
 using System;
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
+/// <summary>
+/// Handles the Pause menu logic of the game.
+/// This includes showing the warning, quitting and return to the main menu via buttons.
+/// </summary>
 public class PauseMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject _warningScreen;
 
     private Action _confirmAction;
 
+    /// <summary>
+    /// Quits the game.
+    /// </summary>
     public void QuitGame()
     {
         AudioManager.Instance.PlayButtonPress();
         ShowWarning(WarningType.Quit);
     }
 
+    /// <summary>
+    /// Returns to the main menu.
+    /// </summary>
     public void ReturnToMainMenu()
     {
         AudioManager.Instance.PlayButtonPress();
         ShowWarning(WarningType.MainMenu);
     }
 
+    /// <summary>
+    /// Confirms a decision in the pause menu.
+    /// </summary>
     public void ConfirmDecision()
     {
         AudioManager.Instance.PlayButtonPress();
@@ -28,6 +39,9 @@ public class PauseMenuManager : MonoBehaviour
         _confirmAction = null;
     }
 
+    /// <summary>
+    /// Cancels a decision in the pause menu.
+    /// </summary>
     public void CancelDecision()
     {
         AudioManager.Instance.PlayButtonPress();

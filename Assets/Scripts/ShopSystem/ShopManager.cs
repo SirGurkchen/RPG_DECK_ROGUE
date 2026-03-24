@@ -3,6 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Handles the logic of the Shop.
+/// This includes Item selection of trying to buy selecting items.
+/// </summary>
 public class ShopManager : MonoBehaviour
 {
     [SerializeField] private ShopUIManager _shopUI;
@@ -27,6 +31,10 @@ public class ShopManager : MonoBehaviour
         UpdateAvailableCards(CardUnlockManager.Instance.UnlockedItemsCards);
     }
 
+    /// <summary>
+    /// Updates the shop with new available cards.
+    /// </summary>
+    /// <param name="unlockedCards">List of unlocked cards.</param>
     public void UpdateAvailableCards(List<string> unlockedCards)
     {
         _availableItemCards.Clear();
@@ -43,12 +51,15 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Starts filling the shop.
+    /// </summary>
     public void EnterShop()
     {
         StartCoroutine(FillShop());
     }
 
-    public IEnumerator FillShop()
+    private IEnumerator FillShop()
     {
         yield return new WaitUntil(() => AudioManager.Instance.IsSoundFinished());
         Tween enterTween = _shopAnimator.PlayShopEnterAnimation();
@@ -72,6 +83,11 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles shop item selection.
+    /// </summary>
+    /// <param name="index">Index of selected item.</param>
+    /// <param name="UI">UI.</param>
     public void HandleShopSelection(int index, UIManager UI)
     {
         if (_itemOnly)
@@ -97,6 +113,12 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handle shop confirmation.
+    /// </summary>
+    /// <param name="player">Player main clas.</param>
+    /// <param name="UI">UI.</param>
+    /// <returns>True if shop purchase was succesful.</returns>
     public bool HandleShopConfirm(PlayerManager player, UIManager UI)
     {
         if (player.GetPlayerInventory().CanAddItem() && _selectItem != null)
@@ -110,7 +132,7 @@ public class ShopManager : MonoBehaviour
             player.GetPlayerInventory().GiveItemToInventory(Instantiate(_selectItem));
             player.RemoveCoins(_selectItem.GetItemBase().Price);
             UI.UpdateCoinsUI(player.GetPlayerStats().Coins);
-            UI.UpdateWeaponUI(player.GetPlayerInventory().GetInventory());
+            UI.UpdateInventoryUI(player.GetPlayerInventory().GetInventory());
             StartCoroutine(EmptyShop());
         }
         else if (_selectCard != null && player.CanAddCard())
@@ -131,11 +153,18 @@ public class ShopManager : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Checks if a reward is selected.
+    /// </summary>
+    /// <returns>True if a reward is selected.</returns>
     public bool IsRewardSelected()
     {
         return _selectCard != null || _selectItem != null;
     }
 
+    /// <summary>
+    /// Empties the shop and starts shop exit animation.
+    /// </summary>
     public IEnumerator EmptyShop()
     {
         _shopUI.ClearShopUI();

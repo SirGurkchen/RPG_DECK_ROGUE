@@ -9,7 +9,6 @@ public class ItemsDataBase : MonoBehaviour
 {
     public static ItemsDataBase Instance { get; private set; }
 
-
     [SerializeField] private List<ItemController> _itemDatabase;
     private List<ItemController> _validItems = new List<ItemController>();
 
@@ -24,6 +23,11 @@ public class ItemsDataBase : MonoBehaviour
         Instance = this;
     }
 
+    /// <summary>
+    /// Finds a random item to return.
+    /// Firt builds a list of valid items that can be selected.
+    /// </summary>
+    /// <returns>Selected item.</returns>
     public ItemController GetRandomItem()
     {
         foreach (ItemController item in _itemDatabase)
@@ -39,6 +43,11 @@ public class ItemsDataBase : MonoBehaviour
         return reward;
     }
 
+    /// <summary>
+    /// Finds an item by given name.
+    /// </summary>
+    /// <param name="itemName">Name of the item.</param>
+    /// <returns>Item Controller found by given name.</returns>
     public ItemController GetItemByName(string itemName)
     {
         return _itemDatabase.Find(item => item.GetItemName() == itemName);

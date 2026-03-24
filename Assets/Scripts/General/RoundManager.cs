@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+/// <summary>
+/// Handles the round system of the game.
+/// Plays the enemy attack sequence, starts the round buffer and starts new enemy spawning.
+/// </summary>
 public class RoundManager : MonoBehaviour
 {
     [SerializeField] private RewardManager _rewardManager;
@@ -20,6 +24,12 @@ public class RoundManager : MonoBehaviour
         _rounds = 1;
     }
 
+    /// <summary>
+    /// Starts the execution of an attack round of enemies.
+    /// </summary>
+    /// <param name="UI">UI.</param>
+    /// <param name="player">Player main class.</param>
+    /// <param name="board">Enemy board.</param>
     public void StartBufferedRound(UIManager UI, PlayerManager player, EnemyBoard board)
     {
         GameInput.Instance.ChangePlayerActive(false);
@@ -63,6 +73,11 @@ public class RoundManager : MonoBehaviour
         _roundBufferRoutine = null;
     }
 
+    /// <summary>
+    /// Handles the logic once the enemy board is cleared.
+    /// </summary>
+    /// <param name="player">Player main class.</param>
+    /// <param name="UI">UI.</param>
     public void BoardClear(PlayerManager player, UIManager UI)
     {
         if (_roundBufferRoutine != null)
@@ -111,11 +126,21 @@ public class RoundManager : MonoBehaviour
         GameInput.Instance.ChangeShopActive(true);
     }
 
+    /// <summary>
+    /// Handles shop selection logic.
+    /// </summary>
+    /// <param name="index">Index of selected item.</param>
+    /// <param name="UI">UI.</param>
     public void HandleShopSelect(int index, UIManager UI)
     {
         _shopManager.HandleShopSelection(index, UI);
     }
 
+    /// <summary>
+    /// Handles shop confirmation logic.
+    /// </summary>
+    /// <param name="player">Player main class.</param>
+    /// <param name="UI">UI.</param>
     public void HandleShopConfirmation(PlayerManager player, UIManager UI)
     {
         if (!_shopManager.IsRewardSelected()) return;
@@ -132,6 +157,11 @@ public class RoundManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Handles reward confirmation logic.
+    /// </summary>
+    /// <param name="player">Player main class.</param>
+    /// <param name="UI">UI.</param>
     public void HandleRewardConfirm(PlayerManager player, UIManager UI)
     {
         if (_rewardManager.GetSelectReward() == null) return;
@@ -162,6 +192,10 @@ public class RoundManager : MonoBehaviour
         StartCoroutine(WaitForSpawnThenActivate(UI));
     }
 
+    /// <summary>
+    /// Cancels the current round buffer and starts new round.
+    /// </summary>
+    /// <param name="UI">UI.</param>
     public void CancelRoundBuffer(UIManager UI)
     {
         if (_currentBuffer == RoundBuffer.Shop)
@@ -180,12 +214,22 @@ public class RoundManager : MonoBehaviour
         StartNextRound(UI);
     }
 
+    /// <summary>
+    /// Handles reward selection logic.
+    /// </summary>
+    /// <param name="rewardIndex">Index of selected reward.</param>
+    /// <param name="UI">UI.</param>
     public void HandleRewardSelection(int rewardIndex, UIManager UI)
     {
         _rewardManager.SetSelectReward(rewardIndex);
         UI.ShowRewardItemDescription(_rewardManager.GetSelectReward(), rewardIndex);
     }
 
+    /// <summary>
+    /// Starts a predetermined round of enemies.
+    /// </summary>
+    /// <param name="enemyOne">Name of first enemy.</param>
+    /// <param name="enemyTwo">Name of second enemy. Can be left empty.</param>
     public void StartPredeterminedRound(string enemyOne, string enemyTwo = null)
     {
         _hordeLogic.RefillBoardPredetermined(enemyOne, enemyTwo); 
@@ -193,7 +237,7 @@ public class RoundManager : MonoBehaviour
 
     private IEnumerator WaitForSpawnThenActivate(UIManager UI)
     {
-        yield return new WaitUntil(() => !_hordeLogic.isSpawning);
+        yield return new WaitUntil(() => !_hordeLogic.IsSpawning);
         GameInput.Instance.ChangePlayerActive(true);
         UI.ToggleSelectionPrompts(true);
     }

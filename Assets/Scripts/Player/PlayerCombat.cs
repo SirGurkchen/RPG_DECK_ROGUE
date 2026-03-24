@@ -7,6 +7,12 @@ public class PlayerCombat : MonoBehaviour
 {
     [SerializeField] private PlayerInventory _inventory;
 
+    /// <summary>
+    /// Uses an item.
+    /// </summary>
+    /// <param name="stats">Player stats.</param>
+    /// <param name="target">Targeted enemy.</param>
+    /// <returns></returns>
     public bool Use(PlayerStats stats, EnemyController target = null)
     {
         if (_inventory.GetEquippedItem() != null)
@@ -20,6 +26,11 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Take damage.
+    /// </summary>
+    /// <param name="stats">Player stats.</param>
+    /// <param name="damage">Damage to be taken.</param>
     public void TakeDamage(PlayerStats stats, int damage)
     {
         stats.ReceiveDamage(damage);

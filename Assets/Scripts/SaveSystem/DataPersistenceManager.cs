@@ -1,8 +1,10 @@
-using System.Security.Cryptography;
 using UnityEngine;
-using System.Linq;
 using System.Collections.Generic;
 
+/// <summary>
+/// Handles the saving of Data of the game.
+/// Elements that save something register to this class.
+/// </summary>
 public class DataPersistenceManager : MonoBehaviour
 {
     public static DataPersistenceManager Instance { get; private set; }
@@ -29,16 +31,17 @@ public class DataPersistenceManager : MonoBehaviour
         LoadGameData();
     }
 
+    /// <summary>
+    /// Starts a new game save file.
+    /// </summary>
     public void StartNewGame()
     {
         _gameData = new GameData();
     }
 
-    public void StartNewRun()
-    {
-        
-    }
-
+    /// <summary>
+    /// Loads an existing save file.
+    /// </summary>
     public void LoadGameData()
     {
         this._gameData = _dataHandler.Load();
@@ -49,17 +52,18 @@ public class DataPersistenceManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Loads data to registered objects.
+    /// </summary>
+    /// <param name="obj"></param>
     public void GiveObjectData(IDataPersistence obj)
     {
-        Debug.Log("Object Data Loaded!");
         obj.LoadData(_gameData);
     }
 
-    public void DeleteSave()
-    {
-        
-    }
-
+    /// <summary>
+    /// Saves a new card unlock.
+    /// </summary>
     public void SaveNewCardUnlock()
     {
         foreach (IDataPersistence data in _dataScripts)
@@ -75,12 +79,20 @@ public class DataPersistenceManager : MonoBehaviour
         _dataHandler.Save(_gameData);
     }
 
+    /// <summary>
+    /// Registeres a new object that saves.
+    /// </summary>
+    /// <param name="data">Object that saves.</param>
     public void Register(IDataPersistence data)
     {
         _dataScripts.Add(data);
         GiveObjectData(data);
     }
 
+    /// <summary>
+    /// Unregisteres an object that saves.
+    /// </summary>
+    /// <param name="data">Object that saves.</param>
     public void Unregister(IDataPersistence data)
     {
         _dataScripts.Remove(data);

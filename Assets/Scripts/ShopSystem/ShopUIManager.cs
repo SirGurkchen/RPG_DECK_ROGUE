@@ -2,6 +2,9 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Handles the UI presentation of the Shop.
+/// </summary>
 public class ShopUIManager : MonoBehaviour
 {
     [SerializeField] private Image[] _shopItems;
@@ -11,13 +14,18 @@ public class ShopUIManager : MonoBehaviour
 
     private CardController _currentCard;
 
+    /// <summary>
+    /// Fills shop UI with items only.
+    /// </summary>
+    /// <param name="itemOne">Item one.</param>
+    /// <param name="itemTwo">Item two.</param>
     public void FillShopUIItemsOnly(ItemController itemOne, ItemController itemTwo)
     {
         _shopItems[0].sprite = itemOne.GetItemBase().Icon;
         _shopItems[1].sprite = itemTwo.GetItemBase().Icon;
 
-        _priceOne.text = "$" + itemOne.GetItemBase().Price;
-        _priceTwo.text = "$" + itemTwo.GetItemBase().Price;
+        _priceOne.text = "1: $" + itemOne.GetItemBase().Price;
+        _priceTwo.text = "$" + itemTwo.GetItemBase().Price + ": 2";
 
         foreach (Image item in _shopItems)
         {
@@ -25,6 +33,11 @@ public class ShopUIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Fills hop UI with one item and one card.
+    /// </summary>
+    /// <param name="item">Item one.</param>
+    /// <param name="card">Card one.</param>
     public void FillShopUI(ItemController item, CardController card)
     {
         _shopItems[0].sprite = item.GetItemBase().Icon;
@@ -39,6 +52,9 @@ public class ShopUIManager : MonoBehaviour
         shopCard.gameObject.transform.position = _cardPlacement.transform.position;
     }
 
+    /// <summary>
+    /// Clears the shop UI.
+    /// </summary>
     public void ClearShopUI()
     {
         DemarkAllShopItems();
@@ -59,6 +75,9 @@ public class ShopUIManager : MonoBehaviour
         _priceTwo.text = string.Empty;
     }
 
+    /// <summary>
+    /// Demarks all shop items.
+    /// </summary>
     public void DemarkAllShopItems()
     {
         foreach (Image item in _shopItems)
@@ -72,12 +91,19 @@ public class ShopUIManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Marks a shop item.
+    /// </summary>
+    /// <param name="index">Index of item to be marked.</param>
     public void MarkShopItem(int index)
     {
         DemarkAllShopItems();
         _shopItems[index].color = Color.red;
     }
 
+    /// <summary>
+    /// Marks the shop card.
+    /// </summary>
     public void MarkShopCard()
     {
         DemarkAllShopItems();

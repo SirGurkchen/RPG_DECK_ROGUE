@@ -4,6 +4,10 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Handles the Loading Screen of the game.
+/// Plays the loading screen animation and loads new scenes.
+/// </summary>
 public class LoadingScreenManager : MonoBehaviour
 {
     public static LoadingScreenManager Instance { get; private set; }
@@ -31,6 +35,10 @@ public class LoadingScreenManager : MonoBehaviour
         DOTween.Kill(_loadingScreen.transform);
     }
 
+    /// <summary>
+    /// Plays the loading animation and loads given next scene.
+    /// </summary>
+    /// <param name="nextScene">Name of next scene.</param>
     public void PlayLoadAnimation(string nextScene)
     {
         if (_loadingScreen == null) return;
@@ -50,6 +58,9 @@ public class LoadingScreenManager : MonoBehaviour
         PlayFinishedAnimation();
     }
 
+    /// <summary>
+    /// Plays the loading finished animation.
+    /// </summary>
     public void PlayFinishedAnimation()
     {
         if (_loadingScreen == null) return;

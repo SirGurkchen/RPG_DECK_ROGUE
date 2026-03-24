@@ -1,5 +1,8 @@
 using UnityEngine;
 
+/// <summary>
+/// Card Effect for throwing a weapon and dealing double its base damage.
+/// </summary>
 [CreateAssetMenu(menuName = "Card Effects/Throw Item")]
 public class ThrowItem : CardEffect
 {

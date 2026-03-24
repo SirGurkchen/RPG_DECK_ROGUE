@@ -34,6 +34,10 @@ public abstract class EnemyBase : ScriptableObject
     public int RoundAppear => _roundAppear;
     public int RoundDisappear => _roundDisappear;
 
+    /// <summary>
+    /// Returns important enemy data of an enemy as a string.
+    /// </summary>
+    /// <returns>String of enemy data.</returns>
     public virtual string GetEnemyStats()
     {
         return "Name: " + _enemyName + " Type: " + _type.ToString() + " Position: " + _position.ToString() + " Damage: " + _damage;

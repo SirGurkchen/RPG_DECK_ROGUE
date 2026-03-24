@@ -25,6 +25,11 @@ public class EnemyBoard : MonoBehaviour
         _enemiesOnField = new List<EnemyController>();
     }
 
+    /// <summary>
+    /// Adds one enemy on the logical enemy field.
+    /// Also handles the visualization.
+    /// </summary>
+    /// <param name="enemy">Enemy to add.</param>
     public void AddEnemyToField(EnemyController enemy)
     {
         if (_enemiesOnField.Count < MAX_ENEMIES)
@@ -35,6 +40,11 @@ public class EnemyBoard : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds one boss enemy to the logical field.
+    /// Also handles the visualization.
+    /// </summary>
+    /// <param name="boss">Boss enemy to add</param>
     public void AddBossToField(EnemyController boss)
     {
         _enemiesOnField.Add(boss);
@@ -51,7 +61,11 @@ public class EnemyBoard : MonoBehaviour
         CheckBoardClear();
     }
 
-    public EnemyController GetMostLefternEnemy()
+    /// <summary>
+    /// Find the leftmost enemy on the field.
+    /// </summary>
+    /// <returns>Enemycontroller of the leftmost enemy.</returns>
+    public EnemyController GetLeftmostEnemy()
     {
         if (_enemiesOnField.Count == 0)
         {
@@ -61,7 +75,12 @@ public class EnemyBoard : MonoBehaviour
         return _enemiesOnField[0];
     }
 
-    public EnemyController GetMostRighternEnemy()
+    /// <summary>
+    /// Find the rightmost enemy on the field.
+    /// If one enemy is on the field, returns the leftmost enemy.
+    /// </summary>
+    /// <returns>Enemycontroller of the found enemy.</returns>
+    public EnemyController GetRightmostEnemy()
     {
         if (_enemiesOnField.Count == 0)
         {
@@ -106,6 +125,10 @@ public class EnemyBoard : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Returns all enemies on the field.
+    /// </summary>
+    /// <returns>List of all enemies.</returns>
     public List<EnemyController> GetEnemies()
     {
         return _enemiesOnField;

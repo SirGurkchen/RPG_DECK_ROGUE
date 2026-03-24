@@ -63,11 +63,19 @@ public class GameInput : MonoBehaviour
         OnPause?.Invoke();
     }
 
+    /// <summary>
+    /// Checks if Player input is enabled.
+    /// </summary>
+    /// <returns>True if Player input is enabled.</returns>
     public bool IsInputActive()
     {
         return _inputActions.Player.enabled;
     }
 
+    /// <summary>
+    /// Changes the activity of pause input
+    /// </summary>
+    /// <param name="isOn">Activity of pause input.</param>
     public void TogglePauseInput(bool isOn)
     {
         if (isOn)
@@ -160,6 +168,10 @@ public class GameInput : MonoBehaviour
         OnItemSelect?.Invoke(4);
     }
 
+    /// <summary>
+    /// Changes the activity of player input
+    /// </summary>
+    /// <param name="isActive">Activity of player input.</param>
     public void ChangePlayerActive(bool isActive)
     {
         if (isActive)
@@ -172,6 +184,10 @@ public class GameInput : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the activity of reward input
+    /// </summary>
+    /// <param name="isActive">Activity of reward input.</param>
     public void ChangeRewardActive(bool isActive)
     {
         if (isActive)
@@ -186,6 +202,10 @@ public class GameInput : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the activity of shop input
+    /// </summary>
+    /// <param name="isActive">Activity of shop input.</param>
     public void ChangeShopActive(bool isActive)
     {
         if (isActive)
@@ -204,10 +224,7 @@ public class GameInput : MonoBehaviour
         {
             _inputActions.Player.Disable();
         }
-    }
 
-    private void OnDestroy()
-    {
         if (_inputActions != null)
         {
             _inputActions.Player.Confirm.performed -= Confirm_performed;
@@ -230,6 +247,14 @@ public class GameInput : MonoBehaviour
             _inputActions.Pause.PauseKey.performed += PauseKey_performed;
         }
 
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
+    private void OnDestroy()
+    {
         OnConfirmPress = null;
         OnSelectRightPress = null;
         OnSelectLeftPress = null;
@@ -241,11 +266,5 @@ public class GameInput : MonoBehaviour
         OnShopItemSelect = null;
         OnCancel = null;
         OnPause = null;
-
-
-        if (Instance == this)
-        {
-            Instance = null;
-        }
     }
 }
