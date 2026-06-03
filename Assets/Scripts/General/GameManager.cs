@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
         _player.OnPlayerCardSwitch += HandlePlayerCardSwitch;
         _player.OnPlayerCancel += HandlePlayerCancel;
         _player.OnPlayerPaused += HandlePlayerPause;
+        _shopManager.OnCardBought += AddCardToPlayer;
         _enemyBoard.OnBoardClear += BoardClear;
         _enemyBoard.OnEnemyKilled += HandleCoinsGain;
 
@@ -169,7 +170,7 @@ public class GameManager : MonoBehaviour
         card.SelectCard();
     }
 
-    private void AddCardToPlayer(CardController card)
+    public void AddCardToPlayer(CardController card)
     {
         if (_player.CanAddCard())
         {
@@ -234,13 +235,16 @@ public class GameManager : MonoBehaviour
         _player.GetPlayerInventory().OnCardWasUnlocked -= HandleCardUnlock;
         _player.GetPlayerTargeting().OnEnemyTargeted -= HandleEnemyTargeted;
         _player.GetPlayerStats().OnPlayerHeal -= HandlePlayerHeal;
+        _player.GetPlayerStats().OnManaChange -= HandleManaChange;
         _enemyBoard.OnBoardClear -= BoardClear;
         _enemyBoard.OnEnemyKilled -= HandleCoinsGain;
+        _shopManager.OnCardBought -= AddCardToPlayer;
         _player.OnShopConfirm -= HandleShopConfirm;
         _player.OnShopSelect -= HandleShopSelect;
         _player.OnPlayerDied -= HandlePlayerDeath;
         _player.OnPlayerCardSwitch -= HandlePlayerCardSwitch;
         _player.OnPlayerCancel -= HandlePlayerCancel;
+        _player.OnPlayerPaused -= HandlePlayerPause;
         LoadingScreenManager.Instance.OnLoadingScreenFinished -= LoadingFinished;
     }
 }

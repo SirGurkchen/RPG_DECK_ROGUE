@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,8 @@ public class ShopManager : MonoBehaviour
     private bool _itemOnly = true;
     private ItemController _selectItem;
     private ItemBase _selectCard;
+
+    public event Action<CardController> OnCardBought;
 
     private void Awake()
     {
@@ -77,7 +80,7 @@ public class ShopManager : MonoBehaviour
         }
         else
         {
-            _availableCard = _availableItemCards[Random.Range(0, _availableItemCards.Count)];
+            _availableCard = _availableItemCards[UnityEngine.Random.Range(0, _availableItemCards.Count)];
             _shopUI.FillShopUI(_availableItems[0], _availableCard.UnlockCard);
             _itemOnly = false;
         }
@@ -143,11 +146,9 @@ public class ShopManager : MonoBehaviour
                 return false;
             }
 
-            CardController newCard = Instantiate(_selectCard.UnlockCard);
-            player.TryGiveCard(newCard);
+            OnCardBought?.Invoke(_selectCard.UnlockCard);
             player.RemoveCoins(_selectCard.UnlockCard.GetCard().ShopPrice);
             UI.UpdateCoinsUI(player.GetPlayerStats().Coins);
-            UI.AddCardUI(newCard);
             StartCoroutine(EmptyShop());
         }
         return true;

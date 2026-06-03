@@ -69,7 +69,6 @@ public class PlayerCardStash : MonoBehaviour
             _selectedCard.DeselectCard();
             _selectedCard = null;
         }
-        Debug.Log(_selectedCard);
     }
 
     /// <summary>

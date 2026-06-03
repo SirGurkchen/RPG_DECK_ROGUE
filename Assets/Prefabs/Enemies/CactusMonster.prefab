@@ -610,11 +610,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5230906918877058735, guid: e3ac422421f8b0f488ddf10bc97f8e22, type: 3}
       propertyPath: m_SortingOrder
-      value: 100
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 6843395480708904760, guid: e3ac422421f8b0f488ddf10bc97f8e22, type: 3}
       propertyPath: m_SortingOrder
-      value: 100
+      value: -10
       objectReference: {fileID: 0}
     - target: {fileID: 7792819492581140774, guid: e3ac422421f8b0f488ddf10bc97f8e22, type: 3}
       propertyPath: m_Pivot.x
